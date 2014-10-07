@@ -177,9 +177,9 @@ chunks:
   ref: master
   repo: upstream:python-packages/rsa
 - build-depends: [pbr]
-  name: jsonpointer
+  name: python-json-pointer
   ref: master
-  repo: upstream:python-packages/jsonpointer
+  repo: upstream:python-json-pointer
 - build-depends: [pbr]
   name: urllib3
   ref: master
@@ -279,7 +279,7 @@ chunks:
   morph: strata/openstack-services/rabbitmq-server.morph
   name: rabbitmq-server
   ref: master
-  repo: upstream:python-packages/rabbitmq-server
+  repo: upstream:rabbitmq-server
 - build-depends: [pbr]
   name: swig-tarball
   ref: master
@@ -378,10 +378,10 @@ chunks:
   name: httpretty
   ref: master
   repo: upstream:python-packages/httpretty
-- build-depends: [jsonpointer, pbr]
-  name: jsonpatch
+- build-depends: [python-json-pointer, pbr]
+  name: python-json-patch
   ref: master
-  repo: upstream:python-packages/jsonpatch
+  repo: upstream:python-json-patch
 - build-depends: [pbr, testtools]
   morph: strata/openstack-services/subunit.morph
   name: subunit
@@ -446,7 +446,7 @@ chunks:
   name: cryptography
   ref: master
   repo: upstream:python-packages/cryptography
-- build-depends: [jsonschema, jsonpatch, pbr]
+- build-depends: [jsonschema, python-json-patch, pbr]
   name: warlock
   ref: master
   repo: upstream:warlock
