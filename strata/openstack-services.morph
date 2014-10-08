@@ -276,6 +276,11 @@ chunks:
   ref: master
   repo: upstream:python-packages/retrying
 - build-depends: [pbr]
+  name: rabbitmq-codegen
+  morph: strata/openstack-services/rabbitmq-codegen.morph
+  ref: master
+  repo: upstream:rabbitmq-codegen
+- build-depends: [pbr, rabbitmq-codegen]
   morph: strata/openstack-services/rabbitmq-server.morph
   name: rabbitmq-server
   ref: master

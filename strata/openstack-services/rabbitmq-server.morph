@@ -1,6 +1,8 @@
 name: rabbitmq-server
 kind: chunk
 configure-commands:
+- mkdir -p codegen
+- cp /usr/lib/rabbitmq-codegen/* codegen
 build-commands:
 - make
 install-commands:
