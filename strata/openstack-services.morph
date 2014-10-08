@@ -449,6 +449,7 @@ chunks:
   repo: upstream:python-packages/xattr
 - build-depends: [pbr, cffi]
   name: cryptography
+  morph: strata/openstack-services/cryptography.morph
   ref: master
   repo: upstream:python-packages/cryptography
 - build-depends: [jsonschema, python-json-patch, pbr]
