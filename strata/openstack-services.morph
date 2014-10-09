@@ -96,9 +96,13 @@ chunks:
   ref: master
   repo: upstream:python-packages/pycco
 - build-depends: [pbr]
-  name: decorator
+  name: python-decorator
   ref: master
-  repo: upstream:python-packages/decorator
+  repo: upstream:python-packages/python-decorator
+- build-depends: [pbr]
+  name: sqlparse
+  ref: master
+  repo: upstream:python-packages/sqlparse
 - build-depends: [pbr]
   name: dateutil
   ref: trunk
@@ -371,7 +375,7 @@ chunks:
   name: taskflow
   ref: master
   repo: upstream:openstack/taskflow
-- build-depends: [pbr, sqlalchemy, decorator, tempita, pbr]
+- build-depends: [pbr, sqlalchemy, python-decorator, tempita, pbr]
   name: sqlalchemy-migrate
   ref: master
   repo: upstream:python-packages/sqlalchemy-migrate
@@ -467,14 +471,14 @@ chunks:
 - build-depends: [pbr, webob, eventlet, greenlet, netaddr, pastedeploy, paste, routes,
     sqlalchemy, sqlalchemy-migrate, passlib, pyiso8601, python-keystoneclient, oslo-config,
     oslo-messaging, babel, oauthlib, dogpile-cache, jsonschema, pycadf, posix-ipc-tarball,
-    pbr, repoze-lru, dogpile-core, oslo-utils, decorator]
+    pbr, repoze-lru, dogpile-core, oslo-utils, python-decorator]
   name: keystone
   ref: 2014.2.b1
   repo: upstream:openstack/keystone
 - build-depends: [pbr, paste, pastedeploy, routes, anyjson, babel, eventlet, greenlet,
     httplib2, python-requests, pyiso8601, jsonrpclib, jinja2, kombu, netaddr, python-neutronclient,
     sqlalchemy, webob, python-keystoneclient, alembic, stevedore, oslo-config, oslo-messaging,
-    oslo-rootwrap, python-novaclient, pbr]
+    oslo-rootwrap, python-novaclient, pbr, python-decorator, sqlparse]
   name: neutron
   ref: master
   repo: upstream:openstack/neutron
