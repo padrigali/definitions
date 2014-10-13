@@ -3,6 +3,11 @@ build-depends:
 - {morph: strata/erlang.morph}
 chunks:
 - build-depends: []
+  name: six
+  repo: upstream:six
+  ref: 43c2db60d6aab5e3cf397d5126ba04cf60c24435
+  unpetrify-ref: 1.8.0
+- build-depends: []
   name: pip
   ref: master
   repo: upstream:pip
@@ -451,7 +456,7 @@ chunks:
   name: xattr
   ref: master
   repo: upstream:python-packages/xattr
-- build-depends: [pbr, cffi]
+- build-depends: [pbr, cffi, six]
   name: cryptography
   morph: strata/openstack-services/cryptography.morph
   ref: master
