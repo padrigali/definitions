@@ -1,6 +1,10 @@
+name: openstack-services
+kind: stratum
+description: Openstack clients and services
 build-depends:
-- {morph: strata/tools.morph}
-- {morph: strata/erlang.morph}
+- morph: strata/tools.morph
+- morph: strata/erlang.morph
+- morph: strata/openstack-clients.morph
 chunks:
 - build-depends: []
   name: six
@@ -11,537 +15,466 @@ chunks:
   name: pip
   ref: master
   repo: upstream:pip
-- build-depends: [pip]
-  name: pbr
-  ref: master
-  repo: upstream:pbr
-- build-depends: [pbr]
+- build-depends: []
   name: oslo-config
   ref: master
   repo: upstream:openstack/oslo-config
-- build-depends: [pbr]
+- build-depends: []
   name: oslo-rootwrap
   ref: master
   repo: upstream:openstack/oslo-rootwrap
-- build-depends: [pbr]
+- build-depends: []
   name: stevedore
   ref: master
   repo: upstream:openstack/stevedore
-- build-depends: [pbr]
+- build-depends: []
   name: webob
   ref: master
   repo: upstream:python-packages/webob
-- build-depends: [pbr]
+- build-depends: []
   name: eventlet
   ref: master
   repo: upstream:python-packages/eventlet
-- build-depends: [pbr]
+- build-depends: []
   name: greenlet
   ref: master
   repo: upstream:python-packages/greenlet
-- build-depends: [pbr]
+- build-depends: []
   name: kombu
   ref: master
   repo: upstream:python-packages/kombu
-- build-depends: [pbr]
+- build-depends: []
   name: sqlalchemy
   ref: master
   repo: upstream:python-packages/sqlalchemy
-- build-depends: [pbr]
+- build-depends: []
   name: alembic
   ref: master
   repo: upstream:python-packages/alembic
-- build-depends: [pbr]
+- build-depends: []
   name: lockfile
   ref: master
   repo: upstream:python-packages/lockfile
-- build-depends: [pbr]
+- build-depends: []
   name: dogpile-cache
   ref: master
   repo: upstream:python-packages/dogpile-cache
-- build-depends: [pbr]
+- build-depends: []
   name: dogpile-core
   ref: master
   repo: upstream:python-packages/dogpile-core
-- build-depends: [pbr]
+- build-depends: []
   morph: strata/openstack-services/pycrypto.morph
   name: pycrypto
   ref: master
   repo: upstream:python-packages/pycrypto
-- build-depends: [pbr]
+- build-depends: []
   name: pyjwt
   ref: master
   repo: upstream:python-packages/pyjwt
-- build-depends: [pbr]
+- build-depends: []
   name: creole
   ref: master
   repo: upstream:python-packages/creole
-- build-depends: [pbr]
+- build-depends: []
   name: mock
   ref: master
   repo: upstream:python-packages/mock
-- build-depends: [pbr]
+- build-depends: []
   name: nose
   ref: master
   repo: upstream:python-packages/nose
-- build-depends: [pbr]
+- build-depends: []
   name: sphinx
   ref: master
   repo: upstream:python-packages/sphinx
-- build-depends: [pbr]
+- build-depends: []
   name: tox
   ref: master
   repo: upstream:python-packages/tox
-- build-depends: [pbr]
+- build-depends: []
   name: pylint
   ref: master
   repo: upstream:python-packages/pylint
-- build-depends: [pbr]
+- build-depends: []
   name: pycco
   ref: master
   repo: upstream:python-packages/pycco
-- build-depends: [pbr]
+- build-depends: []
   name: python-decorator
   ref: master
   repo: upstream:python-packages/python-decorator
-- build-depends: [pbr]
+- build-depends: []
   name: sqlparse
   ref: master
   repo: upstream:python-packages/sqlparse
-- build-depends: [pbr]
+- build-depends: []
   name: dateutil
   ref: trunk
   repo: upstream:python-packages/dateutil
-- build-depends: [pbr]
+- build-depends: []
   morph: strata/openstack-services/docutils.morph
   name: docutils
   ref: master
   repo: upstream:python-packages/docutils
-- build-depends: [pbr]
+- build-depends: []
   name: posix-ipc-tarball
   ref: master
   repo: upstream:python-packages/posix-ipc-tarball
-- build-depends: [pbr]
+- build-depends: []
   name: pastedeploy
   ref: master
   repo: upstream:python-packages/pastedeploy
-- build-depends: [pbr]
+- build-depends: []
   name: paste
   ref: master
   repo: upstream:python-packages/paste
-- build-depends: [pbr]
+- build-depends: []
   name: routes
   ref: master
   repo: upstream:python-packages/routes
-- build-depends: [pbr]
+- build-depends: []
   name: passlib
   ref: master
   repo: upstream:python-packages/passlib
-- build-depends: [pbr]
+- build-depends: []
   name: tempita
   ref: master
   repo: upstream:python-packages/tempita
-- build-depends: [pbr]
+- build-depends: []
   name: websockify
   ref: baserock/v0.6.0
   repo: upstream:python-packages/websockify
-- build-depends: [pbr]
+- build-depends: []
   name: testtools
   ref: master
   repo: upstream:python-packages/testtools
-- build-depends: [pbr]
-  name: pyopenssl
-  ref: master
-  repo: upstream:python-packages/pyopenssl
-- build-depends: [pbr]
+- build-depends: []
   name: httplib2
   ref: master
   repo: upstream:python-packages/httplib2
-- build-depends: [pbr]
+- build-depends: []
   name: testrepository
   ref: trunk
   repo: upstream:python-packages/testrepository
-- build-depends: [pbr]
+- build-depends: []
   name: suds
   ref: master
   repo: upstream:python-packages/suds
-- build-depends: [pbr]
+- build-depends: []
   name: testscenarios
   ref: trunk
   repo: upstream:python-packages/testscenarios
-- build-depends: [pbr]
+- build-depends: []
   name: fixtures
   ref: trunk
   repo: upstream:python-packages/fixtures
-- build-depends: [pbr]
+- build-depends: []
   name: anyjson
   ref: master
   repo: upstream:python-packages/anyjson
-- build-depends: [pbr]
+- build-depends: []
   name: mox
   ref: master
   repo: upstream:python-packages/mox
-- build-depends: [pbr]
+- build-depends: []
   name: rsa
   ref: master
   repo: upstream:python-packages/rsa
-- build-depends: [pbr]
-  name: python-json-pointer
-  ref: master
-  repo: upstream:python-json-pointer
-- build-depends: [pbr]
+- build-depends: []
   name: urllib3
   ref: master
   repo: upstream:python-packages/urllib3
-- build-depends: [pbr]
+- build-depends: []
   name: cliff
   ref: master
   repo: upstream:python-packages/cliff
-- build-depends: [pbr]
+- build-depends: []
   name: jsonrpclib
   ref: master
   repo: upstream:python-packages/jsonrpclib
-- build-depends: [pbr]
+- build-depends: []
   name: rtslib-fb
   ref: master
   repo: upstream:python-packages/rtslib-fb
-- build-depends: [pbr]
+- build-depends: []
   name: futures
   ref: master
   repo: upstream:python-packages/futures
-- build-depends: [pbr]
+- build-depends: []
   name: netifaces
   ref: master
   repo: upstream:python-packages/netifaces
-- build-depends: [pbr]
+- build-depends: []
   name: networkx
   ref: master
   repo: upstream:python-packages/networkx
-- build-depends: [pbr]
+- build-depends: []
   name: dnspython
   ref: master
   repo: upstream:python-packages/dnspython
-- build-depends: [pbr]
+- build-depends: []
   name: pycparser
   ref: master
   repo: upstream:python-packages/pycparser
-- build-depends: [pbr]
+- build-depends: []
   name: pyasn1
   ref: master
   repo: upstream:python-packages/pyasn1
-- build-depends: [pbr]
+- build-depends: []
   name: pexpect
   ref: master
   repo: upstream:python-packages/pexpect
-- build-depends: [pbr]
+- build-depends: []
   name: jsonpath-rw
   ref: master
   repo: upstream:python-packages/jsonpath-rw
-- build-depends: [pbr]
+- build-depends: []
   name: pecan
   ref: master
   repo: upstream:python-packages/pecan
-- build-depends: [pbr]
+- build-depends: []
   name: croniter
   ref: master
   repo: upstream:python-packages/croniter
-- build-depends: [pbr]
+- build-depends: []
   name: msgpack-python
   ref: master
   repo: upstream:python-packages/msgpack-python
-- build-depends: [pbr]
+- build-depends: []
   morph: strata/openstack-services/qpid-python.morph
   name: qpid-python
   ref: trunk
   repo: upstream:python-packages/qpid-python
-- build-depends: [pbr]
+- build-depends: []
   name: wsme
   ref: master
   repo: upstream:python-packages/wsme
-- build-depends: [pbr]
+- build-depends: []
   name: pysnmp
   ref: master
   repo: upstream:python-packages/pysnmp
-- build-depends: [pbr]
+- build-depends: []
   name: repoze-lru
   ref: master
   repo: upstream:python-packages/repoze-lru
-- build-depends: [pbr]
+- build-depends: []
   morph: strata/openstack-services/thrift.morph
   name: thrift
   ref: 0.9.1
   repo: upstream:thrift
-- build-depends: [pbr]
+- build-depends: []
   morph: strata/openstack-services/ipaddr-py.morph
   name: ipaddr-py
   ref: master
   repo: upstream:python-packages/ipaddr-py
-- build-depends: [pbr]
+- build-depends: []
   name: simplegeneric-tarball
   ref: master
   repo: upstream:python-packages/simplegeneric-tarball
-- build-depends: [pbr]
+- build-depends: []
   name: retrying
   ref: master
   repo: upstream:python-packages/retrying
-- build-depends: [pbr]
+- build-depends: []
   name: rabbitmq-codegen
   morph: strata/openstack-services/rabbitmq-codegen.morph
   ref: master
   repo: upstream:rabbitmq-codegen
-- build-depends: [pbr, rabbitmq-codegen]
+- build-depends: [rabbitmq-codegen]
   morph: strata/openstack-services/rabbitmq-server.morph
   name: rabbitmq-server
   ref: master
   repo: upstream:rabbitmq-server
-- build-depends: [pbr]
+- build-depends: []
   name: swig-tarball
   ref: master
   repo: upstream:swig-tarball
-- build-depends: [pbr]
-  name: babel
-  ref: baserock/morph
-  repo: upstream:babel
-- build-depends: [pbr]
-  name: pyiso8601
-  ref: baserock/morph
-  repo: upstream:pyiso8601
-- build-depends: [pbr]
-  name: netaddr
-  ref: baserock/morph
-  repo: upstream:netaddr
-- build-depends: [pbr]
-  name: python-prettytable
-  ref: baserock/morph
-  repo: upstream:python-prettytable
-- build-depends: [pbr]
+- build-depends: []
   name: python-requests
   ref: baserock/morph
   repo: upstream:python-requests
-- build-depends: [pbr]
-  name: jsonschema
-  ref: baserock/morph
-  repo: upstream:jsonschema
-- build-depends: [pbr]
+- build-depends: []
   name: jinja2
   ref: baserock/morph
   repo: upstream:jinja2
-- build-depends: [pbr]
-  name: simplejson
-  ref: baserock/morph
-  repo: upstream:simplejson
-- build-depends: [pbr]
-  name: pytz
-  ref: baserock/morph
-  repo: upstream:pytz
-- build-depends: [pbr]
+- build-depends: []
   name: paramiko
   ref: baserock/morph
   repo: upstream:paramiko
-- build-depends: [pbr]
+- build-depends: []
   name: boto
   ref: baserock/morph
   repo: upstream:boto
-- build-depends: [pbr]
+- build-depends: []
   name: python-coveragepy
   ref: master
   repo: upstream:python-coveragepy
-- build-depends: [babel, pyiso8601, netaddr, oslo-config, pbr, python-prettytable,
-    python-requests, stevedore, pbr]
-  name: python-keystoneclient
-  ref: master
-  repo: upstream:openstack/python-keystoneclient
-- build-depends: [python-requests, simplejson, pbr]
+- build-depends: [python-requests]
   name: python-swiftclient
   ref: master
   repo: upstream:openstack/python-swiftclient
-- build-depends: [pbr, pyiso8601, python-prettytable, python-requests, simplejson,
-    babel, pbr]
-  name: python-novaclient
-  ref: master
-  repo: upstream:openstack/python-novaclient
-- build-depends: [pbr, python-prettytable, python-requests, simplejson, babel, pbr]
+- build-depends: [python-requests]
   name: python-troveclient
   ref: master
   repo: upstream:openstack/python-troveclient
-- build-depends: [oslo-config, stevedore, pyiso8601, eventlet, babel, kombu, pbr]
+- build-depends: [oslo-config, stevedore,  eventlet,  kombu]
   name: oslo-messaging
   ref: master
   repo: upstream:openstack/oslo-messaging
-- build-depends: [stevedore, netaddr, pyiso8601, babel, suds, eventlet, pbr]
+- build-depends: [stevedore, suds, eventlet]
   name: oslo-vmware
   ref: master
   repo: upstream:openstack/oslo-vmware
-- build-depends: [babel, pbr]
+- build-depends: []
   name: oslo-i18n
   ref: master
   repo: upstream:openstack/oslo-i18n
-- build-depends: [pbr, anyjson, pyiso8601, networkx, babel, stevedore, futures, pbr]
+- build-depends: [anyjson,  networkx,  stevedore, futures]
   name: taskflow
   ref: master
   repo: upstream:openstack/taskflow
-- build-depends: [pbr, sqlalchemy, python-decorator, tempita, pbr]
+- build-depends: [sqlalchemy, python-decorator, tempita]
   name: sqlalchemy-migrate
   ref: master
   repo: upstream:python-packages/sqlalchemy-migrate
-- build-depends: [docutils, creole, pycco, pycrypto, mock, nose, sphinx, pyjwt, pbr]
+- build-depends: [docutils, creole, pycco, pycrypto, mock, nose, sphinx, pyjwt]
   name: oauthlib
   ref: master
   repo: upstream:python-packages/oauthlib
-- build-depends: [urllib3, pbr]
+- build-depends: [urllib3]
   name: httpretty
   ref: master
   repo: upstream:python-packages/httpretty
-- build-depends: [python-json-pointer, pbr]
-  name: python-json-patch
-  ref: master
-  repo: upstream:python-json-patch
-- build-depends: [pbr, testtools]
+- build-depends: [testtools]
   morph: strata/openstack-services/subunit.morph
   name: subunit
   ref: trunk
   repo: upstream:python-packages/subunit
-- build-depends: [pycparser, pbr]
+- build-depends: [pycparser]
   name: cffi
   ref: master
   repo: upstream:python-packages/cffi
-- build-depends: [thrift, pbr]
+- build-depends: [thrift]
   name: happybase
   ref: master
   repo: upstream:python-packages/happybase
-- build-depends: [webob, pbr]
+- build-depends: [webob]
   name: osprofiler
   ref: 0.3.0
   repo: upstream:python-packages/osprofiler
-- build-depends: [pbr, python-prettytable, python-keystoneclient, python-requests,
-    simplejson, babel, pbr]
+- build-depends: [python-requests]
   name: python-cinderclient
   ref: master
   repo: upstream:openstack/python-cinderclient
-- build-depends: [pbr, cliff, pyiso8601, netaddr, python-requests, python-keystoneclient,
-    simplejson, babel, pbr]
+- build-depends: [cliff, python-requests]
   name: python-neutronclient
   ref: master
   repo: upstream:openstack/python-neutronclient
-- build-depends: [pbr, pyiso8601, python-prettytable, python-keystoneclient, pbr]
+- build-depends: []
   name: python-ceilometerclient
   ref: master
   repo: upstream:openstack/python-ceilometerclient
-- build-depends: [pyiso8601, pbr, python-prettytable, python-keystoneclient, python-requests,
-    pbr]
+- build-depends: [python-requests]
   name: python-heatclient
   ref: master
   repo: upstream:openstack/python-heatclient
-- build-depends: [cliff, jsonschema, pbr, python-keystoneclient, python-requests,
-    stevedore, pbr]
+- build-depends: [cliff, python-requests, stevedore]
   name: python-designateclient
   ref: master
   repo: upstream:openstack/python-designateclient
-- build-depends: [babel, pyiso8601, oslo-config, oslo-i18n, pbr]
+- build-depends: [oslo-config, oslo-i18n]
   name: oslo-utils
   ref: master
   repo: upstream:openstack/oslo-utils
 - build-depends: [fixtures, subunit, testrepository, testscenarios, testtools, mock,
-    mox, pbr]
+    mox]
   name: oslotest
   ref: master
   repo: upstream:openstack/oslotest
-- build-depends: [babel, pyiso8601, netaddr, oslo-config, oslo-messaging, posix-ipc-tarball,
-    pytz, webob, pbr]
+- build-depends: [oslo-config, oslo-messaging, posix-ipc-tarball,
+     webob]
   name: pycadf
   ref: master
   repo: upstream:python-packages/pycadf
-- build-depends: [cffi, pbr]
+- build-depends: [cffi]
   morph: strata/openstack-services/xattr.morph
   name: xattr
   ref: master
   repo: upstream:python-packages/xattr
-- build-depends: [pbr, cffi, six]
+- build-depends: [cffi, six]
   name: cryptography
   morph: strata/openstack-services/cryptography.morph
   ref: master
   repo: upstream:python-packages/cryptography
-- build-depends: [jsonschema, python-json-patch, pbr]
-  name: warlock
-  ref: master
-  repo: upstream:warlock
-- build-depends: [pbr, greenlet, sqlalchemy, anyjson, eventlet, pastedeploy, routes,
-    webob, boto, sqlalchemy-migrate, httplib2, kombu, pycrypto, pyiso8601, oslo-config,
-    stevedore, netaddr, python-swiftclient, oslo-vmware, paste, jsonschema, python-cinderclient,
-    python-keystoneclient, pyopenssl, oslo-messaging, pbr, cryptography, simplegeneric-tarball,
+- build-depends: [greenlet, sqlalchemy, anyjson, eventlet, pastedeploy, routes,
+    webob, boto, sqlalchemy-migrate, httplib2, kombu, pycrypto,  oslo-config,
+    stevedore,  python-swiftclient, oslo-vmware, paste, python-cinderclient,
+    oslo-messaging,  cryptography, simplegeneric-tarball,
     ipaddr-py, osprofiler, retrying]
   name: glance
   ref: master
   repo: upstream:openstack/glance
-- build-depends: [pbr, webob, eventlet, greenlet, netaddr, pastedeploy, paste, routes,
-    sqlalchemy, sqlalchemy-migrate, passlib, pyiso8601, python-keystoneclient, oslo-config,
-    oslo-messaging, babel, oauthlib, dogpile-cache, jsonschema, pycadf, posix-ipc-tarball,
-    pbr, repoze-lru, dogpile-core, oslo-utils, python-decorator]
+- build-depends: [ webob, eventlet, greenlet,  pastedeploy, paste, routes,
+    sqlalchemy, sqlalchemy-migrate, passlib,   oslo-config,
+    oslo-messaging,  oauthlib, dogpile-cache,  pycadf, posix-ipc-tarball,
+    repoze-lru, dogpile-core, oslo-utils, python-decorator]
   name: keystone
   ref: 2014.2.b1
   repo: upstream:openstack/keystone
-- build-depends: [pbr, paste, pastedeploy, routes, anyjson, babel, eventlet, greenlet,
-    httplib2, python-requests, pyiso8601, jsonrpclib, jinja2, kombu, netaddr, python-neutronclient,
-    sqlalchemy, webob, python-keystoneclient, alembic, stevedore, oslo-config, oslo-messaging,
-    oslo-rootwrap, python-novaclient, pbr, python-decorator, sqlparse]
+- build-depends: [ paste, pastedeploy, routes, anyjson,  eventlet, greenlet,
+    httplib2, python-requests,  jsonrpclib, jinja2, kombu,  python-neutronclient,
+    sqlalchemy, webob,  alembic, stevedore, oslo-config, oslo-messaging,
+    oslo-rootwrap, python-decorator, sqlparse]
   name: neutron
   ref: master
   repo: upstream:openstack/neutron
-- build-depends: [dnspython, eventlet, greenlet, netifaces, pastedeploy, simplejson,
-    xattr, pbr]
+- build-depends: [dnspython, eventlet, greenlet, netifaces, pastedeploy,
+    xattr]
   name: swift
   ref: master
   repo: upstream:openstack/swift
-- build-depends: [pbr, sqlalchemy, eventlet, kombu, routes, webob, pastedeploy, paste,
-    sqlalchemy-migrate, netaddr, httplib2, passlib, python-heatclient, python-novaclient,
-    python-cinderclient, python-keystoneclient, python-swiftclient, python-designateclient,
-    pyiso8601, jsonschema, jinja2, pexpect, oslo-config, babel, pbr]
+- build-depends: [sqlalchemy, eventlet, kombu, routes, webob, pastedeploy, paste,
+    sqlalchemy-migrate,  httplib2, passlib, python-heatclient,
+    python-cinderclient,  python-swiftclient, python-designateclient,
+    jinja2, pexpect, oslo-config]
   name: trove
   ref: master
   repo: upstream:openstack/trove
-- build-depends: [pbr, babel, python-prettytable, python-keystoneclient, pyopenssl,
-    warlock, pbr]
-  name: python-glanceclient
-  ref: master
-  repo: upstream:openstack/python-glanceclient
-- build-depends: [alembic, babel, pyiso8601, oslo-i18n, oslo-config, oslo-utils, sqlalchemy,
-    sqlalchemy-migrate, stevedore, pbr]
+- build-depends: [alembic, oslo-i18n, oslo-config, oslo-utils, sqlalchemy,
+    sqlalchemy-migrate, stevedore]
   name: oslo-db
   ref: master
   repo: upstream:openstack/oslo-db
-- build-depends: [pbr, sqlalchemy, anyjson, boto, eventlet, jinja2, kombu, routes,
-    webob, greenlet, pastedeploy, paste, sqlalchemy-migrate, netaddr, suds, paramiko,
-    pyasn1, babel, pyiso8601, jsonschema, python-cinderclient, python-neutronclient,
-    python-glanceclient, python-keystoneclient, stevedore, websockify, oslo-config,
-    oslo-rootwrap, oslotest, pycadf, oslo-messaging, pbr]
+- build-depends: [ sqlalchemy, anyjson, boto, eventlet, jinja2, kombu, routes,
+    webob, greenlet, pastedeploy, paste, sqlalchemy-migrate,  suds, paramiko,
+    pyasn1, python-cinderclient, python-neutronclient, stevedore, websockify, oslo-config,
+    oslo-rootwrap, oslotest, pycadf, oslo-messaging]
   name: nova
   ref: master
   repo: upstream:openstack/nova
-- build-depends: [pbr, anyjson, babel, eventlet, greenlet, pyiso8601, kombu, netaddr,
-    oslo-config, oslo-messaging, oslo-rootwrap, paramiko, paste, pastedeploy, python-glanceclient,
-    python-keystoneclient, python-novaclient, python-swiftclient, python-requests,
+- build-depends: [anyjson, eventlet, greenlet,  kombu,
+    oslo-config, oslo-messaging, oslo-rootwrap, paramiko, paste, pastedeploy,
+    python-swiftclient, python-requests,
     routes, taskflow, rtslib-fb, sqlalchemy, sqlalchemy-migrate, stevedore, suds,
-    webob, pbr]
+    webob]
   name: cinder
   ref: master
   repo: upstream:openstack/cinder
-- build-depends: [alembic, anyjson, croniter, eventlet, happybase, pyiso8601, jsonpath-rw,
-    jsonschema, lockfile, msgpack-python, netaddr, oslo-config, oslo-vmware, pastedeploy,
-    pbr, pecan, posix-ipc-tarball, oslo-messaging, pysnmp, python-ceilometerclient,
-    python-glanceclient, python-keystoneclient, python-neutronclient, python-novaclient,
-    python-swiftclient, pytz, python-requests, sqlalchemy, sqlalchemy-migrate, stevedore,
-    webob, wsme, pbr]
+- build-depends: [alembic, anyjson, croniter, eventlet, happybase,  jsonpath-rw,
+     lockfile, msgpack-python,  oslo-config, oslo-vmware, pastedeploy,
+     pecan, posix-ipc-tarball, oslo-messaging, pysnmp, python-ceilometerclient,
+      python-neutronclient,
+    python-swiftclient, python-requests, sqlalchemy, sqlalchemy-migrate, stevedore,
+    webob, wsme]
   name: ceilometer
   ref: master
   repo: upstream:openstack/ceilometer
-- build-depends: [babel, eventlet, greenlet, httplib2, pyiso8601, kombu, netaddr,
-    oslo-config, oslo-messaging, pastedeploy, pbr, posix-ipc-tarball, pycrypto, python-ceilometerclient,
-    python-cinderclient, python-glanceclient, python-heatclient, python-keystoneclient,
-    python-neutronclient, python-novaclient, python-swiftclient, python-troveclient,
-    qpid-python, python-requests, routes, sqlalchemy, sqlalchemy-migrate, webob, pbr]
+- build-depends: [ eventlet, greenlet, httplib2,  kombu,
+    oslo-config, oslo-messaging, pastedeploy,  posix-ipc-tarball, pycrypto, python-ceilometerclient,
+    python-cinderclient,  python-heatclient,
+    python-neutronclient,  python-swiftclient, python-troveclient,
+    qpid-python, python-requests, routes, sqlalchemy, sqlalchemy-migrate, webob]
   name: heat
   ref: master
   repo: upstream:openstack/heat
-description: Openstack clients and services
-kind: stratum
-name: openstack-services
