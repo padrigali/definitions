@@ -22,8 +22,8 @@ strata:
   morph: strata/connectivity.morph
 - name: erlang
   morph: strata/erlang.morph
-- name: openstack-clients
-  morph: strata/openstack-clients.morph
+- name: openstack-clients-full
+  morph: strata/openstack-clients-full.morph
 - name: openstack-services
   morph: strata/openstack-services.morph
 configuration-extensions:

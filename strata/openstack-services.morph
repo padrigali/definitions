@@ -4,7 +4,7 @@ description: Openstack clients and services
 build-depends:
 - morph: strata/tools.morph
 - morph: strata/erlang.morph
-- morph: strata/openstack-clients.morph
+- morph: strata/openstack-clients-full.morph
 chunks:
 - build-depends: []
   name: six
