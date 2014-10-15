@@ -291,10 +291,6 @@ chunks:
   ref: master
   repo: upstream:swig-tarball
 - build-depends: []
-  name: python-requests
-  ref: baserock/morph
-  repo: upstream:python-requests
-- build-depends: []
   name: jinja2
   ref: baserock/morph
   repo: upstream:jinja2
@@ -310,11 +306,11 @@ chunks:
   name: python-coveragepy
   ref: master
   repo: upstream:python-coveragepy
-- build-depends: [python-requests]
+- build-depends: []
   name: python-swiftclient
   ref: master
   repo: upstream:openstack/python-swiftclient
-- build-depends: [python-requests]
+- build-depends: []
   name: python-troveclient
   ref: master
   repo: upstream:openstack/python-troveclient
@@ -363,11 +359,11 @@ chunks:
   name: osprofiler
   ref: 0.3.0
   repo: upstream:python-packages/osprofiler
-- build-depends: [python-requests]
+- build-depends: []
   name: python-cinderclient
   ref: master
   repo: upstream:openstack/python-cinderclient
-- build-depends: [cliff, python-requests]
+- build-depends: [cliff]
   name: python-neutronclient
   ref: master
   repo: upstream:openstack/python-neutronclient
@@ -375,11 +371,11 @@ chunks:
   name: python-ceilometerclient
   ref: master
   repo: upstream:openstack/python-ceilometerclient
-- build-depends: [python-requests]
+- build-depends: []
   name: python-heatclient
   ref: master
   repo: upstream:openstack/python-heatclient
-- build-depends: [cliff, python-requests, stevedore]
+- build-depends: [cliff,  stevedore]
   name: python-designateclient
   ref: master
   repo: upstream:openstack/python-designateclient
@@ -409,7 +405,7 @@ chunks:
   repo: upstream:python-packages/cryptography
 - build-depends: [greenlet, sqlalchemy, anyjson, eventlet, pastedeploy, routes,
     webob, boto, sqlalchemy-migrate, httplib2, kombu, pycrypto,  oslo-config,
-    stevedore,  python-swiftclient, oslo-vmware, paste, python-cinderclient,
+    stevedore, python-swiftclient, oslo-vmware, paste, python-cinderclient,
     oslo-messaging,  cryptography, simplegeneric-tarball,
     ipaddr-py, osprofiler, retrying]
   name: glance
@@ -423,7 +419,7 @@ chunks:
   ref: 2014.2.b1
   repo: upstream:openstack/keystone
 - build-depends: [ paste, pastedeploy, routes, anyjson,  eventlet, greenlet,
-    httplib2, python-requests,  jsonrpclib, jinja2, kombu,  python-neutronclient,
+    httplib2,   jsonrpclib, jinja2, kombu,  python-neutronclient,
     sqlalchemy, webob,  alembic, stevedore, oslo-config, oslo-messaging,
     oslo-rootwrap, python-decorator, sqlparse]
   name: neutron
@@ -436,7 +432,7 @@ chunks:
   repo: upstream:openstack/swift
 - build-depends: [sqlalchemy, eventlet, kombu, routes, webob, pastedeploy, paste,
     sqlalchemy-migrate,  httplib2, passlib, python-heatclient,
-    python-cinderclient,  python-swiftclient, python-designateclient,
+    python-cinderclient, python-swiftclient, python-designateclient,
     jinja2, pexpect, oslo-config]
   name: trove
   ref: master
@@ -455,26 +451,24 @@ chunks:
   repo: upstream:openstack/nova
 - build-depends: [anyjson, eventlet, greenlet,  kombu,
     oslo-config, oslo-messaging, oslo-rootwrap, paramiko, paste, pastedeploy,
-    python-swiftclient, python-requests,
-    routes, taskflow, rtslib-fb, sqlalchemy, sqlalchemy-migrate, stevedore, suds,
-    webob]
+    python-swiftclient, routes, taskflow, rtslib-fb, sqlalchemy, sqlalchemy-migrate,
+    stevedore, suds, webob]
   name: cinder
   ref: master
   repo: upstream:openstack/cinder
 - build-depends: [alembic, anyjson, croniter, eventlet, happybase,  jsonpath-rw,
      lockfile, msgpack-python,  oslo-config, oslo-vmware, pastedeploy,
      pecan, posix-ipc-tarball, oslo-messaging, pysnmp, python-ceilometerclient,
-      python-neutronclient,
-    python-swiftclient, python-requests, sqlalchemy, sqlalchemy-migrate, stevedore,
-    webob, wsme]
+     python-neutronclient, python-swiftclient, sqlalchemy, sqlalchemy-migrate, stevedore,
+     webob, wsme]
   name: ceilometer
   ref: master
   repo: upstream:openstack/ceilometer
 - build-depends: [ eventlet, greenlet, httplib2,  kombu,
     oslo-config, oslo-messaging, pastedeploy,  posix-ipc-tarball, pycrypto, python-ceilometerclient,
-    python-cinderclient,  python-heatclient,
-    python-neutronclient,  python-swiftclient, python-troveclient,
-    qpid-python, python-requests, routes, sqlalchemy, sqlalchemy-migrate, webob]
+    python-cinderclient, python-heatclient,
+    python-neutronclient, python-swiftclient, python-troveclient,
+    qpid-python,  routes, sqlalchemy, sqlalchemy-migrate, webob]
   name: heat
   ref: master
   repo: upstream:openstack/heat
