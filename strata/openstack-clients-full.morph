@@ -1,6 +1,6 @@
-name: openstack-clients
+name: openstack-clients-full
 kind: stratum
-description: A stratum with OpenStack clients, for OpenStack deployments.
+description: Stratum with all the OpenStack clients
 build-depends:
 - morph: strata/tools.morph
 chunks:
