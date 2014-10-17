@@ -2,31 +2,14 @@ name: openstack-services
 kind: stratum
 description: Openstack clients and services
 build-depends:
-- morph: strata/tools.morph
 - morph: strata/erlang.morph
+- morph: strata/openstack-common.morph
 - morph: strata/openstack-clients-full.morph
 chunks:
-- build-depends: []
-  name: six
-  repo: upstream:six
-  ref: 43c2db60d6aab5e3cf397d5126ba04cf60c24435
-  unpetrify-ref: 1.8.0
-- build-depends: []
-  name: pip
-  ref: master
-  repo: upstream:pip
-- build-depends: []
-  name: oslo-config
-  ref: master
-  repo: upstream:openstack/oslo-config
 - build-depends: []
   name: oslo-rootwrap
   ref: master
   repo: upstream:openstack/oslo-rootwrap
-- build-depends: []
-  name: stevedore
-  ref: master
-  repo: upstream:openstack/stevedore
 - build-depends: []
   name: webob
   ref: master
@@ -40,6 +23,10 @@ chunks:
   ref: master
   repo: upstream:python-packages/greenlet
 - build-depends: []
+  name: py-amqp
+  ref: master
+  repo: github:celery/py-amqp
+- build-depends: [py-amqp]
   name: kombu
   ref: master
   repo: upstream:python-packages/kombu
@@ -186,10 +173,6 @@ chunks:
   ref: master
   repo: upstream:python-packages/urllib3
 - build-depends: []
-  name: cliff
-  ref: master
-  repo: upstream:python-packages/cliff
-- build-depends: []
   name: jsonrpclib
   ref: master
   repo: upstream:python-packages/jsonrpclib
@@ -213,10 +196,6 @@ chunks:
   name: dnspython
   ref: master
   repo: upstream:python-packages/dnspython
-- build-depends: []
-  name: pycparser
-  ref: master
-  repo: upstream:python-packages/pycparser
 - build-depends: []
   name: pyasn1
   ref: master
@@ -277,16 +256,6 @@ chunks:
   ref: master
   repo: upstream:python-packages/retrying
 - build-depends: []
-  name: rabbitmq-codegen
-  morph: strata/openstack-services/rabbitmq-codegen.morph
-  ref: master
-  repo: upstream:rabbitmq-codegen
-- build-depends: [rabbitmq-codegen]
-  morph: strata/openstack-services/rabbitmq-server.morph
-  name: rabbitmq-server
-  ref: master
-  repo: upstream:rabbitmq-server
-- build-depends: []
   name: swig-tarball
   ref: master
   repo: upstream:swig-tarball
@@ -306,27 +275,15 @@ chunks:
   name: python-coveragepy
   ref: master
   repo: upstream:python-coveragepy
-- build-depends: []
-  name: python-swiftclient
-  ref: master
-  repo: upstream:openstack/python-swiftclient
-- build-depends: []
-  name: python-troveclient
-  ref: master
-  repo: upstream:openstack/python-troveclient
-- build-depends: [oslo-config, stevedore,  eventlet,  kombu]
+- build-depends: [eventlet,  kombu]
   name: oslo-messaging
   ref: master
   repo: upstream:openstack/oslo-messaging
-- build-depends: [stevedore, suds, eventlet]
+- build-depends: [suds, eventlet]
   name: oslo-vmware
   ref: master
   repo: upstream:openstack/oslo-vmware
-- build-depends: []
-  name: oslo-i18n
-  ref: master
-  repo: upstream:openstack/oslo-i18n
-- build-depends: [anyjson,  networkx,  stevedore, futures]
+- build-depends: [anyjson, networkx, futures]
   name: taskflow
   ref: master
   repo: upstream:openstack/taskflow
@@ -347,10 +304,6 @@ chunks:
   name: subunit
   ref: trunk
   repo: upstream:python-packages/subunit
-- build-depends: [pycparser]
-  name: cffi
-  ref: master
-  repo: upstream:python-packages/cffi
 - build-depends: [thrift]
   name: happybase
   ref: master
@@ -360,14 +313,6 @@ chunks:
   ref: 0.3.0
   repo: upstream:python-packages/osprofiler
 - build-depends: []
-  name: python-cinderclient
-  ref: master
-  repo: upstream:openstack/python-cinderclient
-- build-depends: [cliff]
-  name: python-neutronclient
-  ref: master
-  repo: upstream:openstack/python-neutronclient
-- build-depends: []
   name: python-ceilometerclient
   ref: master
   repo: upstream:openstack/python-ceilometerclient
@@ -375,52 +320,48 @@ chunks:
   name: python-heatclient
   ref: master
   repo: upstream:openstack/python-heatclient
-- build-depends: [cliff,  stevedore]
+- build-depends: [cliff]
   name: python-designateclient
   ref: master
   repo: upstream:openstack/python-designateclient
-- build-depends: [oslo-config, oslo-i18n]
-  name: oslo-utils
-  ref: master
-  repo: upstream:openstack/oslo-utils
 - build-depends: [fixtures, subunit, testrepository, testscenarios, testtools, mock,
     mox]
   name: oslotest
   ref: master
   repo: upstream:openstack/oslotest
-- build-depends: [oslo-config, oslo-messaging, posix-ipc-tarball,
+- build-depends: [oslo-messaging, posix-ipc-tarball,
      webob]
   name: pycadf
   ref: master
   repo: upstream:python-packages/pycadf
-- build-depends: [cffi]
+- build-depends: []
   morph: strata/openstack-services/xattr.morph
   name: xattr
   ref: master
   repo: upstream:python-packages/xattr
-- build-depends: [cffi, six]
+- build-depends: []
   name: cryptography
   morph: strata/openstack-services/cryptography.morph
   ref: master
   repo: upstream:python-packages/cryptography
 - build-depends: [greenlet, sqlalchemy, anyjson, eventlet, pastedeploy, routes,
-    webob, boto, sqlalchemy-migrate, httplib2, kombu, pycrypto,  oslo-config,
-    stevedore, python-swiftclient, oslo-vmware, paste, python-cinderclient,
+    webob, boto, sqlalchemy-migrate, httplib2, kombu, pycrypto,
+    oslo-vmware, paste,
     oslo-messaging,  cryptography, simplegeneric-tarball,
     ipaddr-py, osprofiler, retrying]
   name: glance
   ref: master
   repo: upstream:openstack/glance
 - build-depends: [ webob, eventlet, greenlet,  pastedeploy, paste, routes,
-    sqlalchemy, sqlalchemy-migrate, passlib,   oslo-config,
+    sqlalchemy, sqlalchemy-migrate, passlib,
     oslo-messaging,  oauthlib, dogpile-cache,  pycadf, posix-ipc-tarball,
-    repoze-lru, dogpile-core, oslo-utils, python-decorator]
+    repoze-lru, dogpile-core, python-decorator]
   name: keystone
   ref: 2014.2.b1
   repo: upstream:openstack/keystone
 - build-depends: [ paste, pastedeploy, routes, anyjson,  eventlet, greenlet,
-    httplib2,   jsonrpclib, jinja2, kombu,  python-neutronclient,
-    sqlalchemy, webob,  alembic, stevedore, oslo-config, oslo-messaging,
+    httplib2,   jsonrpclib, jinja2, kombu,
+    sqlalchemy, webob,  alembic, oslo-messaging,
     oslo-rootwrap, python-decorator, sqlparse]
   name: neutron
   ref: master
@@ -432,42 +373,41 @@ chunks:
   repo: upstream:openstack/swift
 - build-depends: [sqlalchemy, eventlet, kombu, routes, webob, pastedeploy, paste,
     sqlalchemy-migrate,  httplib2, passlib, python-heatclient,
-    python-cinderclient, python-swiftclient, python-designateclient,
-    jinja2, pexpect, oslo-config]
+    python-designateclient,
+    jinja2, pexpect]
   name: trove
   ref: master
   repo: upstream:openstack/trove
-- build-depends: [alembic, oslo-i18n, oslo-config, oslo-utils, sqlalchemy,
-    sqlalchemy-migrate, stevedore]
+- build-depends: [alembic, sqlalchemy,
+    sqlalchemy-migrate]
   name: oslo-db
   ref: master
   repo: upstream:openstack/oslo-db
 - build-depends: [ sqlalchemy, anyjson, boto, eventlet, jinja2, kombu, routes,
     webob, greenlet, pastedeploy, paste, sqlalchemy-migrate,  suds, paramiko,
-    pyasn1, python-cinderclient, python-neutronclient, stevedore, websockify, oslo-config,
+    pyasn1, websockify,
     oslo-rootwrap, oslotest, pycadf, oslo-messaging]
   name: nova
   ref: master
   repo: upstream:openstack/nova
 - build-depends: [anyjson, eventlet, greenlet,  kombu,
-    oslo-config, oslo-messaging, oslo-rootwrap, paramiko, paste, pastedeploy,
-    python-swiftclient, routes, taskflow, rtslib-fb, sqlalchemy, sqlalchemy-migrate,
-    stevedore, suds, webob]
+    oslo-messaging, oslo-rootwrap, paramiko, paste, pastedeploy,
+    routes, taskflow, rtslib-fb, sqlalchemy, sqlalchemy-migrate,
+    suds, webob]
   name: cinder
   ref: master
   repo: upstream:openstack/cinder
 - build-depends: [alembic, anyjson, croniter, eventlet, happybase,  jsonpath-rw,
-     lockfile, msgpack-python,  oslo-config, oslo-vmware, pastedeploy,
+     lockfile, msgpack-python,  oslo-vmware, pastedeploy,
      pecan, posix-ipc-tarball, oslo-messaging, pysnmp, python-ceilometerclient,
-     python-neutronclient, python-swiftclient, sqlalchemy, sqlalchemy-migrate, stevedore,
+     sqlalchemy, sqlalchemy-migrate,
      webob, wsme]
   name: ceilometer
   ref: master
   repo: upstream:openstack/ceilometer
 - build-depends: [ eventlet, greenlet, httplib2,  kombu,
-    oslo-config, oslo-messaging, pastedeploy,  posix-ipc-tarball, pycrypto, python-ceilometerclient,
-    python-cinderclient, python-heatclient,
-    python-neutronclient, python-swiftclient, python-troveclient,
+    oslo-messaging, pastedeploy,  posix-ipc-tarball, pycrypto, python-ceilometerclient,
+    python-heatclient,
     qpid-python,  routes, sqlalchemy, sqlalchemy-migrate, webob]
   name: heat
   ref: master
