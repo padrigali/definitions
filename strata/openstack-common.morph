@@ -76,8 +76,8 @@ chunks:
   unpetrify-ref: r12
   build-depends: []
 - name: stevedore
-  ref: master
-  unpetrify-ref: master
+  ref: 860bd8f8ecba38fdfda5b41a3a1dbe854d6528e2
+  unpetrify-ref: 1.0.0.0a2
   repo: upstream:openstack/stevedore
   build-depends:
   - argparse
