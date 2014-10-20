@@ -63,18 +63,12 @@ chunks:
   - python-prettytable
   - simplejson
   - python-keystoneclient
-- name: futures
-  repo: upstream:python-packages/futures
-  ref: 4f7ceedb8a7742e52b0436a4160c7c44665a2597 
-  unpetrify-ref: 2.2.0
-  build-depends: []
 - name: python-swiftclient
   repo: upstream:openstack/python-swiftclient
   ref: master
   unpetrify-ref: master
   build-depends:
   - simplejson
-  - futures
 - name: python-troveclient
   repo: upstream:openstack/python-troveclient
   ref: e010a919750f07493afd42a4db867853b925bcbf
