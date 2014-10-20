@@ -126,3 +126,18 @@ chunks:
   build-depends:
   - python-prettytable
   - python-keystoneclient
+- name: python-heatclient
+  repo: upstream:openstack/python-heatclient
+  ref: 752217978ac41ebe3e7a0cf38708e324ac634c09
+  unpetrify-ref: 0.2.12
+  build-depends:
+  - python-prettytable
+  - python-keystoneclient
+- name: python-designateclient
+  repo: upstream:openstack/python-designateclient
+  ref: a900b41e4d8a9eb40e1812295ba16d773e2b9618
+  ref: 1.1.0
+  build-depends:
+  - cliff
+  - jsonschema
+  - python-keystoneclient
