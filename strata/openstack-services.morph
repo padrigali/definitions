@@ -6,42 +6,74 @@ build-depends:
 - morph: strata/openstack-common.morph
 - morph: strata/openstack-clients-full.morph
 chunks:
-- build-depends: []
-  name: oslo-rootwrap
-  ref: master
+- name: oslo-rootwrap
   repo: upstream:openstack/oslo-rootwrap
-- build-depends: []
-  name: webob
-  ref: master
+  ref: 8c68df850ab4c7984885503393f6be8bf6461ba1
+  unpetrify-ref: 1.3.0.0a3
+  build-depends: []
+- name: webob
   repo: upstream:python-packages/webob
-- build-depends: []
-  name: eventlet
-  ref: master
-  repo: upstream:python-packages/eventlet
-- build-depends: []
-  name: greenlet
-  ref: master
+  ref: ae0ac90f22f9e1ff351e445f92330efd89195f51
+  unpetrify-ref: 1.4
+  build-depends: []
+- name: greenlet
+  ref: 42b65a7b67dfabd180625155cd4fcd8e51917fe2
+  unpetrify-ref: 0.4.5
   repo: upstream:python-packages/greenlet
-- build-depends: []
-  name: py-amqp
+  build-depends: []
+- name: eventlet
+  ref: 8d2474197de4827a7bca9c33e71a82573b6fc721
+  unpetrify-ref: v0.15.2
+  repo: upstream:python-packages/eventlet
+  build-depends:
+  - greenlet
+- name: py-amqp
+#TODO: Add lorry-file and references
   ref: master
+  unpetrify-ref: master
   repo: github:celery/py-amqp
-- build-depends: [py-amqp]
-  name: kombu
-  ref: master
+  build-depends: []
+- name: anyjson
+  repo: upstream:python-packages/anyjson
+  ref: 016506078e94718e1fe750eb5083ab5ba07498c8
+  unpetrify-ref: 0.3.3
+  build-depends: []
+- name: kombu
   repo: upstream:python-packages/kombu
-- build-depends: []
-  name: sqlalchemy
-  ref: master
+  ref: 6e68e54b3a846faa6f8b7e14a4a7ca51d1967bc2
+  unpetrify-ref: v3.0.23
+  build-depends:
+  - anyjson
+  - py-amqp
+- name: sqlalchemy
   repo: upstream:python-packages/sqlalchemy
-- build-depends: []
-  name: alembic
+  ref: ff34c480dfd2b8b7c72339d196f5477980a5124c
+  unpetrify-ref: rel_0_9_8
+  build-depends: []
+- name: markupsafe
+  repo: upstream:markupsafe
+  ref: feb1d70c16df62f60dcb521d127fdad8819fc036
+  unpetrify-ref: 0.23
+  build-depends: []
+- name: mako
+#TODO: Add lorry-file and references
+  repo: git://git@bitbucket.org:zzzeek/mako.git
   ref: master
+  unpetrify-ref: master
+  build-depends:
+  - MarkupSafe
+- name: alembic
   repo: upstream:python-packages/alembic
-- build-depends: []
-  name: lockfile
-  ref: master
+  ref: e37162294fc6df9740f4231a75021f391e2a0f98
+  unpetrify-ref: rel_0_6_7
+  build-depends:
+  - sqlalchemy
+  - mako
+- name: lockfile
   repo: upstream:python-packages/lockfile
+  ref: 4eb27075e0523b6ed2027444fd42d83a6e9b14c5
+  unpetrify-ref: master
+  build-depends: []
 - build-depends: []
   name: dogpile-cache
   ref: master
@@ -50,11 +82,12 @@ chunks:
   name: dogpile-core
   ref: master
   repo: upstream:python-packages/dogpile-core
-- build-depends: []
+- name: pycrypto
   morph: strata/openstack-services/pycrypto.morph
-  name: pycrypto
-  ref: master
   repo: upstream:python-packages/pycrypto
+  ref: af058ee6f5da391a05275470ab4a4a96aa22b350
+  unpetrify-ref: v2.7a1
+  build-depends: []
 - build-depends: []
   name: pyjwt
   ref: master
@@ -67,10 +100,11 @@ chunks:
   name: mock
   ref: master
   repo: upstream:python-packages/mock
-- build-depends: []
-  name: nose
-  ref: master
+- name: nose
   repo: upstream:python-packages/nose
+  ref: 08d134270b035dac3310cd877bb0fe9ab678303a
+  unpetrify-ref: release_1.3.4
+  build-depends: []
 - build-depends: []
   name: sphinx
   ref: master
@@ -87,10 +121,11 @@ chunks:
   name: pycco
   ref: master
   repo: upstream:python-packages/pycco
-- build-depends: []
-  name: python-decorator
-  ref: master
+- name: python-decorator
   repo: upstream:python-packages/python-decorator
+  ref: b02f7a254c3679dfac57a824e08dd02ced850636
+  unpetrify-ref: decorator-3.4.0
+  build-depends: []
 - build-depends: []
   name: sqlparse
   ref: master
@@ -104,50 +139,66 @@ chunks:
   name: docutils
   ref: master
   repo: upstream:python-packages/docutils
-- build-depends: []
-  name: posix-ipc-tarball
-  ref: master
+- name: posix-ipc-tarball
   repo: upstream:python-packages/posix-ipc-tarball
-- build-depends: []
-  name: pastedeploy
-  ref: master
+  ref: f3765db04b903b3671733e07cf1541a51966dd14
+  unpetrify-ref: posix_ipc-0.9.8
+  build-depends: []
+- name: pastedeploy
   repo: upstream:python-packages/pastedeploy
+  ref: 5ad87be617c2cc1dd31625688172e964db2756dc
+  unpetrify-ref: 1.5.2
+  build-depends: []
 - build-depends: []
   name: paste
   ref: master
   repo: upstream:python-packages/paste
-- build-depends: []
-  name: routes
-  ref: master
+- name: routes
   repo: upstream:python-packages/routes
+  ref: 8b165a52ab568f6fcaaa11cbbc7402e0360f60a3
+  unpetrify-ref: v2.0
+  build-depends:
+  - repoze-lru
 - build-depends: []
   name: passlib
   ref: master
   repo: upstream:python-packages/passlib
-- build-depends: []
-  name: tempita
-  ref: master
+- name: tempita
   repo: upstream:python-packages/tempita
+  ref: b2b67795a009e9f825cbd855d766b78a00273f10
+  unpetrify-ref: 0.5
+  build-depends: []
 - build-depends: []
   name: websockify
   ref: baserock/v0.6.0
   repo: upstream:python-packages/websockify
-- build-depends: []
-  name: testtools
+- name: python-mimeparse
+#TODO add lorryfile and modify references
+  repo: github:dbtsai/python-mimeparse
   ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: testtools
   repo: upstream:python-packages/testtools
-- build-depends: []
-  name: httplib2
-  ref: master
+  ref: ee9946228ce5a03a84cf146027de0a8a9a46c4fe
+  unpetrify-ref: testools-1.1.0
+  build-depends:
+# - extras   #TODO: No idea which python's package is this
+  - python-mimeparse
+- name: httplib2
+  ref: 058a1f9448d5c27c23772796f83a596caf9188e6
+  unpetrify-ref: v0.9
   repo: upstream:python-packages/httplib2
+  build-depends: []
 - build-depends: []
   name: testrepository
   ref: trunk
   repo: upstream:python-packages/testrepository
-- build-depends: []
-  name: suds
-  ref: master
+- name: suds
   repo: upstream:python-packages/suds
+  ref: badd30a87f676d632d7386b05401e6029a5df83c
+  unpetrify-ref: release-0.3.2
+  build-depends: []
 - build-depends: []
   name: testscenarios
   ref: trunk
@@ -156,10 +207,6 @@ chunks:
   name: fixtures
   ref: trunk
   repo: upstream:python-packages/fixtures
-- build-depends: []
-  name: anyjson
-  ref: master
-  repo: upstream:python-packages/anyjson
 - build-depends: []
   name: mox
   ref: master
@@ -181,10 +228,6 @@ chunks:
   ref: master
   repo: upstream:python-packages/rtslib-fb
 - build-depends: []
-  name: futures
-  ref: master
-  repo: upstream:python-packages/futures
-- build-depends: []
   name: netifaces
   ref: master
   repo: upstream:python-packages/netifaces
@@ -196,65 +239,126 @@ chunks:
   name: dnspython
   ref: master
   repo: upstream:python-packages/dnspython
-- build-depends: []
-  name: pyasn1
-  ref: master
+- name: pyasn1
   repo: upstream:python-packages/pyasn1
+  ref: fa8e66c5f4367a1e39b53dcddc133d084b10400f
+  unpetrify-ref: release_0_1_7_tag
+  build-depends: []
 - build-depends: []
   name: pexpect
   ref: master
   repo: upstream:python-packages/pexpect
-- build-depends: []
-  name: jsonpath-rw
+- name: ply
+#TODO: creaty lorry file and add references.
+  repo: github:dabeaz/ply
   ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: jsonpath-rw
   repo: upstream:python-packages/jsonpath-rw
-- build-depends: []
-  name: pecan
+  ref: f4cfe56b8e8370116c5275ddcea970e9a68fd75d
+  unpetrify-ref: 1.2.3
+  build-depends:
+  - ply
+  - python-decorator
+- name: waitress
+  repo: github:Pylons/waitress
   ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: beautifulsoup4
+#TODO: create a lorryfile for this and add references
+  repo: bzr branch lp:beautifulsoup
+  ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: webtest
+#TODO: create a lorryfile for this and add references
+  repo: github:Pylons/webtest
+  ref: master
+  unpetrify-ref: master
+  build-depends:
+  - webob
+  - waitress
+  - beautifulsoup4
+- name: logutils
+#TODO: create a lorryfile for this and add references
+  repo: hg clone ssh://hg@bitbucket.org/vinay.sajip/logutils
+  ref:
+  unpetrify-ref:
+  build-depends: []
+- name: pecan
   repo: upstream:python-packages/pecan
-- build-depends: []
-  name: croniter
+  ref: c7f241fd6bb8a0b10e02b8b43aaf1810c312cfbf
+  unpetrify-ref: 0.8.0
+  build-depends:
+  - webob
+  - mako
+  - webtest
+  - logutils
+- name: python-dateutil
+#TODO: create the lorry file and add references.
+  repo: bzr branch lp:dateutil
   ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: croniter
   repo: upstream:python-packages/croniter
-- build-depends: []
-  name: msgpack-python
-  ref: master
+  ref: 0c3aeac05791cb4ece9e30da29442e9cd5b22f36
+  unpetrify-ref: 0.3.5
+  build-depends:
+  - python-dateutil
+- name: msgpack-python
   repo: upstream:python-packages/msgpack-python
-- build-depends: []
+  ref: 61bac2f586e82313a0e618093bfed2435cd18983
+  unpetrify-ref: 0.4.2
+  build-depends: []
+- name: qpid-python
   morph: strata/openstack-services/qpid-python.morph
-  name: qpid-python
-  ref: trunk
   repo: upstream:python-packages/qpid-python
-- build-depends: []
-  name: wsme
-  ref: master
+  ref: 587b0febaf1996db1e483137ed6addb45580ee9e
+  unpetrify-ref: 0.30
+  build-depends: []
+- name: simplegeneric-tarball
+  repo: upstream:python-packages/simplegeneric-tarball
+  ref: 601fab9b154c557dfd848d531a8969f4697d1aa2
+  unpetrify-ref: simplegeneric_0.8.1.orig
+  build-depends: []
+- name: wsme
   repo: upstream:python-packages/wsme
-- build-depends: []
-  name: pysnmp
-  ref: master
+  ref: 99d7668789cc6252398222549599d1363cddb081
+  unpetrify-ref: 0.6.1
+  build-depends:
+  - simplegeneric-tarball
+  - webob
+- name: pysnmp
   repo: upstream:python-packages/pysnmp
-- build-depends: []
-  name: repoze-lru
-  ref: master
+  ref: 1b377afeaf9ee96ab1d48aeebb2b7a6d65a4ac9d
+  unpetrify-ref: release_4_2_5_tag
+  build-depends:
+  - pyasn1
+  - pycrypto
+- name: repoze-lru
   repo: upstream:python-packages/repoze-lru
-- build-depends: []
+  ref: 29c8281dee7fe8dae8c66c7c40ce7c058ec2ab0f
+  unpetrify-ref: 0.6
+  build-depends: []
+- name: thrift
   morph: strata/openstack-services/thrift.morph
-  name: thrift
-  ref: 0.9.1
   repo: upstream:thrift
+  ref: 1f3a975a421c3ccf5d20dcce9d4c88d25676d073
+  unpetrify-ref: 0.9.2
+  build-depends: []
 - build-depends: []
   morph: strata/openstack-services/ipaddr-py.morph
   name: ipaddr-py
   ref: master
   repo: upstream:python-packages/ipaddr-py
-- build-depends: []
-  name: simplegeneric-tarball
-  ref: master
-  repo: upstream:python-packages/simplegeneric-tarball
-- build-depends: []
-  name: retrying
-  ref: master
+- name: retrying
   repo: upstream:python-packages/retrying
+  ref: cab083eb5791615fadbc0c98ad77a70d64b77d0d
+  unpetrify-ref: v1.3.1
+  build-depends: []
 - build-depends: []
   name: swig-tarball
   ref: master
@@ -275,22 +379,32 @@ chunks:
   name: python-coveragepy
   ref: master
   repo: upstream:python-coveragepy
-- build-depends: [eventlet,  kombu]
-  name: oslo-messaging
-  ref: master
+- name: oslo-messaging
   repo: upstream:openstack/oslo-messaging
-- build-depends: [suds, eventlet]
-  name: oslo-vmware
-  ref: master
+  ref: 6ea3b12492e86f9e8d109fc3490cc4d3a0edd8b6
+  unpetrify-ref: 1.4.0.0a5
+  build-depends:
+  - eventlet
+  - kombu
+- name: oslo-vmware
   repo: upstream:openstack/oslo-vmware
-- build-depends: [anyjson, networkx, futures]
+  ref: 047d62c4bbd01a951f77a1a4a75fb2b3d8ce23ee
+  unpetrify-ref: 0.6.0
+  build-depends:
+  - suds
+  - eventlet
+- build-depends: [anyjson, networkx]
   name: taskflow
   ref: master
   repo: upstream:openstack/taskflow
-- build-depends: [sqlalchemy, python-decorator, tempita]
-  name: sqlalchemy-migrate
-  ref: master
+- name: sqlalchemy-migrate
   repo: upstream:python-packages/sqlalchemy-migrate
+  ref: 93ae21007d0100332a5751fc58f7616ced775ef9
+  unpetrify-ref: 0.9.2
+  build-depends:
+  - sqlalchemy
+  - python-decorator
+  - tempita
 - build-depends: [docutils, creole, pycco, pycrypto, mock, nose, sphinx, pyjwt]
   name: oauthlib
   ref: master
@@ -304,26 +418,16 @@ chunks:
   name: subunit
   ref: trunk
   repo: upstream:python-packages/subunit
-- build-depends: [thrift]
-  name: happybase
-  ref: master
+- name: happybase
   repo: upstream:python-packages/happybase
+  ref: 90a4b7ef741f0ecfe5145693f64c6f7180b9ba3d
+  unpetrify-ref: 0.8
+  build-depends:
+  - thrift
 - build-depends: [webob]
   name: osprofiler
   ref: 0.3.0
   repo: upstream:python-packages/osprofiler
-- build-depends: []
-  name: python-ceilometerclient
-  ref: master
-  repo: upstream:openstack/python-ceilometerclient
-- build-depends: []
-  name: python-heatclient
-  ref: master
-  repo: upstream:openstack/python-heatclient
-- build-depends: [cliff]
-  name: python-designateclient
-  ref: master
-  repo: upstream:openstack/python-designateclient
 - build-depends: [fixtures, subunit, testrepository, testscenarios, testtools, mock,
     mox]
   name: oslotest
@@ -372,17 +476,19 @@ chunks:
   ref: master
   repo: upstream:openstack/swift
 - build-depends: [sqlalchemy, eventlet, kombu, routes, webob, pastedeploy, paste,
-    sqlalchemy-migrate,  httplib2, passlib, python-heatclient,
-    python-designateclient,
+    sqlalchemy-migrate,  httplib2, passlib,
     jinja2, pexpect]
   name: trove
   ref: master
   repo: upstream:openstack/trove
-- build-depends: [alembic, sqlalchemy,
-    sqlalchemy-migrate]
-  name: oslo-db
-  ref: master
+- name: oslo-db
   repo: upstream:openstack/oslo-db
+  ref: 0bb1e236daae53a3f5b4b88761d7b19f7961ed6c
+  unpetrify-ref: 1.0.2
+  build-depends:
+  - alembic
+  - sqlalchemy
+  - sqlalchemy-migrate
 - build-depends: [ sqlalchemy, anyjson, boto, eventlet, jinja2, kombu, routes,
     webob, greenlet, pastedeploy, paste, sqlalchemy-migrate,  suds, paramiko,
     pyasn1, websockify,
@@ -397,18 +503,110 @@ chunks:
   name: cinder
   ref: master
   repo: upstream:openstack/cinder
-- build-depends: [alembic, anyjson, croniter, eventlet, happybase,  jsonpath-rw,
-     lockfile, msgpack-python,  oslo-vmware, pastedeploy,
-     pecan, posix-ipc-tarball, oslo-messaging, pysnmp, python-ceilometerclient,
-     sqlalchemy, sqlalchemy-migrate,
-     webob, wsme]
-  name: ceilometer
+- name: keystonemiddleware
+  repo: upstream:keystonemiddleware
+  ref: a7beb50b38be5c3dd4c44d68ad79d1bb206dab6b
+  unpetrify-ref: 1.2.0
+  build-depends:
+  - webob
+- name: oslo-serialization
+#TODO: Creat lorry file
+  repo: git://git.openstack.org/openstack/oslo.serialization
+  ref: 80fec894a54253d9b4c80dd8a563957966ca0b88
+  unpetrify-ref: 0.3.0
+  build-depends: []
+- name: gevent
+#TODO: Create lorry file
+  repo: github:gevent/gevent
   ref: master
+  unpetrify-ref: master
+  build-depends:
+  - greenlet
+- name: kazoo
+#TODO: Create lorry file
+  repo: github:python-zk/kazoo
+  ref: master
+  unpretrify-ref: master
+  build-depends:
+  - gevent
+- name: pymemcache
+#TODO: Creat lorry file
+  repo: github:pinterest/pymemcache
+  ref: master
+  unpetrify-ref: master
+  build-depends:
+  - nose
+- name: zake
+#TODO: Create lorry file and add references
+  repo: github:yahoo/Zake
+  ref: master
+  unpetrify-ref: master
+  build-depends:
+  - kazoo
+  - testtools
+- name: sysv_ipc-tarball
+#TODO: Create lorry file and references
+  repo: http://semanchuk.com/philip/sysv_ipc/sysv_ipc-0.6.8.tar.gz
+  ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: tooz
+#TODO: Creat lorry file
+  repo: git://git.openstack.org/stackforge/tooz
+  ref: a90940a506b7c1bf52ef7d2f2ff52204fdcc6221
+  unpetrify-ref: 0.7
+  build-depends:
+  - kazoo
+  - pymemcache
+  - zake
+  - sysv_ipc
+  - msgpack-python
+  - retrying
+- name: ceilometer
   repo: upstream:openstack/ceilometer
-- build-depends: [ eventlet, greenlet, httplib2,  kombu,
-    oslo-messaging, pastedeploy,  posix-ipc-tarball, pycrypto, python-ceilometerclient,
-    python-heatclient,
-    qpid-python,  routes, sqlalchemy, sqlalchemy-migrate, webob]
-  name: heat
-  ref: master
+  ref: 94579bfc81b820380d03703e4e2311b3bd25c022
+  unpetrify-ref: 2014.2
+  build-depends:
+  - alembic
+  - anyjson
+  - croniter
+  - eventlet
+  - happybase
+  - jsonpath-rw
+  - keystonemiddleware
+  - lockfile
+  - msgpack-python
+  - oslo-db
+  - oslo-rootwrap
+  - oslo-vmware
+  - pastedeploy
+  - pecan
+  - posix-ipc-tarball
+  - oslo-messaging
+  - oslo-serialization
+  - pysnmp
+  - sqlalchemy
+  - sqlalchemy-migrate
+  - tooz
+  - webob
+  - wsme
+- name: heat
   repo: upstream:openstack/heat
+  ref: c06772571a81383aa37336a78d72d455067b75e8
+  unpetrify-ref: 2014.2
+  build-depends:
+  - eventlet
+  - greenlet
+  - httplib2
+  - keystonemiddleware
+  - kombu
+  - oslo-db
+  - oslo-messaging
+  - pastedeploy
+  - posix-ipc-tarball
+  - pycrypto
+  - qpid-python
+  - routes
+  - sqlalchemy
+  - sqlalchemy-migrate
+  - webob
