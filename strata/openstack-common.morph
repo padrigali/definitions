@@ -112,3 +112,8 @@ chunks:
   - six
   - pyiso8601
   - oslo-i18n
+- name: futures
+  repo: upstream:python-packages/futures
+  ref: 4f7ceedb8a7742e52b0436a4160c7c44665a2597
+  unpetrify-ref: 2.2.0
+  build-depends: []
