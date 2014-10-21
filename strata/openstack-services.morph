@@ -240,6 +240,9 @@ chunks:
   build-depends: []
 - name: dateutil
   repo: upstream:python-packages/dateutil
+  ref: 8c6026ba09716a4e164f5420120bfe2ebb2d9d82
+  unpetrify-ref: trunk
+  build-depends: []
 - name: posix-ipc-tarball
   repo: upstream:python-packages/posix-ipc-tarball
   ref: f3765db04b903b3671733e07cf1541a51966dd14
@@ -271,82 +274,115 @@ chunks:
   ref: b2b67795a009e9f825cbd855d766b78a00273f10
   unpetrify-ref: 0.5
   build-depends: []
-- build-depends: []
-  name: websockify
-  ref: baserock/v0.6.0
+- name: numpy
+#TODO: Add lorry file and refs
+  repo: github:numpy/numpy
+  ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: websockify
   repo: upstream:python-packages/websockify
+  ref: 739af6ecb46e762793508ab59fede1f6b647e44e
+  unpetrify-ref: v0.6.0
+  build-depends:
+  - numpy
 - name: python-mimeparse
 #TODO add lorryfile and modify references
   repo: github:dbtsai/python-mimeparse
   ref: master
   unpetrify-ref: master
   build-depends: []
-- name: testtools
-  repo: upstream:python-packages/testtools
-  ref: ee9946228ce5a03a84cf146027de0a8a9a46c4fe
-  unpetrify-ref: testools-1.1.0
-  build-depends:
-# - extras   #TODO: No idea which python's package is this
-  - python-mimeparse
 - name: httplib2
   ref: 058a1f9448d5c27c23772796f83a596caf9188e6
   unpetrify-ref: v0.9
   repo: upstream:python-packages/httplib2
   build-depends: []
-- build-depends: []
-  name: testrepository
-  ref: trunk
+- name: extras
+#TODO: Add lorryfile and refs
+  repo: github:testing-cabal/extras
+  ref: master
+  unpetrify-ref: master
+  build-deps: []
+- name: testtools
+  repo: upstream:python-packages/testtools
+  ref: ee9946228ce5a03a84cf146027de0a8a9a46c4fe
+  unpetrify-ref: testools-1.1.0
+  build-depends:
+  - extras
+  - python-mimeparse
+- name: fixtures
+  repo: upstream:python-packages/fixtures
+  ref: 9f9d89ce718463b24cd3910b9a99efb60b3c9e1b
+  unpetrify-ref: 0.3.16
+  build-depends:
+  - testtools
+- name: subunit
+  morph: strata/openstack-services/subunit.morph
+  repo: upstream:python-packages/subunit
+  ref: e18ffe65a3229d5c1d91be988405d40219db0887
+  unpetrify-ref: 0.0.21
+  build-depends:
+  - extras
+  - testtools
+- name: testrepository
   repo: upstream:python-packages/testrepository
+  ref: 6419a3dcaabaf09eaf438c6d8d85c90eba7a2b91
+  unpetrify-ref: 0.0.19
+  build-depends:
+  - fixtures
+  - subunit
+  - testtools
 - name: suds
   repo: upstream:python-packages/suds
   ref: badd30a87f676d632d7386b05401e6029a5df83c
   unpetrify-ref: release-0.3.2
   build-depends: []
-- build-depends: []
-  name: testscenarios
-  ref: trunk
+- name: testscenarios
   repo: upstream:python-packages/testscenarios
-- build-depends: []
-  name: fixtures
-  ref: trunk
-  repo: upstream:python-packages/fixtures
-- build-depends: []
-  name: mox
-  ref: master
+  ref: 475857af19a8190c9c0c7f8241b9907b942e19fd
+  unpetrify-ref: trunk
+  build-depends: []
+- name: mox
   repo: upstream:python-packages/mox
   ref: 160491d0384285698d726b1af21277f336107f51
   unpetrify-ref: master
   build-depends: []
 - name: jsonrpclib
   repo: upstream:python-packages/jsonrpclib
+  ref: 53c8ffcfe4dd1718086cc551dce8ac459e8abc67
+  unpetrify-ref: master
+  build-depends: []
 - name: rtslib-fb
   repo: upstream:python-packages/rtslib-fb
   ref: a020fbadfe530bc0773b73501c2cee420c435f87
   unpetrify-ref: v2.1.fb50
   build-depends: []
-- build-depends: []
-  name: netifaces
-  ref: master
+- name: netifaces
   repo: upstream:python-packages/netifaces
+  ref: 885b200ba717df87f6e8044ec8c66c677c949bcb
+  unpetrify-ref: release_0_10_4
+  build-depends: []
 - name: networkx
   repo: upstream:python-packages/networkx
   ref: 8ac796aba866ade1a56b83e30f25ed392ca3512c
   unpetrify-ref: v1.9.1
   build-depends:
   - python-decorator
-- build-depends: []
-  name: dnspython
-  ref: master
+- name: dnspython
   repo: upstream:python-packages/dnspython
+  ref: e1369c62d14f82b80ef11197a490ace5d43bb3f3
+  unpetrify-ref: v1.12.0
+  build-depends: []
 - name: pyasn1
   repo: upstream:python-packages/pyasn1
   ref: fa8e66c5f4367a1e39b53dcddc133d084b10400f
   unpetrify-ref: release_0_1_7_tag
   build-depends: []
-- build-depends: []
-  name: pexpect
-  ref: master
+- name: pexpect
   repo: upstream:python-packages/pexpect
+  ref: 671417beb41c21f772687c565196fdde444b053b
+  unpetrify-ref: 3.3
+  build-depends: []
 - name: ply
 #TODO: creaty lorry file and add references.
   repo: github:dabeaz/ply
@@ -395,18 +431,12 @@ chunks:
   - mako
   - webtest
   - logutils
-- name: python-dateutil
-#TODO: create the lorry file and add references.
-  repo: bzr branch lp:dateutil
-  ref: master
-  unpetrify-ref: master
-  build-depends: []
 - name: croniter
   repo: upstream:python-packages/croniter
   ref: 0c3aeac05791cb4ece9e30da29442e9cd5b22f36
   unpetrify-ref: 0.3.5
   build-depends:
-  - python-dateutil
+  - dateutil
 - name: msgpack-python
   repo: upstream:python-packages/msgpack-python
   ref: 61bac2f586e82313a0e618093bfed2435cd18983
@@ -523,11 +553,19 @@ chunks:
   unpetrify-ref: 0.3.0
   build-depends:
   - webob
-- build-depends: [fixtures, subunit, testrepository, testscenarios, testtools, mock,
-    mox]
-  name: oslotest
-  ref: master
+- name: oslotest
   repo: upstream:openstack/oslotest
+  ref: bbfde1e29c72ee7f90b2982e29b47cd2e1574d6d
+  unpetrify-ref: 1.1.0.0a2
+  build-depends:
+  - discover
+  - fixtures
+  - subunit
+  - testrepository
+  - testscenarios
+  - testtools
+  - mock
+  - mox
 - name: pycadf
   repo: upstream:python-packages/pycadf
   ref: 52727bcea3a98e72331e748ce5f9e3a111a64cd1
@@ -536,16 +574,12 @@ chunks:
   - oslo-messaging
   - posix-ipc-tarball
   - webob
-- build-depends: []
+- name: xattr
   morph: strata/openstack-services/xattr.morph
-  name: xattr
-  ref: master
   repo: upstream:python-packages/xattr
-- build-depends: []
-  name: cryptography
-  morph: strata/openstack-services/cryptography.morph
-  ref: master
-  repo: upstream:python-packages/cryptography
+  ref: dd10d44e3eb9a1d2303c1f7d5126c099d56e97fc
+  unpetrify-ref: v0.7.6
+  build-depends: []
 - name: keystonemiddleware
   repo: upstream:keystonemiddleware
   ref: a7beb50b38be5c3dd4c44d68ad79d1bb206dab6b
@@ -613,37 +647,101 @@ chunks:
   - dogpile-cache
   - pycadf
   - posix-ipc-tarball
-- build-depends: [ paste, pastedeploy, routes, anyjson,  eventlet, greenlet,
-    httplib2,   jsonrpclib, jinja2, kombu,
-    sqlalchemy, webob,  alembic, oslo-messaging,
-    oslo-rootwrap, python-decorator, sqlparse]
-  name: neutron
-  ref: master
+- name: neutron
   repo: upstream:openstack/neutron
-- build-depends: [dnspython, eventlet, greenlet, netifaces, pastedeploy,
-    xattr]
-  name: swift
-  ref: master
+  ref: 0d0c376d09d85a0eabeb8c9258349d1e63a5cdf0
+  unpetrify-ref: 2014.2
+  build-depends:
+  - paste
+  - pastedeploy
+  - routes
+  - anyjson
+  - eventlet
+  - greenlet
+  - httplib2
+  - jsonrpclib
+  - jinja2
+  - keystonemiddleware
+  - sqlalchemy
+  - webob
+  - alembic
+  - oslo-db
+  - oslo-messaging
+  - oslo-rootwrap
+- name: swift
   repo: upstream:openstack/swift
-- build-depends: [sqlalchemy, eventlet, kombu, routes, webob, pastedeploy, paste,
-    sqlalchemy-migrate,  httplib2, passlib,
-    jinja2, pexpect]
-  name: trove
-  ref: master
+  ref: 2e8261a4dc0d0af0c4a46478b81e167bcf02220b
+  unpetrify-ref: 2.2.0
+  build-depends:
+  - dnspython
+  - eventlet
+  - greenlet
+  - netifaces
+  - pastedeploy
+  - xattr
+- name: trove
   repo: upstream:openstack/trove
-- build-depends: [ sqlalchemy, anyjson, boto, eventlet, jinja2, kombu, routes,
-    webob, greenlet, pastedeploy, paste, sqlalchemy-migrate,  suds, paramiko,
-    pyasn1, websockify,
-    oslo-rootwrap, oslotest, pycadf, oslo-messaging]
-  name: nova
-  ref: master
-  repo: upstream:openstack/nova
+  ref: a4c38cc6ddbfba2301766eced939229cccc31953
+  unpetrify-ref: 2014.2
+  build-depends:
+  - sqlalchemy
+  - eventlet
+  - keystonemiddleware
+  - kombu
+  - routes
+  - webob
+  - pastedeploy
+  - paste
+  - sqlalchemy-migrate
+  - netifaces
+  - httplib2
+  - passlib
+  - jinja2
+  - pexpect
 - name: wsgiref
 #TODO: Create lorry file and add references
   repo: svn://svn.eby-sarna.com/svnroot/wsgiref
   ref: master
   unpetrify-ref: master
   build-depends: []
+- name: rfc3986
+#TODO: Add lorry file and refs
+  repo: https://pypi.python.org/packages/source/r/rfc3986/rfc3986-0.2.0.tar.gz
+  ref: master
+  ref: master
+  build-depends: []
+- name: nova
+  repo: upstream:openstack/nova
+  ref: c5ac21f3dbb4ad59efcb631d91e4e64f77fba43f
+  unpetrify-ref: 2014.2
+  build-depends:
+  - sqlalchemy
+  - anyjson
+  - boto
+  - python-decorator
+  - eventlet
+  - jinja2
+  - keystonemiddleware
+  - kombu
+  - routes
+  - webob
+  - greenlet
+  - pastedeploy
+  - paste
+  - sqlalchemy-migrate
+  - suds
+  - paramiko
+  - posix-ipc-tarball
+  - pyasn1
+  - websockify
+  - wsgiref
+  - oslo-db
+  - oslo-rootwrap
+  - pycadf
+  - oslo-messaging
+  - lockfile
+  - rfc3986
+  - oslo-vmware
 - name: cinder
   repo: upstream:openstack/cinder
   ref: be3d4604dc0566e0838959d998ff1d37755de6d3
