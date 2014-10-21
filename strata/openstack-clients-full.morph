@@ -29,18 +29,12 @@ chunks:
   ref: f8a45724391ba5d26877f7ae9f4cb145d95876c9
   unpetrify-ref: master
   build-depends: []
-- name: simplejson
-  repo: upstream:simplejson
-  ref: 54d5ff15d508c51366986cc4f77f2f287f036582
-  unpetrify-ref: v3.6.4
-  build-depends: []
 - name: python-keystoneclient
   repo: upstream:python-keystoneclient
   ref: 79d1eec35aad874a7c08ff22c39260884a5524ba
   unpetrify-ref: 0.11.1
   build-depends:
   - python-prettytable
-  - simplejson
 - name: python-glanceclient
   repo: upstream:python-glanceclient
   ref: 8a877b2752162d6a2db43d7d61d6311c4f42285b
@@ -55,21 +49,18 @@ chunks:
   unpetrify-ref: 2.20.0
   build-depends:
   - python-prettytable
-  - simplejson
   - python-keystoneclient
 - name: python-swiftclient
   repo: upstream:openstack/python-swiftclient
   ref: master
   unpetrify-ref: master
   build-depends:
-  - simplejson
 - name: python-troveclient
   repo: upstream:openstack/python-troveclient
   ref: e010a919750f07493afd42a4db867853b925bcbf
   unpetrify-ref: 1.0.7
   build-depends:
   - python-prettytable
-  - simplejson
 - name: python-cinderclient
   repo: upstream:openstack/python-cinderclient
   ref: ac9b0913904c43f4bf12c8164324d6e6a55dc1ab
@@ -77,7 +68,6 @@ chunks:
   build-depends:
   - python-prettytable
   - python-keystoneclient
-  - simplejson
 - name: pyparsing
 # TODO: create a lorry file with all the dependencies which remains
   repo: svn://svn.code.sf.net/p/pyparsing/code
@@ -106,7 +96,6 @@ chunks:
   build-depends:
   - cliff
   - python-keystoneclient
-  - simplejson
 - name: python-ceilometerclient
   repo: upstream:openstack/python-ceilometerclient
   ref: 7316dd16b8850270db27c1298dcf5a2223f2f1e1
