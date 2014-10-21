@@ -143,10 +143,6 @@ chunks:
   - pygments
   - docutils
   - snowballstemmer
-- build-depends: []
-  name: tox
-  ref: master
-  repo: upstream:python-packages/tox
 - name: logilab-common
 #TODO: Add lorry file and refs
   repo: hg clone http://hg.logilab.org/review/logilab/common/
@@ -242,13 +238,7 @@ chunks:
   ref: b02f7a254c3679dfac57a824e08dd02ced850636
   unpetrify-ref: decorator-3.4.0
   build-depends: []
-- build-depends: []
-  name: sqlparse
-  ref: master
-  repo: upstream:python-packages/sqlparse
-- build-depends: []
-  name: dateutil
-  ref: trunk
+- name: dateutil
   repo: upstream:python-packages/dateutil
 - name: posix-ipc-tarball
   repo: upstream:python-packages/posix-ipc-tarball
@@ -324,17 +314,10 @@ chunks:
   name: mox
   ref: master
   repo: upstream:python-packages/mox
-- build-depends: []
-  name: rsa
-  ref: master
-  repo: upstream:python-packages/rsa
-- build-depends: []
-  name: urllib3
-  ref: master
-  repo: upstream:python-packages/urllib3
-- build-depends: []
-  name: jsonrpclib
-  ref: master
+  ref: 160491d0384285698d726b1af21277f336107f51
+  unpetrify-ref: master
+  build-depends: []
+- name: jsonrpclib
   repo: upstream:python-packages/jsonrpclib
 - name: rtslib-fb
   repo: upstream:python-packages/rtslib-fb
@@ -465,20 +448,11 @@ chunks:
   ref: 1f3a975a421c3ccf5d20dcce9d4c88d25676d073
   unpetrify-ref: 0.9.2
   build-depends: []
-- build-depends: []
-  morph: strata/openstack-services/ipaddr-py.morph
-  name: ipaddr-py
-  ref: master
-  repo: upstream:python-packages/ipaddr-py
 - name: retrying
   repo: upstream:python-packages/retrying
   ref: cab083eb5791615fadbc0c98ad77a70d64b77d0d
   unpetrify-ref: v1.3.1
   build-depends: []
-- build-depends: []
-  name: swig-tarball
-  ref: master
-  repo: upstream:swig-tarball
 - name: ecdsa
   repo: upstream:python-packages/ecdsa
   ref: 36e9cfa80fcf8b53119adc787e54a5892ec1eb2c
@@ -496,10 +470,6 @@ chunks:
   ref: 2517f660f8ef9012708d46da3a36ab967993d2f6
   unpetrify-ref: 2.33.0
   build-depends: []
-- build-depends: []
-  name: python-coveragepy
-  ref: master
-  repo: upstream:python-coveragepy
 - name: oslo-messaging
   repo: upstream:openstack/oslo-messaging
   ref: 6ea3b12492e86f9e8d109fc3490cc4d3a0edd8b6
@@ -541,15 +511,6 @@ chunks:
   - nose
   - sphinx
   - pyjwt
-- build-depends: [urllib3]
-  name: httpretty
-  ref: master
-  repo: upstream:python-packages/httpretty
-- build-depends: [testtools]
-  morph: strata/openstack-services/subunit.morph
-  name: subunit
-  ref: trunk
-  repo: upstream:python-packages/subunit
 - name: happybase
   repo: upstream:python-packages/happybase
   ref: 90a4b7ef741f0ecfe5145693f64c6f7180b9ba3d
