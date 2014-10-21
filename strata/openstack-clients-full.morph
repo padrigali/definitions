@@ -4,11 +4,6 @@ description: Stratum with all the OpenStack clients
 build-depends:
 - morph: strata/openstack-common.morph
 chunks:
-- name: jsonschema
-  repo: upstream:jsonschema
-  ref: 35b60f390098d3306c03eee27ceec8cf8a493579
-  unpetrify-ref: v2.3.0
-  build-depends: []
 - name: python-json-pointer
   repo: upstream:python-json-pointer
   ref: 34073e561261cb413b9bdff5beac31b070d98ea2
@@ -25,7 +20,6 @@ chunks:
   ref: 408ccb82347aabf3dc7cf6eccbd2ed2475cb0d60
   unpetrify-ref: 1.1.0
   build-depends:
-  - jsonschema
   - python-json-pointer
 - name: python-prettytable
 # NOTE: There are a problem with the lorry which should be
@@ -130,8 +124,14 @@ chunks:
 - name: python-designateclient
   repo: upstream:openstack/python-designateclient
   ref: a900b41e4d8a9eb40e1812295ba16d773e2b9618
-  ref: 1.1.0
+  unpetrify-ref: 1.1.0
   build-depends:
   - cliff
-  - jsonschema
   - python-keystoneclient
+- name: python-barbicanclient
+  repo: github:openstack/python-barbicanclient
+  ref: master
+  unpetrify-ref: master
+  build-depends:
+  - python-keystoneclient
+  - cliff
