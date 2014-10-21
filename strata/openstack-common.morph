@@ -117,3 +117,14 @@ chunks:
   ref: 4f7ceedb8a7742e52b0436a4160c7c44665a2597
   unpetrify-ref: 2.2.0
   build-depends: []
+- name: oslo-serialization
+#TODO: Creat lorry file
+  repo: git://git.openstack.org/openstack/oslo.serialization
+  ref: 80fec894a54253d9b4c80dd8a563957966ca0b88
+  unpetrify-ref: 0.3.0
+  build-depends: []
+- name: jsonschema
+  repo: upstream:jsonschema
+  ref: 35b60f390098d3306c03eee27ceec8cf8a493579
+  unpetrify-ref: v2.3.0
+  build-depends: []
