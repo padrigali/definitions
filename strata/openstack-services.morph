@@ -74,53 +74,169 @@ chunks:
   ref: 4eb27075e0523b6ed2027444fd42d83a6e9b14c5
   unpetrify-ref: master
   build-depends: []
-- build-depends: []
-  name: dogpile-cache
-  ref: master
-  repo: upstream:python-packages/dogpile-cache
-- build-depends: []
-  name: dogpile-core
-  ref: master
+- name: dogpile-core
   repo: upstream:python-packages/dogpile-core
+  ref: 3e6f0f86b4161b48898e656039154092426e5cc8
+  unpetrify-ref: rel_0_4_1
+  build-depends: []
+- name: dogpile-cache
+  repo: upstream:python-packages/dogpile-cache
+  ref: 1c753914b335b4391bc5847a87b7c52ca81c2bc6
+  unpetrify-ref: rel_0_5_4
+  build-depends:
+  - dogpile.core
 - name: pycrypto
   morph: strata/openstack-services/pycrypto.morph
   repo: upstream:python-packages/pycrypto
   ref: af058ee6f5da391a05275470ab4a4a96aa22b350
   unpetrify-ref: v2.7a1
   build-depends: []
-- build-depends: []
-  name: pyjwt
-  ref: master
+- name: pyjwt
   repo: upstream:python-packages/pyjwt
-- build-depends: []
-  name: creole
-  ref: master
+  ref: 739efeff4c6c1fc30ab5cf5eb0ac337e8ee107d7
+  unpetrify-ref: 0.2.3
+  build-depends: []
+- name: creole
   repo: upstream:python-packages/creole
-- build-depends: []
-  name: mock
-  ref: master
+  ref: 6390231688adb5d8678a71cd33204e9bca555d4a
+  unpetrify-ref: v1.2.1
+  build-depends: []
+- name: mock
   repo: upstream:python-packages/mock
+  ref: 5b35f7ad239005a950f870af57b44dbdc99d66b
+  unpetrify-ref: master
+  build-depends: []
 - name: nose
   repo: upstream:python-packages/nose
   ref: 08d134270b035dac3310cd877bb0fe9ab678303a
   unpetrify-ref: release_1.3.4
   build-depends: []
-- build-depends: []
-  name: sphinx
+- name: jinja2
+  repo: upstream:jinja2
+  ref: 762c612e7276889aac265645da00e62e33d1573c
+  unpetrify-ref: 2.7.3
+  build-depends:
+  - markupsafe
+- name: pygments
+  repo: upstream:pygments
+  ref: f41e8c594e76855611b3b3dfca300894bd29f1c4
+  unpetrify-ref: 2.0rc1
+  build-depends: []
+- name: docutils
+  morph: strata/openstack-services/docutils.morph
+  repo: upstream:python-packages/docutils
+  ref: 1976ba91eff979abc3e13e5d8cb68324833af6a0
+  unpetrify-ref: docutils-0.12
+  build-depends: []
+- name: snowballstemmer
+#TODO: Add lorry file and refs
+  repo: github:shibukawa/snowball_py
   ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: sphinx
   repo: upstream:python-packages/sphinx
+  ref: e76c9771bad16e68cdb7deb18b4d13de0a718c68
+  unpetrify-ref: 1.3b1
+  build-depends:
+  - jinja2
+  - pygments
+  - docutils
+  - snowballstemmer
 - build-depends: []
   name: tox
   ref: master
   repo: upstream:python-packages/tox
-- build-depends: []
-  name: pylint
+- name: logilab-common
+#TODO: Add lorry file and refs
+  repo: hg clone http://hg.logilab.org/review/logilab/common/
   ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: astroid
+#TODO: Add lorry file and refs
+  repo: hg clone https://bitbucket.org/logilab/astroid
+  ref: master
+  unpetrify-ref: master
+  build-depends:
+  - logilab-common
+- name: pylint
   repo: upstream:python-packages/pylint
-- build-depends: []
-  name: pycco
+  ref: 541466c31aae21c7cfbf30470f0f6a2dc0a948c3
+  unpetrify-ref: pylint-1.3.1
+  build-depends:
+  - logilab-common
+  - astroid
+- name: python-markdown
+  repo: upstream:python-markdown
+  ref: f0c5b71acbc02af60a33d67c59558bb513b25e74
+  unpetrify-ref: 2.5.1-final
+  build-depends: []
+- name: pystache
+#TODO: Add lorry file and refs
+  repo: github:defunkt/pystache
   ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: enum34
+#TODO: Add lorry file and refs
+  repo: https://pypi.python.org/packages/source/e/enum34/enum34-1.0.tar.gz
+  ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: pies
+#TODO: Add lorry file and refs
+  morph: strata/openstack-services/pies.morph
+  repo: github:timothycrosley/pies
+  ref: master
+  unpetrify-ref: master
+  build-depends:
+  - enum34
+- name: natsort
+#TODO: Add lorry file and refs
+  repo: github:SethMMorton/natsort
+  ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: isort
+#TODO: Add lorry file and refs
+  repo: github:timothycrosley/isort
+  ref: master
+  unpetrify-ref: master
+  build-depends:
+  - pies
+  - natsort
+- name: pep8
+#TODO: Add lorry file and refs
+  repo: github:jcrocholl/pep8
+  ref: master
+  unpetrify-ref: master
+  build-depends:[]
+- name: pyflakes
+#TODO: Add lorry file and refs
+  repo: github:pyflakes/pyflakes
+  ref: master
+  unpetrify-ref: master
+  build-depends: []
+- name: smartypants
+#TODO: Add lorry file and refs
+  repo: hg clone https://bitbucket.org/livibetter/smartypants.py
+  ref: master
+  unpetrify-ref: master
+  build-depends:
+  - isort
+  - pep8
+  - pyflakes
+  - pylint
+- name: pycco
   repo: upstream:python-packages/pycco
+  ref: 22e157e525760e843dba391ca85fbe9bd35fdc5b
+  unpetrify-ref: master
+  build-depends:
+  - python-markdown
+  - pygments
+  - pystache
+  - smartypants
 - name: python-decorator
   repo: upstream:python-packages/python-decorator
   ref: b02f7a254c3679dfac57a824e08dd02ced850636
@@ -134,11 +250,6 @@ chunks:
   name: dateutil
   ref: trunk
   repo: upstream:python-packages/dateutil
-- build-depends: []
-  morph: strata/openstack-services/docutils.morph
-  name: docutils
-  ref: master
-  repo: upstream:python-packages/docutils
 - name: posix-ipc-tarball
   repo: upstream:python-packages/posix-ipc-tarball
   ref: f3765db04b903b3671733e07cf1541a51966dd14
@@ -160,10 +271,11 @@ chunks:
   unpetrify-ref: v2.0
   build-depends:
   - repoze-lru
-- build-depends: []
-  name: passlib
-  ref: master
+- name: passlib
   repo: upstream:python-packages/passlib
+  ref: f407312597727a08440e41bc8e31d3b3b334c66f
+  unpetrify-ref: 1.6.2
+  build-depends: []
 - name: tempita
   repo: upstream:python-packages/tempita
   ref: b2b67795a009e9f825cbd855d766b78a00273f10
@@ -367,10 +479,6 @@ chunks:
   name: swig-tarball
   ref: master
   repo: upstream:swig-tarball
-- build-depends: []
-  name: jinja2
-  ref: baserock/morph
-  repo: upstream:jinja2
 - name: ecdsa
   repo: upstream:python-packages/ecdsa
   ref: 36e9cfa80fcf8b53119adc787e54a5892ec1eb2c
@@ -383,10 +491,11 @@ chunks:
   build-depends:
   - pycrypto
   - ecdsa
-- build-depends: []
-  name: boto
-  ref: baserock/morph
+- name: boto
   repo: upstream:boto
+  ref: 2517f660f8ef9012708d46da3a36ab967993d2f6
+  unpetrify-ref: 2.33.0
+  build-depends: []
 - build-depends: []
   name: python-coveragepy
   ref: master
@@ -419,10 +528,19 @@ chunks:
   - sqlalchemy
   - python-decorator
   - tempita
-- build-depends: [docutils, creole, pycco, pycrypto, mock, nose, sphinx, pyjwt]
-  name: oauthlib
-  ref: master
+- name: oauthlib
   repo: upstream:python-packages/oauthlib
+  ref: de773eefcb3c1afe54a0c12d5bf9bd214ceaf404
+  unpetrify-ref: 0.6.3
+  build-depends:
+  - docutils
+  - creole
+  - pycco
+  - pycrypto
+  - mock
+  - nose
+  - sphinx
+  - pyjwt
 - build-depends: [urllib3]
   name: httpretty
   ref: master
@@ -449,11 +567,14 @@ chunks:
   name: oslotest
   ref: master
   repo: upstream:openstack/oslotest
-- build-depends: [oslo-messaging, posix-ipc-tarball,
-     webob]
-  name: pycadf
-  ref: master
+- name: pycadf
   repo: upstream:python-packages/pycadf
+  ref: 52727bcea3a98e72331e748ce5f9e3a111a64cd1
+  unpetrify-ref: 0.6.0
+  build-depends:
+  - oslo-messaging
+  - posix-ipc-tarball
+  - webob
 - build-depends: []
   morph: strata/openstack-services/xattr.morph
   name: xattr
@@ -464,21 +585,73 @@ chunks:
   morph: strata/openstack-services/cryptography.morph
   ref: master
   repo: upstream:python-packages/cryptography
-- build-depends: [greenlet, sqlalchemy, anyjson, eventlet, pastedeploy, routes,
-    webob, boto, sqlalchemy-migrate, httplib2, kombu, pycrypto,
-    oslo-vmware, paste,
-    oslo-messaging,  cryptography, simplegeneric-tarball,
-    ipaddr-py, osprofiler, retrying]
-  name: glance
+- name: keystonemiddleware
+  repo: upstream:keystonemiddleware
+  ref: a7beb50b38be5c3dd4c44d68ad79d1bb206dab6b
+  unpetrify-ref: 1.2.0
+  build-depends:
+  - webob
+- name: oslo-db
+  repo: upstream:openstack/oslo-db
+  ref: 0bb1e236daae53a3f5b4b88761d7b19f7961ed6c
+  unpetrify-ref: 1.0.2
+  build-depends:
+  - alembic
+  - sqlalchemy
+  - sqlalchemy-migrate
+- name: glance_store
+  repo: github:openstack/glance_store
   ref: master
+  unpetrify-ref: master
+  build-depends:
+  - evenlet
+- name: glance
   repo: upstream:openstack/glance
-- build-depends: [ webob, eventlet, greenlet,  pastedeploy, paste, routes,
-    sqlalchemy, sqlalchemy-migrate, passlib,
-    oslo-messaging,  oauthlib, dogpile-cache,  pycadf, posix-ipc-tarball,
-    repoze-lru, dogpile-core, python-decorator]
-  name: keystone
-  ref: 2014.2.b1
+  ref: 742c898956d655affa7351505c8a3a5c72881eae
+  unpetrify-ref: 2014.2
+  build-depends:
+  - greenlet
+  - sqlalchemy
+  - anyjson
+  - eventlet
+  - pastedeploy
+  - routes
+  - webob
+  - boto
+  - sqlalchemy-migrate
+  - httplib2
+  - kombu
+  - pycrypto
+  - keystonemiddleware
+  - wsme
+  - oslo-vmware
+  - paste
+  - oslo-db
+  - oslo-messaging
+  - retrying
+  - osprofiler
+  - glance_store
+- name: keystone
   repo: upstream:openstack/keystone
+  ref: ef8d9aa4e1ca3b5465a5bba0cdb6dcb9be1fe9ca
+  unpetrify-ref: 2014.2
+  build-depends:
+  - webob
+  - eventlet
+  - greenlet
+  - pastedeploy
+  - paste
+  - routes
+  - sqlalchemy
+  - sqlalchemy-migrate
+  - passlib
+  - keystonemiddleware
+  - oslo-messaging
+  - oslo-db
+  - oauthlib
+  - dogpile-cache
+  - pycadf
+  - posix-ipc-tarball
 - build-depends: [ paste, pastedeploy, routes, anyjson,  eventlet, greenlet,
     httplib2,   jsonrpclib, jinja2, kombu,
     sqlalchemy, webob,  alembic, oslo-messaging,
@@ -497,14 +670,6 @@ chunks:
   name: trove
   ref: master
   repo: upstream:openstack/trove
-- name: oslo-db
-  repo: upstream:openstack/oslo-db
-  ref: 0bb1e236daae53a3f5b4b88761d7b19f7961ed6c
-  unpetrify-ref: 1.0.2
-  build-depends:
-  - alembic
-  - sqlalchemy
-  - sqlalchemy-migrate
 - build-depends: [ sqlalchemy, anyjson, boto, eventlet, jinja2, kombu, routes,
     webob, greenlet, pastedeploy, paste, sqlalchemy-migrate,  suds, paramiko,
     pyasn1, websockify,
@@ -512,12 +677,6 @@ chunks:
   name: nova
   ref: master
   repo: upstream:openstack/nova
-- name: keystonemiddleware
-  repo: upstream:keystonemiddleware
-  ref: a7beb50b38be5c3dd4c44d68ad79d1bb206dab6b
-  unpetrify-ref: 1.2.0
-  build-depends:
-  - webob
 - name: wsgiref
 #TODO: Create lorry file and add references
   repo: svn://svn.eby-sarna.com/svnroot/wsgiref
