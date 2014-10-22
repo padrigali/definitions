@@ -81,7 +81,7 @@ chunks:
   build-depends:
   - pyparsing
 - name: cliff
-  repo: upstream:cliff
+  repo: upstream:openstack/cliff
   ref: 42675b2d7ad93f4bba9c4216874c68b8e5834147
   ref: 1.7.0
   build-depends:
