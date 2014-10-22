@@ -22,7 +22,7 @@ chunks:
   build-depends:
   - python-json-pointer
 - name: python-prettytable
-# NOTE: There are a problem with the lorry which should be
+# TODO: NOTE: There are a problem with the lorry which should be
 #       fixed to update this package to the latest version.
   morph: strata/openstack-clients/python-prettytable.morph
   repo: upstream:python-prettytable
@@ -52,9 +52,9 @@ chunks:
   - python-keystoneclient
 - name: python-swiftclient
   repo: upstream:openstack/python-swiftclient
-  ref: master
-  unpetrify-ref: master
-  build-depends:
+  ref: bb4d2ab59c4de9389667eeed255642f51e276f1e
+  unpetrify-ref: 2.3.1
+  build-depends: []
 - name: python-troveclient
   repo: upstream:openstack/python-troveclient
   ref: e010a919750f07493afd42a4db867853b925bcbf
@@ -69,15 +69,14 @@ chunks:
   - python-prettytable
   - python-keystoneclient
 - name: pyparsing
-# TODO: create a lorry file with all the dependencies which remains
-  repo: svn://svn.code.sf.net/p/pyparsing/code
-  ref: master
-  unpetrify-ref: master
+  morph: strata/openstack-clients-full/pyparsing.morph
+  repo: git://85.199.252.93/delta/python-packages/pyparsing.git
+  ref: 8062c76ab3958a570052124f17e71f3dd3ec2257
+  unpetrify-ref: pyparsing_2.0.3
   build-depends: []
 - name: cmd2
-# TODO: create a lorry file with all the dependencies which remains
-  repo: github:Zearin/cmd2
-  ref: master
+  repo: git://85.199.252.93/delta/python-packages/cmd2.git
+  ref: 07b4dc3d6991cbdc420c246e807371c97a467d1a
   unpetrify-ref: master
   build-depends:
   - pyparsing
