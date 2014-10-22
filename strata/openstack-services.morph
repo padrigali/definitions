@@ -28,10 +28,9 @@ chunks:
   build-depends:
   - greenlet
 - name: py-amqp
-#TODO: Add lorry-file and references
-  ref: master
-  unpetrify-ref: master
-  repo: github:celery/py-amqp
+  repo: git://85.199.252.93/delta/python-packages/py-amqp.git
+  ref: 875b10d1715def640042c7ff2f42c00a6c07eed1
+  unpetrify-ref: 1.4.6
   build-depends: []
 - name: anyjson
   repo: upstream:python-packages/anyjson
@@ -56,12 +55,11 @@ chunks:
   unpetrify-ref: 0.23
   build-depends: []
 - name: mako
-#TODO: Add lorry-file and references
-  repo: git://git@bitbucket.org:zzzeek/mako.git
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/mako.git
+  ref: 285bc818a50ccc0f9549630f7c4f4c250585c3e7
+  unpetrify-ref: rel_1_0_0
   build-depends:
-  - MarkupSafe
+  - markupsafe
 - name: alembic
   repo: upstream:python-packages/alembic
   ref: e37162294fc6df9740f4231a75021f391e2a0f98
@@ -84,7 +82,7 @@ chunks:
   ref: 1c753914b335b4391bc5847a87b7c52ca81c2bc6
   unpetrify-ref: rel_0_5_4
   build-depends:
-  - dogpile.core
+  - dogpile-core
 - name: pycrypto
   morph: strata/openstack-services/pycrypto.morph
   repo: upstream:python-packages/pycrypto
@@ -103,7 +101,7 @@ chunks:
   build-depends: []
 - name: mock
   repo: upstream:python-packages/mock
-  ref: 5b35f7ad239005a950f870af57b44dbdc99d66b
+  ref: 35b35f7ad239005a950f870af57b44dbdc99d66b
   unpetrify-ref: master
   build-depends: []
 - name: nose
@@ -118,20 +116,18 @@ chunks:
   build-depends:
   - markupsafe
 - name: pygments
-  repo: upstream:pygments
+  repo: upstream:python-packages/pygments
   ref: f41e8c594e76855611b3b3dfca300894bd29f1c4
   unpetrify-ref: 2.0rc1
   build-depends: []
 - name: docutils
-  morph: strata/openstack-services/docutils.morph
   repo: upstream:python-packages/docutils
   ref: 1976ba91eff979abc3e13e5d8cb68324833af6a0
   unpetrify-ref: docutils-0.12
   build-depends: []
 - name: snowballstemmer
-#TODO: Add lorry file and refs
-  repo: github:shibukawa/snowball_py
-  ref: master
+  repo: git://85.199.252.93/delta/python-packages/snowballstemmer.git
+  ref: f0d81ce1606d685029302ea073b59d9437d12569
   unpetrify-ref: master
   build-depends: []
 - name: sphinx
@@ -144,16 +140,14 @@ chunks:
   - docutils
   - snowballstemmer
 - name: logilab-common
-#TODO: Add lorry file and refs
-  repo: hg clone http://hg.logilab.org/review/logilab/common/
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/logilab-common.git
+  ref: d1d8f793af6d015d885b9ea67b5741d5a093e2f4
+  unpetrify-ref: logilab-common-version-0.62.0
   build-depends: []
 - name: astroid
-#TODO: Add lorry file and refs
-  repo: hg clone https://bitbucket.org/logilab/astroid
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/astroid.git
+  ref: 7657331baa162122890aa4327f4f441cde9f5188
+  unpetrify-ref: astroid-1.2.1
   build-depends:
   - logilab-common
 - name: pylint
@@ -169,56 +163,47 @@ chunks:
   unpetrify-ref: 2.5.1-final
   build-depends: []
 - name: pystache
-#TODO: Add lorry file and refs
-  repo: github:defunkt/pystache
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/pystache.git
+  ref: c684298743dbcfb20d06dccba5b74de13120cef9
+  unpetrify-ref: baserock-clone/v0.5.4-submodules
   build-depends: []
 - name: enum34
-#TODO: Add lorry file and refs
-  repo: https://pypi.python.org/packages/source/e/enum34/enum34-1.0.tar.gz
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/enum34.git
+  ref: 6f566392f62accf077a5e5fb97aa9d15a0388d2b
+  unpetrify-ref: enum34-1.0
   build-depends: []
 - name: pies
-#TODO: Add lorry file and refs
-  morph: strata/openstack-services/pies.morph
-  repo: github:timothycrosley/pies
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/pies.git
+  ref: 593dcce07fdb3e8d0053a863a7aba7f2ce8a6c9c
+  unpetrify-ref: 2.6.1
   build-depends:
   - enum34
 - name: natsort
-#TODO: Add lorry file and refs
-  repo: github:SethMMorton/natsort
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/natsort.git
+  ref: ce94d418c3849e891f0508b41f5bccc4ae1d4e4d
+  unpetrify-ref: 3.5.1
   build-depends: []
 - name: isort
-#TODO: Add lorry file and refs
-  repo: github:timothycrosley/isort
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/isort.git
+  ref: 9d1b03b6e1fd2f87be1c635d6159a76a131f8155
+  unpetrify-ref: 3.9.0
   build-depends:
   - pies
   - natsort
 - name: pep8
-#TODO: Add lorry file and refs
-  repo: github:jcrocholl/pep8
-  ref: master
-  unpetrify-ref: master
-  build-depends:[]
+  repo: git://85.199.252.93/delta/python-packages/pep8.git
+  ref: 164066c4d85f212f5f4a11699b848942c678b947
+  unpetrify-ref: 1.5.7
+  build-depends: []
 - name: pyflakes
-#TODO: Add lorry file and refs
-  repo: github:pyflakes/pyflakes
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/pyflakes.git
+  ref: 71b7b6776856912d50a0b9a85a8ea2a1dc7eb75c
+  unpetrify-ref: 0.8.1
   build-depends: []
 - name: smartypants
-#TODO: Add lorry file and refs
-  repo: hg clone https://bitbucket.org/livibetter/smartypants.py
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/smartypants.git
+  ref: e89b6e7e119694edcd414a556c634d5ca85bff76
+  unpetrify-ref: v1.8.6
   build-depends:
   - isort
   - pep8
@@ -258,6 +243,11 @@ chunks:
   ref: 4c177fce89fee925f0f4fbfde00ce2e1252562c0
   unpetrify-ref: master
   build-depends: []
+- name: repoze-lru
+  repo: upstream:python-packages/repoze-lru
+  ref: 29c8281dee7fe8dae8c66c7c40ce7c058ec2ab0f
+  unpetrify-ref: 0.6
+  build-depends: []
 - name: routes
   repo: upstream:python-packages/routes
   ref: 8b165a52ab568f6fcaaa11cbbc7402e0360f60a3
@@ -274,22 +264,29 @@ chunks:
   ref: b2b67795a009e9f825cbd855d766b78a00273f10
   unpetrify-ref: 0.5
   build-depends: []
-- name: numpy
-#TODO: Add lorry file and refs
-  repo: github:numpy/numpy
-  ref: master
-  unpetrify-ref: master
+- name: cython
+  repo: upstream:cython
+  ref: f66e01ff743b6d010245a08b144a94e474f29967
+  unpetrify-ref: 0.21.1
   build-depends: []
+- name: numpy
+  repo: git://85.199.252.93/delta/python-packages/numpy.git
+  ref: a46fe2f6e894ff86c1c69760971261c73b112f1a
+  unpetrify-ref: baserock-clone/v1.9.0-submodules
+  build-depends:
+  - cython
+  - sphinx
 - name: websockify
-  repo: upstream:python-packages/websockify
-  ref: 739af6ecb46e762793508ab59fede1f6b647e44e
-  unpetrify-ref: v0.6.0
+# This repo is in upstream but we should lorry its submodule
+# and no use a github repository
+  repo: git://85.199.252.93/delta/python-packages/websockify
+  ref: 3b7eb92b47ee5c0a34d202b6d00b83a358920ddb
+  unpetrify-ref: baserock-clone/v0.6.0-submodules
   build-depends:
   - numpy
 - name: python-mimeparse
-#TODO add lorryfile and modify references
-  repo: github:dbtsai/python-mimeparse
-  ref: master
+  repo: git://85.199.252.93/delta/python-packages/python-mimeparse.git
+  ref: 2d600d3fc4a386af69d20fba433843b4df2b3c92
   unpetrify-ref: master
   build-depends: []
 - name: httplib2
@@ -298,11 +295,10 @@ chunks:
   repo: upstream:python-packages/httplib2
   build-depends: []
 - name: extras
-#TODO: Add lorryfile and refs
-  repo: github:testing-cabal/extras
-  ref: master
+  repo: git://85.199.252.93/delta/python-packages/python-test-extras.git
+  ref: cdeb596f01241e9c779332e86f6edcd0c2e8e9f0
   unpetrify-ref: master
-  build-deps: []
+  build-depends: []
 - name: testtools
   repo: upstream:python-packages/testtools
   ref: ee9946228ce5a03a84cf146027de0a8a9a46c4fe
@@ -384,9 +380,8 @@ chunks:
   unpetrify-ref: 3.3
   build-depends: []
 - name: ply
-#TODO: creaty lorry file and add references.
-  repo: github:dabeaz/ply
-  ref: master
+  repo: git://85.199.252.93/delta/python-packages/ply.git
+  ref: 6513f3537d80f483ec9c7e36d52e87f107a57f23
   unpetrify-ref: master
   build-depends: []
 - name: jsonpath-rw
@@ -397,30 +392,27 @@ chunks:
   - ply
   - python-decorator
 - name: waitress
-  repo: github:Pylons/waitress
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/waitress.git
+  ref: b795d573a5a9e6e39b46a6e82da367a6a5db8dbd
+  unpetrify-ref: 0.8.9
   build-depends: []
 - name: beautifulsoup4
-#TODO: create a lorryfile for this and add references
-  repo: bzr branch lp:beautifulsoup
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/beautifulsoup4.git
+  ref: bcd7af0e9159d97aa511fb2d879424d1c1c5aadf
+  unpetrify-ref: trunk
   build-depends: []
 - name: webtest
-#TODO: create a lorryfile for this and add references
-  repo: github:Pylons/webtest
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/webtest.git
+  ref: 6a24fba456d1c4ac2609b90f1fdc377c595608a4
+  unpetrify-ref: 2.0.16
   build-depends:
   - webob
   - waitress
   - beautifulsoup4
 - name: logutils
-#TODO: create a lorryfile for this and add references
-  repo: hg clone ssh://hg@bitbucket.org/vinay.sajip/logutils
-  ref:
-  unpetrify-ref:
+  repo: git://85.199.252.93/delta/python-packages/logutils.git
+  ref: 095f14efbaaf838b7772bffd36a466abb9668efe
+  unpetrify-ref: 0.3.3
   build-depends: []
 - name: pecan
   repo: upstream:python-packages/pecan
@@ -467,11 +459,6 @@ chunks:
   build-depends:
   - pyasn1
   - pycrypto
-- name: repoze-lru
-  repo: upstream:python-packages/repoze-lru
-  ref: 29c8281dee7fe8dae8c66c7c40ce7c058ec2ab0f
-  unpetrify-ref: 0.6
-  build-depends: []
 - name: thrift
   morph: strata/openstack-services/thrift.morph
   repo: upstream:thrift
@@ -555,10 +542,9 @@ chunks:
   - webob
 - name: oslotest
   repo: upstream:openstack/oslotest
-  ref: bbfde1e29c72ee7f90b2982e29b47cd2e1574d6d
-  unpetrify-ref: 1.1.0.0a2
+  ref: cfdb562a6e07728570ca624a8c4faf3f5b61423b
+  unpetrify-ref: 1.2.0
   build-depends:
-  - discover
   - fixtures
   - subunit
   - testrepository
@@ -581,7 +567,7 @@ chunks:
   unpetrify-ref: v0.7.6
   build-depends: []
 - name: keystonemiddleware
-  repo: upstream:keystonemiddleware
+  repo: upstream:openstack/keystonemiddleware
   ref: a7beb50b38be5c3dd4c44d68ad79d1bb206dab6b
   unpetrify-ref: 1.2.0
   build-depends:
@@ -595,11 +581,11 @@ chunks:
   - sqlalchemy
   - sqlalchemy-migrate
 - name: glance_store
-  repo: github:openstack/glance_store
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/openstack/glance_store.git
+  ref: 54f673d4133c1244e2555e7ceb3344c104a74154
+  unpetrify-ref: 0.1.8
   build-depends:
-  - evenlet
+  - eventlet
 - name: glance
   repo: upstream:openstack/glance
   ref: 742c898956d655affa7351505c8a3a5c72881eae
@@ -699,16 +685,14 @@ chunks:
   - jinja2
   - pexpect
 - name: wsgiref
-#TODO: Create lorry file and add references
-  repo: svn://svn.eby-sarna.com/svnroot/wsgiref
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/wsgiref.git
+  ref: 504f5b7a5ce148a865f81723a952e27469410f68
+  unpetrify-ref: baserock-clone/master
   build-depends: []
 - name: rfc3986
-#TODO: Add lorry file and refs
-  repo: https://pypi.python.org/packages/source/r/rfc3986/rfc3986-0.2.0.tar.gz
-  ref: master
-  ref: master
+  repo: git://85.199.252.93/delta/python-packages/python-rfc3986.git
+  ref: 8daff8ef7c8cfa9a2bddc6b2511e269c5eb079a1
+  unpetrify-ref: rfc3986-0.2.0
   build-depends: []
 - name: nova
   repo: upstream:openstack/nova
@@ -760,7 +744,6 @@ chunks:
   - paste
   - pastedeploy
   - pycrypto
-  - python-barbicanclient
   - routes
   - taskflow
   - rtslib-fb
@@ -769,51 +752,38 @@ chunks:
   - suds
   - webob
   - wsgiref
-- name: gevent
-#TODO: Create lorry file
-  repo: github:gevent/gevent
-  ref: master
-  unpetrify-ref: master
-  build-depends:
-  - greenlet
 - name: kazoo
-#TODO: Create lorry file
-  repo: github:python-zk/kazoo
-  ref: master
-  unpretrify-ref: master
-  build-depends:
-  - gevent
+  repo: git://85.199.252.93/delta/python-packages/kazoo.git
+  ref: 93a718ea4c20df797766742c3d74de281613c651
+  unpretrify-ref: 2.0
+  build-depends: []
 - name: pymemcache
-#TODO: Creat lorry file
-  repo: github:pinterest/pymemcache
-  ref: master
+  repo: git://85.199.252.93/delta/python-packages/pymemcache.git
+  ref: 3824d3b0bcdea3e8d0c08598bedfce10fd3c79e0
   unpetrify-ref: master
   build-depends:
   - nose
 - name: zake
-#TODO: Create lorry file and add references
-  repo: github:yahoo/Zake
-  ref: master
+  repo: git://85.199.252.93/delta/python-packages/zake.git
+  ref: 13b92d9db4ad37d9550ef5c5abd323a2530a1e72
   unpetrify-ref: master
   build-depends:
   - kazoo
   - testtools
 - name: sysv_ipc-tarball
-#TODO: Create lorry file and references
-  repo: http://semanchuk.com/philip/sysv_ipc/sysv_ipc-0.6.8.tar.gz
-  ref: master
-  unpetrify-ref: master
+  repo: git://85.199.252.93/delta/python-packages/sysv-ipc-tarball.git
+  ref: 11c30a9005878080597ee4109d1c25ae2c066a82
+  unpetrify-ref: sysv_ipc-0.6.8
   build-depends: []
 - name: tooz
-#TODO: Creat lorry file
-  repo: git://git.openstack.org/stackforge/tooz
+  repo: git://85.199.252.93/delta/python-packages/tooz.git
   ref: a90940a506b7c1bf52ef7d2f2ff52204fdcc6221
   unpetrify-ref: 0.7
   build-depends:
   - kazoo
   - pymemcache
   - zake
-  - sysv_ipc
+  - sysv_ipc-tarball
   - msgpack-python
   - retrying
 - name: ceilometer
