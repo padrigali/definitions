@@ -4,7 +4,7 @@ description: |
              Stratum with the python packages needed to compile openstack
              clients and services.
 build-depends:
-- morph: strata/core.morph
+- morph: strata/foundation.morph
 chunks:
 - name: pip
   repo: upstream:pip
@@ -80,6 +80,7 @@ chunks:
   unpetrify-ref: 1.0.0.0a2
   repo: upstream:openstack/stevedore
   build-depends:
+  - pbr
   - argparse
   - six
 - name: oslo-config
@@ -101,11 +102,12 @@ chunks:
   ref: 040f1d6afa733527385d2309e485bf37e9843b0e
   unpetrify-ref: 0.4.0
   build-depends:
+  - pbr
   - babel
   - six
 - name: oslo-utils
   repo: upstream:openstack/oslo-utils
-  ref: 	6a123fce93895e92004ce9d5bd8dee3c3642cf41
+  ref: 6a123fce93895e92004ce9d5bd8dee3c3642cf41
   unpetrify-ref: 0.3.0
   build-depends:
   - babel
@@ -122,7 +124,8 @@ chunks:
   repo: git://git.openstack.org/openstack/oslo.serialization
   ref: 80fec894a54253d9b4c80dd8a563957966ca0b88
   unpetrify-ref: 0.3.0
-  build-depends: []
+  build-depends:
+  - pbr
 - name: jsonschema
   repo: upstream:jsonschema
   ref: 35b60f390098d3306c03eee27ceec8cf8a493579
