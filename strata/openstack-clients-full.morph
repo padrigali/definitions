@@ -104,7 +104,7 @@ chunks:
   - python-keystoneclient
 - name: python-heatclient
   repo: upstream:openstack/python-heatclient
-  ref: 752217978ac41ebe3e7a0cf38708e324ac634c09
+  ref: 6089d31e302d80910cc15132f99a1bf358bbb64f
   unpetrify-ref: 0.2.12
   build-depends:
   - python-prettytable
@@ -117,9 +117,9 @@ chunks:
   - cliff
   - python-keystoneclient
 - name: python-barbicanclient
-  repo: github:openstack/python-barbicanclient
-  ref: master
-  unpetrify-ref: master
+  repo: git://git.openstack.org/openstack/python-barbicanclient.git
+  ref: ac30643631b6bc1c40116061f8eb280a7881e422
+  unpetrify-ref: 2.2.1
   build-depends:
   - python-keystoneclient
   - cliff
