@@ -19,8 +19,8 @@ chunks:
   - pip
 - name: pycparser
   repo: upstream:python-packages/pycparser
-  ref: e242e4ca1c5b089013fc508404f43b333a4f05e6 
-  unpetrify-ref: release_v2.10
+  ref: c926670643ebb5f88a2bf56579fc9934c82be6d2
+  unpetrify-ref: master
   build-depends: []
 - name: cffi
   repo: upstream:python-packages/cffi
