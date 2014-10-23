@@ -22,11 +22,8 @@ chunks:
   build-depends:
   - python-json-pointer
 - name: python-prettytable
-# TODO: NOTE: There are a problem with the lorry which should be
-#       fixed to update this package to the latest version.
-  morph: strata/openstack-clients/python-prettytable.morph
   repo: upstream:python-prettytable
-  ref: f8a45724391ba5d26877f7ae9f4cb145d95876c9
+  ref: 7a48f1e84049577370cf28632a75d2fd01e4142d
   unpetrify-ref: master
   build-depends: []
 - name: python-keystoneclient
