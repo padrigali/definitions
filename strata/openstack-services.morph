@@ -612,6 +612,11 @@ chunks:
   - retrying
   - osprofiler
   - glance_store
+- name: sqlparse
+  repo: upstream:python-packages/sqlparse
+  ref: 991e7348075accae6d08025212251af21e92e664
+  unpetrify-ref: 0.1.13
+  build-depends: []
 - name: keystone
   repo: upstream:openstack/keystone
   ref: ef8d9aa4e1ca3b5465a5bba0cdb6dcb9be1fe9ca
@@ -633,6 +638,7 @@ chunks:
   - dogpile-cache
   - pycadf
   - posix-ipc-tarball
+  - sqlparse
 - name: neutron
   repo: upstream:openstack/neutron
   ref: 0d0c376d09d85a0eabeb8c9258349d1e63a5cdf0
