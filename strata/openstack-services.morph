@@ -443,11 +443,18 @@ chunks:
   ref: 601fab9b154c557dfd848d531a8969f4697d1aa2
   unpetrify-ref: simplegeneric_0.8.1.orig
   build-depends: []
+- name: ipaddr-py
+  morph: strata/openstack-services/ipaddr-py.morph
+  ref: c813f4790d1092b1515ee18fe8270180ed3cc5cb
+  unpetrify-ref: master
+  repo: upstream:python-packages/ipaddr-py
+  build-depends: []
 - name: wsme
   repo: upstream:python-packages/wsme
   ref: 99d7668789cc6252398222549599d1363cddb081
   unpetrify-ref: 0.6.1
   build-depends:
+  - ipaddr-py
   - simplegeneric-tarball
   - webob
 - name: pysnmp
