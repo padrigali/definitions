@@ -120,7 +120,7 @@ chunks:
   unpetrify-ref: 2.2.0
   build-depends: []
 - name: oslo-serialization
-  repo: git://85.199.252.93/delta/openstack/oslo-serialization.git
+  repo: upstream:openstack/oslo-serialization.git
   ref: 80fec894a54253d9b4c80dd8a563957966ca0b88
   unpetrify-ref: 0.3.0
   build-depends:
