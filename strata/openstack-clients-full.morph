@@ -67,12 +67,12 @@ chunks:
   - python-keystoneclient
 - name: pyparsing
   morph: strata/openstack-clients-full/pyparsing.morph
-  repo: git://85.199.252.93/delta/python-packages/pyparsing.git
+  repo: upstream:python-packages/pyparsing.git
   ref: 8062c76ab3958a570052124f17e71f3dd3ec2257
   unpetrify-ref: pyparsing_2.0.3
   build-depends: []
 - name: cmd2
-  repo: git://85.199.252.93/delta/python-packages/cmd2.git
+  repo: upstream:python-packages/cmd2.git
   ref: 07b4dc3d6991cbdc420c246e807371c97a467d1a
   unpetrify-ref: master
   build-depends:
