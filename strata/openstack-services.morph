@@ -46,8 +46,8 @@ chunks:
   - py-amqp
 - name: sqlalchemy
   repo: upstream:python-packages/sqlalchemy
-  ref: ff34c480dfd2b8b7c72339d196f5477980a5124c
-  unpetrify-ref: rel_0_9_8
+  ref: 393470c7abf1b1e0c32f037e0ed1eb8e8ce82543
+  unpetrify-ref: master
   build-depends: []
 - name: markupsafe
   repo: upstream:markupsafe
@@ -514,8 +514,8 @@ chunks:
   - networkx
 - name: sqlalchemy-migrate
   repo: upstream:python-packages/sqlalchemy-migrate
-  ref: 93ae21007d0100332a5751fc58f7616ced775ef9
-  unpetrify-ref: 0.9.2
+  ref: 1e83840c98a9a6b18f8e105b7f29402c4fffee92
+  unpetrify-ref: master
   build-depends:
   - sqlalchemy
   - python-decorator
@@ -739,8 +739,8 @@ chunks:
   - oslo-vmware
 - name: cinder
   repo: upstream:openstack/cinder
-  ref: be3d4604dc0566e0838959d998ff1d37755de6d3
-  unpetrify-ref: 2014.2
+  ref: 2cb1aaf69d17963cc7205002fa194b3b41b51d5f
+  unpetrify-ref: master
   build-depends:
   - anyjson
   - eventlet
