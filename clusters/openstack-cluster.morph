@@ -25,8 +25,9 @@ systems:
       OPENSTACK_AUTH_HOST: localhost
       NOVA_HOST: localhost
       GLANCE_HOST: localhost
-      NOVA_SERVICE_USER: glance
+      NOVA_SERVICE_USER: nova
       NOVA_SERVICE_PASSWORD: veryinsecure
-      NOVA_PUBLIC_URL: http:\/\/localhost:8774\/v2\/\%\(tenant_id\)s
-      NOVA_INTERNAL_URL:http: \/\/localhost:8774\/v2\/\%\(tenant_id\)s 
-      NOVA_ADMIN_URL: http:\/\/localhost:8774\/v2\/\%\(tenant_id\)s
+      NOVA_PUBLIC_URL: \"http:\/\/localhost:8774\/v2\/\%\(tenant_id\)s\"
+      NOVA_INTERNAL_URL: \"http:\/\/localhost:8774\/v2\/\%\(tenant_id\)s\"
+      NOVA_ADMIN_URL: \"http:\/\/localhost:8774\/v2\/\%\(tenant_id\)s\"
+      NOVA_REGION: LON
