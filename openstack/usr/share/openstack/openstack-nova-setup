@@ -43,7 +43,7 @@ keystone endpoint-create  --service-id $(keystone service-list | awk '/ compute 
 
 if [ ! -e /var/lib/nova/nova.sqlite ]; then
     chown nova:nova /var/lib/nova
-    sudo -u nova nova-manage db_sync
+    sudo -u nova nova-manage db sync
 fi
 
 #systemctl start openstack-nova-api
