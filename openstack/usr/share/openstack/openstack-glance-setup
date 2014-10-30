@@ -38,8 +38,8 @@ keystone endpoint-create  --service-id $(keystone service-list | awk '/ image / 
 
 # Setup the glance database
 if [ ! -e /var/lib/glance/glance.sqlite ]; then
-    chown glance:glance /var/lib/glance
-    chown glance:glance /var/log/glance
+    chown -R glance:glance /var/lib/glance
+    chown -R glance:glance /var/log/glance
     sudo -u glance glance-manage db_sync
 fi
 
