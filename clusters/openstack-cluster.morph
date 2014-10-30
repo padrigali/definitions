@@ -5,8 +5,8 @@ systems:
   deploy:
     release:
       type: rawdisk
-      location: /src2/release/baserock-xx-devel-system-x86_64-openstack.img
-      DISK_SIZE: 10G
+      location: /src/release/baserock-xx-devel-system-x86_64-openstack.img
+      DISK_SIZE: 5G
       VERSION_LABEL: Br-openstack-1
       KERNEL_ARGS: console=ttyS0,115200
       INSTALL_FILES: openstack/manifest
