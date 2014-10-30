@@ -48,6 +48,15 @@ keystone user-role-add --tenant admin --user temporary_admin --role admin
 
 keystone tenant-create --name service --description "Service Tenant"
 
+# Define a service for the Identity Service
+keystone service-create --name keystone --type identity --description "Openstack Identity"
+
+# Specify an API endpoint for the Identity Service by using the returned service ID.
+keystone endpoint-create --service-id $(keystone service-list | awk '/ identity / {print $2}') \
+	                 --publicurl ##KEYSTONE_PUBLIC_URL## \
+			 --internalurl ##KEYSTONE_INTERNAL_URL## \
+			 --adminurl ##KEYSTONE_ADMIN_URL##
+
 rm /etc/systemd/system/multi-user.target.wants/openstack-keystone-setup.service
 
 ln -s "/etc/systemd/system/openstack-keystone.service" \
