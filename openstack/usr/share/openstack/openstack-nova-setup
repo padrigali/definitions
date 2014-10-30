@@ -42,7 +42,7 @@ keystone endpoint-create  --service-id $(keystone service-list | awk '/ compute 
 # Setup the nova database
 
 if [ ! -e /var/lib/nova/nova.sqlite ]; then
-    chown nova:nova /var/lib/nova
+    chown -R nova:nova /var/lib/nova
     sudo -u nova nova-manage db sync
 fi
 
