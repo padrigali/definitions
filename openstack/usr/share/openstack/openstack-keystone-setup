@@ -27,7 +27,7 @@ getent passwd keystone >/dev/null || \
 # Setup the keystone database
 
 if [ ! -e /var/lib/keystone/keystone.sqlite ]; then
-    chown keystone:keystone /var/lib/keystone
+    chown -R keystone:keystone /var/lib/keystone
     sudo -u keystone keystone-manage db_sync
 fi
 
