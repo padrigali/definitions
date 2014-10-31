@@ -22,7 +22,6 @@ systems:
       GLANCE_PUBLIC_URL: http:\/\/localhost:9292
       GLANCE_INTERNAL_URL: http:\/\/localhost:9292
       GLANCE_ADMIN_URL: http:\/\/localhost:9292
-      OPENSTACK_AUTH_HOST: localhost
       NOVA_HOST: localhost
       GLANCE_HOST: localhost
       NOVA_SERVICE_USER: nova
