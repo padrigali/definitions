@@ -22,6 +22,7 @@
 0100644 0 0 /etc/glance/glance-registry.conf
 0100644 0 0 /etc/glance/glance-scrubber.conf
 0100644 0 0 /etc/glance/glance-cache.conf
+0100644 0 0 /etc/glance/schema-image.json
 0100644 0 0 /etc/glance/policy.json
 0100644 0 0 /etc/glance/glance-api-paste.ini
 0100644 0 0 /etc/glance/glance-registry-paste.ini
