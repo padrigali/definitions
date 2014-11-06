@@ -41,5 +41,23 @@ sed -f "$ROOT"/etc/openstack-nova-setup.sed -i \
 
 ##########################################################################
 
-ln -s "/etc/systemd/system/openstack-nova-setup.service" \
+ln -sf "/etc/systemd/system/openstack-nova-setup.service" \
     "$ROOT/etc/systemd/system/multi-user.target.wants/openstack-nova-setup.service"
+
+##########################################################################
+# Enable libvirtd and libvirt-guests services
+##########################################################################
+
+wants_dir="$ROOT"/usr/lib/systemd/system/multi-user.target.wants
+mkdir -p "$wants_dir"
+mkdir -p "$ROOT"/var/lock/subsys
+ln -sf ../libvirtd.service "$wants_dir/libvirtd.service"
+ln -sf ../libvirt-guests.service "$wants_dir/libvirt-guests.service"
+
+##########################################################################
+# Change iprange for the interal libvirt to avoid clashes
+# with eth0 ip range
+##########################################################################
+
+sed -i "s/192\.168\.122\./192\.168\.1\./g" \
+       "$ROOT"/etc/libvirt/qemu/networks/default.xml
