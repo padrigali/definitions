@@ -4,13 +4,17 @@ systems:
 - morph: systems/openstack-server.morph
   deploy:
     release:
-      type: rawdisk
-      location: /src/release/baserock-xx-devel-system-x86_64-openstack.img
+      type: kvm
+      location: kvm+ssh://franred@refinery.ducie.codethink.co.uk/franred-openstack-test/home/franred/openstack.img
       DISK_SIZE: 5G
-      VERSION_LABEL: Br-openstack-1
-      KERNEL_ARGS: console=ttyS0,115200
+      RAM_SIZE: 1G
+      VCPUS: 1
       INSTALL_FILES: openstack/manifest
       HOSTNAME: Br-Openstack
+      RABBITMQ_HOST: localhost
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: guest
+      RABBITMQ_PASSWORD: veryinsecure
       KEYSTONE_TEMPORARY_ADMIN_TOKEN: 22f3aa1cf538e3f6d5e8
       KEYSTONE_TEMPORARY_ADMIN_PASSWORD: veryinsecure
       KEYSTONE_PUBLIC_URL: http:\/\/localhost:5000\/v2.0
