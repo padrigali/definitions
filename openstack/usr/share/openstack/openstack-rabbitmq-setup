@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+# Copyright (C) 2014 Codethink Limited
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+set -xe
+
+# Create required system users and groups
+getent group rabbitmq >/dev/null || groupadd -r --gid 1002 rabbitmq
+getent passwd rabbitmq >/dev/null || \
+	useradd --uid 1002 -r -g rabbitmq -d /var/lib/rabbitmq -s /sbin/nologin \
+	-c "Rabbitmq server daemon" rabbitmq
+
+chown -R rabbitmq:rabbitmq /var/lib/rabbitmq
+
+# Create directories and files needed to run openstack-rabbitmq-server
+if [ ! -d /var/run/rabbitmq ]; then
+    mkdir -p /var/run/rabbitmq
+    chown -R rabbitmq:rabbitmq /var/run/rabbitmq
+    chmod 755 /var/run/rabbitmq
+fi
+
+if [ ! -d /var/log/rabbitmq ]; then
+    mkdir -p /var/log/rabbitmq
+    chown -R rabbitmq:rabbitmq /var/log/rabbitmq
+    chmod 755 /var/log/rabbitmq
+fi
+
+systemctl start openstack-rabbitmq-server
+
+ln -s "/etc/systemd/system/openstack-rabbitmq-server.service" \
+    "/etc/systemd/system/multi-user.target.wants/openstack-rabbitmq-server.service"
+
+exit 0
