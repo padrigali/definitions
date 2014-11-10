@@ -6,6 +6,19 @@ build-depends:
 - morph: strata/openstack-common.morph
 - morph: strata/openstack-clients-full.morph
 chunks:
+- name: rabbitmq-codegen
+  morph: strata/openstack-services/rabbitmq-codegen.morph
+  ref: 4dc5ccde2a0b3d638e5754b00abf94196fe9ca32
+  unpetrify-ref: rabbitmq_v3_4_1
+  repo: upstream:rabbitmq-codegen
+  build-depends: []
+- name: rabbitmq-server
+  morph: strata/openstack-services/rabbitmq-server.morph
+  ref: cbd78738d05f7ecc736e3cfccf94ca95e29460c4
+  unpetrify-ref: rabbitmq_v3_4_1
+  repo: upstream:rabbitmq-server
+  build-depends:
+  - rabbitmq-codegen
 - name: oslo-rootwrap
   repo: upstream:openstack/oslo-rootwrap
   ref: 8c68df850ab4c7984885503393f6be8bf6461ba1
@@ -32,6 +45,13 @@ chunks:
   ref: 875b10d1715def640042c7ff2f42c00a6c07eed1
   unpetrify-ref: 1.4.6
   build-depends: []
+- name: librabbitmq
+  morph: strata/openstack-services/librabbitmq.morph
+  repo: git://85.199.252.93/delta/python-packages/librabbitq.git
+  ref: 4cd843666d0740877dfa5bef7d9d415d829635dc
+  unpetrify-ref: baserock-clone/master
+  build-depends:
+  - py-amqp
 - name: anyjson
   repo: upstream:python-packages/anyjson
   ref: 016506078e94718e1fe750eb5083ab5ba07498c8
@@ -44,6 +64,7 @@ chunks:
   build-depends:
   - anyjson
   - py-amqp
+  - librabbitmq
 - name: sqlalchemy
   repo: upstream:python-packages/sqlalchemy
   ref: ff34c480dfd2b8b7c72339d196f5477980a5124c
