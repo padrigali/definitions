@@ -1,13 +1,21 @@
 [Unit]
-Description=RabbitMQ broker: Enable AMQP service provided by RabbitMQ broker
-After=syslog.target network.target
+Description=RabbitMQ broker
+After=syslog.target network.target openstack-rabbitmq-setup.service
+Requires=openstack-rabbitmq-setup.service
 
 [Service]
-Type=notify
+Type=simple
 User=rabbitmq
 Group=rabbitmq
+Environment="RABBITMQ_PID_FILE=/var/run/rabbitmq/pid" "HOME=/var/lib/rabbitmq"
+WorkingDirectory=/var/lib/rabbitmq
+# Ensure cookie is created to avoid race
+# See https://bugzilla.redhat.com/show_bug.cgi?id=1059913
+ExecStartPre=-/bin/sh -c '/usr/sbin/rabbitmqctl status > /dev/null 2>&1'
 ExecStart=/usr/sbin/rabbitmq-server
+ExecStartPost=/usr/sbin/rabbitmqctl wait /var/run/rabbitmq/pid
 ExecStop=/usr/sbin/rabbitmqctl stop
+ExecStopPost=/bin/rm /var/run/rabbitmq/pid
 
 [Install]
 WantedBy=multi-user.target

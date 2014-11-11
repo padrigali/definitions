@@ -38,9 +38,6 @@ if [ ! -d /var/log/rabbitmq ]; then
     chmod 755 /var/log/rabbitmq
 fi
 
-systemctl start openstack-rabbitmq-server
-
-ln -s "/etc/systemd/system/openstack-rabbitmq-server.service" \
-    "/etc/systemd/system/multi-user.target.wants/openstack-rabbitmq-server.service"
+chown -R rabbitmq:rabbitmq /var/lib/rabbitmq
 
 exit 0

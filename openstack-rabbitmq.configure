@@ -38,3 +38,6 @@ sed -f "$ROOT"/etc/openstack-rabbitmq-setup.sed -i \
 
 ln -s "/etc/systemd/system/openstack-rabbitmq-setup.service" \
     "$ROOT/etc/systemd/system/multi-user.target.wants/openstack-rabbitmq-setup.service"
+
+ln -s "/etc/systemd/system/openstack-rabbitmq-server.service" \
+    "$ROOT/etc/systemd/system/multi-user.target.wants/openstack-rabbitmq-server.service"
