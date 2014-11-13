@@ -1,7 +1,7 @@
 [Unit]
 Description=Run openstack-rabbitmq-setup (once)
 Requires=local-fs.target
-After=local-fs.target
+After=local-fs.target network.target
 
 [Service]
 Type=oneshot
