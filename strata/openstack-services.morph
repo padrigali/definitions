@@ -14,8 +14,8 @@ chunks:
   build-depends: []
 - name: rabbitmq-server
   morph: strata/openstack-services/rabbitmq-server.morph
-  ref: cbd78738d05f7ecc736e3cfccf94ca95e29460c4
-  unpetrify-ref: rabbitmq_v3_4_1
+  ref: 9afcf9b95d2c53f866e9a33ddce46562f8950ded
+  unpetrify-ref: baserock/master
   repo: upstream:rabbitmq-server
   build-depends:
   - rabbitmq-codegen
