@@ -26,8 +26,8 @@ systems:
       GLANCE_PUBLIC_URL: http:\/\/localhost:9292
       GLANCE_INTERNAL_URL: http:\/\/localhost:9292
       GLANCE_ADMIN_URL: http:\/\/localhost:9292
-      NOVA_HOST: localhost
       GLANCE_HOST: localhost
+      NOVA_HOST: 127.0.0.1
       NOVA_SERVICE_USER: nova
       NOVA_SERVICE_PASSWORD: veryinsecure
       NOVA_PUBLIC_URL: \"http:\/\/localhost:8774\/v2\/\%\(tenant_id\)s\"
