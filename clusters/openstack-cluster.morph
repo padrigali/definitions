@@ -13,7 +13,7 @@ systems:
       HOSTNAME: Br-Openstack
       RABBITMQ_HOST: localhost
       RABBITMQ_PORT: 5672
-      RABBITMQ_USER: guest
+      RABBITMQ_USER: rabbitmq
       RABBITMQ_PASSWORD: veryinsecure
       KEYSTONE_TEMPORARY_ADMIN_TOKEN: 22f3aa1cf538e3f6d5e8
       KEYSTONE_TEMPORARY_ADMIN_PASSWORD: veryinsecure
