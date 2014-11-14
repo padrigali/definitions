@@ -50,6 +50,7 @@
 0100755 0 0 /usr/share/openstack/openstack-nova-setup
 0100644 0 0 /etc/systemd/system/openstack-nova-setup.service
 0100644 0 0 /etc/systemd/system/openstack-nova-compute.service
+0100644 0 0 /etc/systemd/system/openstack-nova-conductor.service
 0100644 0 0 /etc/systemd/system/openstack-nova-api.service
 0100644 0 0 /etc/systemd/system/openstack-rabbitmq-setup.service
 0100644 0 0 /etc/systemd/system/openstack-rabbitmq-server.service
