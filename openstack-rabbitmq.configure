@@ -32,7 +32,8 @@ EOF
 
 sed -f "$ROOT"/etc/openstack-rabbitmq-setup.sed -i \
        "$ROOT"/etc/keystone/keystone.conf \
-       "$ROOT"/etc/nova/nova.conf
+       "$ROOT"/etc/nova/nova.conf \
+       "$ROOT"/usr/share/openstack/openstack-rabbitmq-setup
 
 ##########################################################################
 
