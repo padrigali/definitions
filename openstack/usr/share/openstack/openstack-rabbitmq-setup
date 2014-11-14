@@ -38,6 +38,29 @@ if [ ! -d /var/log/rabbitmq ]; then
     chmod 755 /var/log/rabbitmq
 fi
 
+# Install rabbimq.config and rabbitmq-env.conf
+install -D -m 644 /proc/self/fd/0 <<'EOF' /var/lib/rabbitmq/etc/rabbitmq/rabbitmq.config
+%% -*- Rabbit configuration for Openstack in Baserock
+[
+ {rabbit,
+  [
+    {default_user,  <<"##RABBITMQ_USER##">>},
+    {default_pass,  <<"##RABBITMQ_PASSWORD##">>},
+    {tcp_listeners, [##RABBITMQ_PORT##]}
+  ]}
+].
+EOF
+
+install -D -m 644 /proc/self/fd/0 <<'EOF' /etc/rabbitmq/rabbitmq-env.conf
+# NOTE: Install this file in /etc/rabbitmq/ because rabbitmq-server will load
+# it only from this directory.
+
+# Configure port node where rabbitmq-server will listen from.
+NODE_PORT=##RABBITMQ_PORT##
+# Config file has to be in $RABBITMQ_HOME/etc/rabbitmq/rabbitmq.config
+CONFIG_FILE=/var/lib/rabbitmq/etc/rabbitmq/rabbitmq
+EOF
+
 chown -R rabbitmq:rabbitmq /var/lib/rabbitmq
 
 exit 0
