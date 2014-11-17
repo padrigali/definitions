@@ -19,5 +19,5 @@ configure-commands:
   --with-secrets --with-storage-dir --with-storage-fs --with-storage-lvm \
   --without-storage-iscsi --without-storage-scsi --without-storage-mpath \
   --without-storage-disk --with-storage-rbd --without-storage-sheepdog \
-  --without-storage-gluster --without-wireshark-dissector --with-python \
+  --without-storage-gluster --without-wireshark-dissector \
   --prefix="$PREFIX"
