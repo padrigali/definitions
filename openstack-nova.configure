@@ -61,3 +61,9 @@ ln -sf ../libvirt-guests.service "$wants_dir/libvirt-guests.service"
 
 sed -i "s/192\.168\.122\./192\.168\.1\./g" \
        "$ROOT"/etc/libvirt/qemu/networks/default.xml
+
+##########################################################################
+# Add nova to sudoers controlling which commands is running as a root
+# using the openstack rootwrap.
+##########################################################################
+echo 'nova ALL=(ALL) NOPASSWD: /usr/bin/nova-rootwrap /etc/nova/rootwrap.conf *' >> "$ROOT/etc/sudoers"
