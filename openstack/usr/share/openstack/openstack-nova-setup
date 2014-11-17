@@ -56,9 +56,15 @@ if [ ! -d /var/lock/nova ]; then
     chown -R nova:nova /var/lock/nova
 fi
 
+if [ ! -d /var/lib/nova/instances ]; then
+    mkdir /var/lib/nova/instances
+    chown -R nova:nova /var/lib/nova/instances
+fi
+
 # Nova compute needs to write in /var/run/libvirt/libvirt-sock
 # to start the hypervisor
 chmod 766 /var/run/libvirt/libvirt-sock
+
 
 # Check existence of Network Block Device module in the kernel
 # NOTE: modprobe does not work actually and returns always
