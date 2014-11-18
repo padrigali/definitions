@@ -12,14 +12,14 @@ chunks:
   build-depends: []
 - name: rebar
   morph: strata/erlang/rebar.morph
-  repo: https://github.com/rebar/rebar
+  repo: upstream:erlang-modules/rebar
   ref: master
   unpretrify-ref: master
   build-depends:
   - erlang
 - name: erlang-sd_notify
   morph: strata/erlang/erlang-sd_notify.morph
-  repo: https://github.com/lemenkov/erlang-sd_notify
+  repo: upstream:erlang-modules/erlang-sd_notify
   ref: master
   unpretrify-ref: master
   build-depends:
