@@ -48,8 +48,8 @@ chunks:
   - xorg-util-macros
 - name: dmidecode
   morph: strata/virtualization/dmidecode.morph
-  repo: git://85.199.252.93/delta/dmidecode.git
-  ref: 6d6e2504298cc0ff346eb55d10503d1795b34c56
+  repo: upstream:dmidecode
+  ref: 47a0aa5d6696a83922ee70279b7253a4e55947d5
   unpetrify-ref: master
   build-depends: []
 - name: libvirt
@@ -130,7 +130,7 @@ chunks:
   - libosinfo
 - name: ebtables
   morph: strata/virtualization/ebtables.morph
-  repo: git://85.199.252.93/delta/ebtables.git
+  repo: upstream:ebtables
   ref: 09792f0107a9318da809908db31f0b826017de7b
   unpetrify-ref: master
   build-depends: []
