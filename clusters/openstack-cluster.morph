@@ -33,4 +33,5 @@ systems:
       NOVA_PUBLIC_URL: \"http:\/\/localhost:8774\/v2\/\%\(tenant_id\)s\"
       NOVA_INTERNAL_URL: \"http:\/\/localhost:8774\/v2\/\%\(tenant_id\)s\"
       NOVA_ADMIN_URL: \"http:\/\/localhost:8774\/v2\/\%\(tenant_id\)s\"
+      NOVA_NOVNCPROXY_BASE_URL: http:\/\/localhost:6080\/vnc_auto.html
       NOVA_REGION: LON

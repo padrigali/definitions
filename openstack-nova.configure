@@ -33,6 +33,7 @@ s/##NOVA_ADMIN_URL##/$NOVA_ADMIN_URL/g
 s/##NOVA_HOST##/$NOVA_HOST/g
 s/##NOVA_REGION##/$NOVA_REGION/g
 s/##GLANCE_HOST##/$GLANCE_HOST/g
+s/##NOVA_NOVNCPROXY_BASE_URL##/$NOVA_NOVNCPROXY_BASE_URL/g
 EOF
 
 sed -f "$ROOT"/etc/openstack-nova-setup.sed -i \
