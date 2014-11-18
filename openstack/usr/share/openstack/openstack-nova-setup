@@ -81,6 +81,7 @@ systemctl start openstack-nova-compute
 #systemctl start openstack-nova-consoleauth
 #systemctl start openstack-nova-scheduler
 #systemctl start openstack-nova-novncproxy
+#systemctl start openstack-nova-xvpnvncproxy
 
 # TODO, need to start more nova services.
 
