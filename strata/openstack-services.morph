@@ -41,15 +41,15 @@ chunks:
   build-depends:
   - greenlet
 - name: py-amqp
-  repo: upstream:python-packages/py-amqp.git
+  repo: upstream:python-packages/py-amqp
   ref: 875b10d1715def640042c7ff2f42c00a6c07eed1
   unpetrify-ref: 1.4.6
   build-depends: []
 - name: librabbitmq
   morph: strata/openstack-services/librabbitmq.morph
-  repo: git://85.199.252.93/delta/python-packages/librabbitq.git
-  ref: 4cd843666d0740877dfa5bef7d9d415d829635dc
-  unpetrify-ref: baserock-clone/master
+  repo: upstream:python-packages/librabbitmq
+  ref: 0087f3c6fa81d4ec4c573319ee2149a5db7018e6
+  unpetrify-ref: baserock/v1.6.1
   build-depends:
   - py-amqp
 - name: anyjson
