@@ -66,4 +66,6 @@ sed -i "s/192\.168\.122\./192\.168\.1\./g" \
 # Add nova to sudoers controlling which commands is running as a root
 # using the openstack rootwrap.
 ##########################################################################
-echo 'nova ALL=(ALL) NOPASSWD: /usr/bin/nova-rootwrap /etc/nova/rootwrap.conf *' >> "$ROOT/etc/sudoers"
+install -D -m 0440 /proc/self/fd/0 <<'EOF' "$ROOT"/etc/sudoers.d/nova-rootwrap
+nova ALL=(root) NOPASSWD: /usr/bin/nova-rootwrap /etc/nova/rootwrap.conf *
+EOF
