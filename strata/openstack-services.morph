@@ -21,8 +21,8 @@ chunks:
   - rabbitmq-codegen
 - name: oslo-rootwrap
   repo: upstream:openstack/oslo-rootwrap
-  ref: 8c68df850ab4c7984885503393f6be8bf6461ba1
-  unpetrify-ref: 1.3.0.0a3
+  ref: 62d732277de5cf663172eafe6d3a6c149a9cf814
+  unpetrify-ref: master
   build-depends: []
 - name: webob
   repo: upstream:python-packages/webob
