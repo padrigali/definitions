@@ -43,11 +43,14 @@ if [ ! -e /var/lib/glance/glance.sqlite ]; then
     sudo -u glance glance-manage db_sync
 fi
 
+# Remove the one-shot setup service
 rm /etc/systemd/system/multi-user.target.wants/openstack-glance-setup.service
 
+# Start glance services
 systemctl start openstack-glance-api
 systemctl start openstack-glance-registry
 
+# Create the links to run glance services when system start next times.
 ln -s "/etc/systemd/system/openstack-glance-api.service" \
     "/etc/systemd/system/multi-user.target.wants/openstack-glance-api.service"
 
