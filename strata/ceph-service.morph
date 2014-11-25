@@ -54,7 +54,7 @@ chunks:
 - name: ceph
   morph: strata/ceph-service/ceph.morph
   repo: upstream:ceph
-  ref: 8fdf1df512b73bad0eb695cdf9cbf2d09f0327d4
+  ref: 4be687bf4480474117f56c387febc75c904036be
   unpetrify-ref: baserock/morph
   build-depends:
   - libaio
