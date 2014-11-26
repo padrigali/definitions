@@ -29,10 +29,14 @@ s/##KEYSTONE_TEMPORARY_ADMIN_PASSWORD##/$KEYSTONE_TEMPORARY_ADMIN_PASSWORD/g
 s/##KEYSTONE_PUBLIC_URL##/$KEYSTONE_PUBLIC_URL/g
 s/##KEYSTONE_INTERNAL_URL##/$KEYSTONE_INTERNAL_URL/g
 s/##KEYSTONE_ADMIN_URL##/$KEYSTONE_ADMIN_URL/g
+s/##OPENSTACK_AUTH_HOST##/$OPENSTACK_AUTH_HOST/g
+s/##OPENSTACK_AUTH_PORT##/$OPENSTACK_AUTH_PORT/g
 EOF
 
 sed -f "$ROOT"/etc/openstack-keystone-setup.sed -i \
        "$ROOT"/etc/keystone/keystone.conf \
+       "$ROOT"/etc/glance/glance-api.conf \
+       "$ROOT"/etc/glance/glance-registry.conf \
        "$ROOT"/usr/share/openstack/openstack-keystone-setup
 
 ##########################################################################
