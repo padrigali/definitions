@@ -37,6 +37,7 @@ sed -f "$ROOT"/etc/openstack-glance-setup.sed -i \
        "$ROOT"/etc/glance/glance-registry.conf \
        "$ROOT"/etc/glance/glance-scrubber.conf \
        "$ROOT"/etc/glance/glance-cache.conf \
+       "$ROOT"/etc/cinder/cinder.conf \
        "$ROOT"/usr/share/openstack/openstack-glance-setup 
 
 ##########################################################################
