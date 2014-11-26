@@ -36,7 +36,7 @@ s/##CINDER_ADMIN_URL_V2##/$CINDER_ADMIN_URL_V2/g
 EOF
 
 sed -f "$ROOT"/etc/openstack-cinder-setup.sed -i \
-       "$ROOT"/etc/nova/cinder.conf \
+       "$ROOT"/etc/cinder/cinder.conf \
        "$ROOT"/usr/share/openstack/openstack-cinder-setup 
 
 ##########################################################################
