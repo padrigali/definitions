@@ -34,4 +34,13 @@ systems:
       NOVA_INTERNAL_URL: \"http:\/\/localhost:8774\/v2\/\%\(tenant_id\)s\"
       NOVA_ADMIN_URL: \"http:\/\/localhost:8774\/v2\/\%\(tenant_id\)s\"
       NOVA_NOVNCPROXY_BASE_URL: http:\/\/localhost:6080\/vnc_auto.html
-      NOVA_REGION: LON
+      NOVA_REGION: regionOne
+      CINDER_USER: cinder
+      CINDER_PASSWORD: veryinsecure
+      CINDER_PUBLIC_URL: \"http:\/\/localhost:8776\/v1\/\%\(tenant_id\)s\"
+      CINDER_INTERNAL_URL: \"http:\/\/localhost:8776\/v1\/\%\(tenant_id\)s\"
+      CINDER_ADMIN_URL: \"http:\/\/localhost:8776\/v1\/\%\(tenant_id\)s\"
+      CINDER_USER_V2: cinderv2
+      CINDER_PUBLIC_URL_V2: \"http:\/\/localhost:8776\/v2\/\%\(tenant_id\)s\"
+      CINDER_INTERNAL_URL_V2: \"http:\/\/localhost:8776\/v2\/\%\(tenant_id\)s\"
+      CINDER_ADMIN_URL_V2: \"http:\/\/localhost:8776\/v2\/\%\(tenant_id\)s\"
