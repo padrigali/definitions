@@ -19,9 +19,9 @@ set -e
 
 # Create required system users and groups
 
-getent group nova >/dev/null || groupadd -r --gid 165 nova
+getent group nova >/dev/null || groupadd -r --gid 162 nova
 getent passwd nova >/dev/null || \
-	useradd --uid 165 -r -g nova -d /var/lib/nova -s /sbin/nologin \
+	useradd --uid 162 -r -g nova -d /var/lib/nova -s /sbin/nologin \
 	-c "OpenStack Nova Daemons" nova
 
 # Create the keystone user and services
