@@ -66,6 +66,12 @@ if [ ! -e /var/lib/cinder/cinder.sqlite ]; then
     sudo -u cinder cinder-manage db sync
 fi
 
+# Create the volumes directory for cinder
+if [ ! -d /var/lib/cinder/volumes ]; then
+    mkdir -p /var/lib/cinder/volumes
+    chown -R cinder:cinder /var/lib/cinder/volumes
+fi
+
 # Remove the one-shot setup service
 rm /etc/systemd/system/multi-user.target.wants/openstack-cinder-setup.service
 
