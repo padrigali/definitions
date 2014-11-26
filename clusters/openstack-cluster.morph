@@ -21,6 +21,7 @@ systems:
       KEYSTONE_INTERNAL_URL: http:\/\/localhost:5000\/v2.0
       KEYSTONE_ADMIN_URL: http:\/\/localhost:35357\/v2.0
       OPENSTACK_AUTH_HOST: localhost
+      OPENSTACK_AUTH_PORT: 35357
       GLANCE_SERVICE_USER: glance
       GLANCE_SERVICE_PASSWORD: veryinsecure
       GLANCE_PUBLIC_URL: http:\/\/localhost:9292
