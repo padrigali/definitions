@@ -72,3 +72,5 @@
 0100644 0 0 /etc/systemd/system/openstack-cinder-scheduler.service
 0100644 0 0 /etc/systemd/system/openstack-cinder-volume.service
 0100644 0 0 /etc/systemd/system/openstack-cinder-backup.service
+0040755 0 0 /etc/cinder/rootwrap.d/
+0100644 0 0 /etc/cinder/rootwrap.d/volume.filters
