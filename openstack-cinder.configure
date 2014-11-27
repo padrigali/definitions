@@ -24,6 +24,7 @@ ROOT="$1"
 ##########################################################################
 
 cat <<EOF > "$ROOT"/etc/openstack-cinder-setup.sed
+s/##KEYSTONE_TEMPORARY_ADMIN_TOKEN##/$KEYSTONE_TEMPORARY_ADMIN_TOKEN/g
 s/##CINDER_USER##/$CINDER_USER/g
 s/##CINDER_PASSWORD##/$CINDER_PASSWORD/g
 s/##CINDER_PUBLIC_URL##/$CINDER_PUBLIC_URL/g
