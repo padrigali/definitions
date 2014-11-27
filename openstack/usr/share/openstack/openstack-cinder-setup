@@ -60,6 +60,12 @@ if [ ! -d /var/lock/cinder ]; then
     chown -R cinder:cinder /var/lock/cinder
 fi
 
+# Create the log directory for cinder
+if [ ! -d /var/log/cinder ]; then
+    mkdir -p /var/log/cinder
+    chown -R cinder:cinder /var/log/cinder
+fi
+
 # Setup the cinder database
 if [ ! -e /var/lib/cinder/cinder.sqlite ]; then
     chown -R cinder:cinder /var/lib/cinder
@@ -71,6 +77,23 @@ if [ ! -d /var/lib/cinder/volumes ]; then
     mkdir -p /var/lib/cinder/volumes
     chown -R cinder:cinder /var/lib/cinder/volumes
 fi
+
+# This is only for testing purposes and we need to change it for
+# something more robust to deploy in production.
+# This also assumes that the user will add a second disk to its VM
+# and if it does not find sdb or vda it will fail.
+if [ $(ls /sys/block | grep -v sda | grep [vs]d | wc -l) -ne 1 ]; then
+  echo "Error: More than one or none block device found, cinder will not be able to create a VG."
+  exit 1
+else
+  device=/dev/$(ls /sys/block | grep -v sda | grep [vs]d)
+fi
+
+# Create a physical volume
+pvcreate -ff -y $device
+
+# Create a volume group named "cinder-volumes"
+vgcreate -y cinder-volumes $device
 
 # Remove the one-shot setup service
 rm /etc/systemd/system/multi-user.target.wants/openstack-cinder-setup.service
