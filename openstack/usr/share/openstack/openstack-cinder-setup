@@ -95,6 +95,11 @@ pvcreate -ff -y $device
 # Create a volume group named "cinder-volumes"
 vgcreate -y cinder-volumes $device
 
+# Active the cinder-volumes volume group
+# Note: on reboot the lvm.service will do this for us.
+systemctl start lvm2-activation-early_systemd
+systemctl start lvm2-activation_systemd
+
 # Remove the one-shot setup service
 rm /etc/systemd/system/multi-user.target.wants/openstack-cinder-setup.service
 
@@ -116,5 +121,12 @@ ln -s "/etc/systemd/system/openstack-cinder-volume.service" \
 
 ln -s "/etc/systemd/system/openstack-cinder-backup.service" \
     "/etc/systemd/system/multi-user.target.wants/openstack-cinder-backup.service"
+
+# Link lvm2 services
+ln -s "/usr/lib/systemd/system/lvm2-activation-early_systemd.service" \
+    "/etc/systemd/system/multi-user.target.wants/lvm2-activation-early_systemd.service"
+
+ln -s "/usr/lib/systemd/system/lvm2-activation_systemd.service" \
+    "/etc/systemd/system/multi-user.target.wants/lvm2-activation_systemd.service"
 
 exit 0
