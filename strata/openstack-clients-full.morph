@@ -80,7 +80,7 @@ chunks:
 - name: cliff
   repo: upstream:openstack/cliff
   ref: 42675b2d7ad93f4bba9c4216874c68b8e5834147
-  ref: 1.7.0
+  unpetrify-ref: 1.7.0
   build-depends:
   - cmd2
   - python-prettytable
