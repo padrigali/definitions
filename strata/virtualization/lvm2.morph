@@ -2,5 +2,42 @@ name: lvm2
 kind: chunk
 build-system: autotools
 configure-commands:
-- ./configure --prefix="$PREFIX" --enable-applib --enable-cmdlib --enable-pkgconfig
-  --enable-dmeventd --enable-udev_sync
+- |
+  ./configure --prefix="$PREFIX" --exec-prefix="" --sbindir="/sbin" \
+  --enable-applib --enable-cmdlib --enable-pkgconfig \
+  --enable-dmeventd --enable-udev_sync --enable-udev_rules
+post-install-commands:
+- |
+  install -D -m 644 /proc/self/fd/0 <<'EOF' "$DESTDIR$PREFIX"/lib/systemd/system/lvm2-activation-early_systemd.service
+  [Unit]
+  Description=Activation of LVM2 logical volumes
+  Documentation=man:lvm(8) man:vgchange(8)
+  DefaultDependencies=no
+  After=systemd-udev-settle.service
+  Before=cryptsetup.target local-fs.target shutdown.target
+  Wants=systemd-udev-settle.service
+
+  [Service]
+  ExecStart=/sbin/lvm vgchange -aay --sysinit
+  Type=oneshot
+
+  [Install]
+  WantedBy=local-fs.target
+  EOF
+- |
+  install -D -m 644 /proc/self/fd/0 <<'EOF' "$DESTDIR$PREFIX"/lib/systemd/system/lvm2-activation_systemd.service
+  [Unit]
+  Description=Activation of LVM2 logical volumes
+  Documentation=man:lvm(8) man:vgchange(8)
+  DefaultDependencies=no
+  After=lvm2-activation-early.service cryptsetup.target
+  Before=local-fs.target shutdown.target
+  Wants=systemd-udev-settle.service
+
+  [Service]
+  ExecStart=/sbin/lvm vgchange -aay --sysinit
+  Type=oneshot
+
+  [Install]
+  WantedBy=local-fs.target
+  EOF
