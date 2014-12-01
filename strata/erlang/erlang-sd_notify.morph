@@ -2,7 +2,7 @@ name: erlang
 kind: chunk
 build-commands:
 # https://apps.fedoraproject.org/packages/erlang-sd_notify/sources/spec
-- LDFLAGS=-lsystemd-daemon REBAR_FLAGS="--verbose 2" make
+- LDFLAGS=-lsystemd REBAR_FLAGS="--verbose 2" make
 install-commands:
 - install -D -m 644 -p ebin/sd_notify.app "$DESTDIR$PREFIX"/lib/erlang/lib/sd_notify-0.1/ebin/sd_notify.app
 - install -D -m 644 -p ebin/sd_notify.beam "$DESTDIR$PREFIX"/lib/erlang/lib/sd_notify-0.1/ebin/sd_notify.beam
