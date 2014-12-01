@@ -29,7 +29,7 @@ chunks:
   - libunwind
 - name: snappy
   repo: upstream:snappy
-  ref: 760c6ffc67836027c5f1d307e5c6cb012dfbdf72
+  ref: e77d15ed7e57338cd2f87ed22d88c1938eeecd1a
   unpetrify-ref: baserock/morph
   build-depends: []
 - name: leveldb
