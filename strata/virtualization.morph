@@ -55,7 +55,7 @@ chunks:
 - name: libvirt
   morph: strata/virtualization/libvirt.morph
   repo: upstream:libvirt
-  ref: e3ea7baf6a6e5625cea7b20c911c4333b79e72e2
+  ref: 7b1ceec1e2f141d36ed9b7ef3a660ff8bb34fc53
   unpetrify-ref: baserock/v1.2.10
   build-depends:
   - libpciaccess
