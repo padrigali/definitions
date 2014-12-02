@@ -7,3 +7,8 @@ configure-commands:
 - FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix="$PREFIX" --disable-nls
 install-commands:
 - make INSTALL_PROGRAM=install DESTDIR="$DESTDIR" install
+# This hack is to get Cinder to work because otherwise it uses
+# busybox "dd" which does not support "fdatasync".
+# This will dissappear when we merge /usr/bin and /bin.
+- mkdir -p "$DESTDIR"/bin/
+- ln -sf ../usr/bin/dd "$DESTDIR"/bin/
