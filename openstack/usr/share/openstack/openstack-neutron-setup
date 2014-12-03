@@ -36,8 +36,7 @@ keystone service-create --name neutron --type network --description "OpenStack C
 keystone endpoint-create  --service-id $(keystone service-list | awk '/ network / {print $2}') \
 	    	          --publicurl ##NEUTRON_PUBLIC_URL## \
 	                  --internalurl ##NEUTRON_INTERNAL_URL## \
-	                  --adminurl ##NEUTRON_ADMIN_URL## \
-			  --region ##NEUTRON_REGION##
+	                  --adminurl ##NEUTRON_ADMIN_URL##
 
 # Neutron compute configuration
 if [ ! -d /var/run/neutron ]; then
