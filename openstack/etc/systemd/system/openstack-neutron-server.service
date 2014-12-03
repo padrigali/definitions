@@ -1,0 +1,11 @@
+[Unit]
+Description=Neutron Api Server
+After=syslog.target network.target openstack-keystone-setup.service
+
+[Service]
+Type=simple
+User=neutron
+ExecStart=/usr/bin/neutron-server
+
+[Install]
+WantedBy=multi-user.target

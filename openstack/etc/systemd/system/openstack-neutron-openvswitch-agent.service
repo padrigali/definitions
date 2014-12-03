@@ -1,0 +1,14 @@
+[Unit]
+Description=Neutron OpenvSwitch Plugin Agent
+After=syslog.target network.target openstack-keystone-setup.service
+
+[Service]
+Type=simple
+User=neutron
+ExecStart=/usr/bin/neutron-openvswitch-agent \
+  --config-file=/etc/neutron/neutron.conf \
+  --config-file=/etc/neutron/plugins/ml2/ml2_conf.ini \
+  --log-file=/var/log/neutron/openvswitch-agent.log
+
+[Install]
+WantedBy=multi-user.target
