@@ -45,3 +45,8 @@ systems:
       CINDER_PUBLIC_URL_V2: \"http:\/\/localhost:8776\/v2\/\%\(tenant_id\)s\"
       CINDER_INTERNAL_URL_V2: \"http:\/\/localhost:8776\/v2\/\%\(tenant_id\)s\"
       CINDER_ADMIN_URL_V2: \"http:\/\/localhost:8776\/v2\/\%\(tenant_id\)s\"
+      NEUTRON_SERVICE_USER: neutron
+      NEUTRON_SERVICE_PASSWORD: veryinsecure
+      NEUTRON_PUBLIC_URL: \"http:\/\/localhost:9696\/v2\/\%\(tenant_id\)s\"
+      NEUTRON_INTERNAL_URL: \"http:\/\/localhost:9696\/v2\/\%\(tenant_id\)s\"
+      NEUTRON_ADMIN_URL: \"http:\/\/localhost:9696\/v2\/\%\(tenant_id\)s\"
