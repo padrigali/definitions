@@ -24,7 +24,6 @@ ROOT="$1"
 ##########################################################################
 
 cat <<EOF > "$ROOT"/etc/openstack-glance-setup.sed
-s/##KEYSTONE_TEMPORARY_ADMIN_TOKEN##/$KEYSTONE_TEMPORARY_ADMIN_TOKEN/g
 s/##GLANCE_SERVICE_USER##/$GLANCE_SERVICE_USER/g
 s/##GLANCE_SERVICE_PASSWORD##/$GLANCE_SERVICE_PASSWORD/g
 s/##GLANCE_PUBLIC_URL##/$GLANCE_PUBLIC_URL/g
