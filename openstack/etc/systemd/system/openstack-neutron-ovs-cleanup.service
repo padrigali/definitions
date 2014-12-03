@@ -1,0 +1,14 @@
+[Unit]
+Description=Neutron OVS cleanup
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=neutron
+ConditionFileIsExecutable=/usr/bin/neutron-ovs-cleanup
+ExecStart=/usr/bin/neutron-ovs-cleanup \
+  --log-file /var/log/neutron/ovs-cleanup.log \
+  --config-file /etc/neutron/neutron.conf --verbose
+
+[Install]
+WantedBy=multi-user.target

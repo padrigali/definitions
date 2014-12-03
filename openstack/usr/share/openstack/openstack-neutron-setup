@@ -1,0 +1,94 @@
+#!/bin/sh
+#
+# Copyright (C) 2014 Codethink Limited
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+set -e
+
+# Create required system users and groups
+
+getent group neutron >/dev/null || groupadd -r --gid 166 neutron
+getent passwd neutron >/dev/null || \
+	useradd --uid 166 -r -g neutron -d /var/lib/neutron -s /sbin/nologin \
+	-c "OpenStack Neutron Daemons" neutron
+
+# Create the keystone user and services
+
+export OS_SERVICE_TOKEN=##KEYSTONE_TEMPORARY_ADMIN_TOKEN##
+export OS_SERVICE_ENDPOINT='http://localhost:35357/v2.0'
+
+keystone user-create --name ##NEUTRON_SERVICE_USER## --pass ##NEUTRON_SERVICE_PASSWORD##
+keystone user-role-add --tenant service --user ##NEUTRON_SERVICE_USER## --role admin
+
+keystone service-create --name neutron --type network --description "OpenStack Compute Service"
+keystone endpoint-create  --service-id $(keystone service-list | awk '/ network / {print $2}') \
+	    	          --publicurl ##NEUTRON_PUBLIC_URL## \
+	                  --internalurl ##NEUTRON_INTERNAL_URL## \
+	                  --adminurl ##NEUTRON_ADMIN_URL## \
+			  --region ##NEUTRON_REGION##
+
+# Neutron compute configuration
+if [ ! -d /var/run/neutron ]; then
+    mkdir -p /var/run/neutron
+    chown -R neutron:neutron /var/run/neutron
+fi
+
+if [ ! -d /var/lock/neutron ]; then
+    mkdir -p /var/lock/neutron
+    chown -R neutron:neutron /var/lock/neutron
+fi
+
+if [ ! -d /var/log/neutron ]; then
+    mkdir -p /var/log/neutron
+    chown -R neutron:neutron /var/log/neutron
+fi
+
+# Setup the neutron database
+if [ ! -e /var/lib/neutron/neutron.sqlite ]; then
+    chown -R neutron:neutron /var/lib/neutron
+    sudo -u neutron neutron-manage db sync
+fi
+
+# Remove the one-shot setup service
+rm /etc/systemd/system/multi-user.target.wants/openstack-neutron-setup.service
+
+# Start neutron services
+systemctl start openstack-neutron-server
+systemctl start openstack-neutron-metadata-agent
+systemctl start openstack-neutron-plugin-openvswitch-agent
+systemctl start openstack-neutron-ovs-cleanup
+systemctl start openstack-neutron-dhcp-agent
+systemctl start openstack-neutron-l3-agent
+
+# Create the links to run neutron services when system start next times.
+ln -s "/etc/systemd/system/openstack-neutron-server.service" \
+    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-server.service"
+
+ln -s "/etc/systemd/system/openstack-neutron-metadata-agent.service" \
+    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-metadata-agent.service"
+
+ln -s "/etc/systemd/system/openstack-neutron-plugin-openvswitch-agent.service" \
+    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-plugin-openvswitch-agent.service"
+
+ln -s "/etc/systemd/system/openstack-neutron-ovs-cleanup.service" \
+    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-ovs-cleanup.service"
+
+ln -s "/etc/systemd/system/openstack-neutron-dhcp-agent.service" \
+    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-dhcp-agent.service"
+
+ln -s "/etc/systemd/system/openstack-neutron-l3-agent.service" \
+    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-l3-agent.service"
+
+exit 0
