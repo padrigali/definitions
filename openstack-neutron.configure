@@ -32,7 +32,7 @@ s/##NEUTRON_ADMIN_URL##/$NEUTRON_ADMIN_URL/g
 EOF
 
 sed -f "$ROOT"/etc/openstack-neutron-setup.sed -i \
-       "$ROOT"/etc/nova/neutron.conf \
+       "$ROOT"/etc/neutron/neutron.conf \
        "$ROOT"/usr/share/openstack/openstack-neutron-setup
 
 ##########################################################################
