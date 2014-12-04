@@ -60,6 +60,28 @@ if [ ! -e /var/lib/neutron/neutron.sqlite ]; then
     sudo -u neutron neutron-manage db sync
 fi
 
+
+# Create the bridges to use the External network mapped
+# This configuration is for 1 node and it was taken from:
+# https://fosskb.wordpress.com/2014/10/18/openstack-juno-on-ubuntu-14-10/
+# and https://fosskb.wordpress.com/2014/06/10/managing-openstack-internaldataexternal-network-in-one-interface/
+ovs-vsctl add-br br-eth0
+ovs-vsctl add-port br-eth0 ens3
+ifconfig br-eth0 $(hostname -i | awk '{ print $1 }') up
+ip link set br-eth0 promisc on
+ip link add proxy-br-eth1 type veth peer name eth1-br-proxy
+ip link add proxy-br-ex type veth peer name ex-br-proxy
+ovs-vsctl add-br br-eth1
+ovs-vsctl add-br br-ex
+ovs-vsctl add-port br-eth1 eth1-br-proxy
+ovs-vsctl add-port br-ex ex-br-proxy
+ovs-vsctl add-port br-eth0 proxy-br-eth1
+ovs-vsctl add-port br-eth0 proxy-br-ex
+ip link set eth1-br-proxy up promisc on
+ip link set ex-br-proxy up promisc on
+ip link set proxy-br-eth1 up promisc on
+ip link set proxy-br-ex up promisc on
+
 # Remove the one-shot setup service
 rm /etc/systemd/system/multi-user.target.wants/openstack-neutron-setup.service
 
