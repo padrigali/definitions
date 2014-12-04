@@ -39,6 +39,7 @@ sed -f "$ROOT"/etc/openstack-keystone-setup.sed -i \
        "$ROOT"/etc/glance/glance-registry.conf \
        "$ROOT"/etc/nova/nova.conf \
        "$ROOT"/etc/cinder/cinder.conf \
+       "$ROOT"/etc/neutron/neutron.conf \
        "$ROOT"/usr/share/openstack/openstack-keystone-setup \
        "$ROOT"/usr/share/openstack/openstack-glance-setup \
        "$ROOT"/usr/share/openstack/openstack-nova-setup \
