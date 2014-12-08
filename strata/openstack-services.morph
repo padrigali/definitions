@@ -90,7 +90,7 @@ chunks:
   - mako
 - name: lockfile
   repo: upstream:python-packages/lockfile
-  ref: 4eb27075e0523b6ed2027444fd42d83a6e9b14c5
+  ref: 777758cdf4520271370b3338b86b5c66f9b104f0
   unpetrify-ref: master
   build-depends: []
 - name: dogpile-core
