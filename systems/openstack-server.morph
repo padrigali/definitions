@@ -21,6 +21,8 @@ strata:
   morph: strata/virtualization.morph
 - name: connectivity
   morph: strata/connectivity.morph
+- name: networking-utils
+  morph: strata/networking-utils.morph
 - name: erlang
   morph: strata/erlang.morph
 - name: openstack-common
