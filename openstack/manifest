@@ -75,6 +75,7 @@
 0040755 0 0 /etc/cinder/rootwrap.d/
 0100644 0 0 /etc/cinder/rootwrap.d/volume.filters
 0040755 0 0 /etc/neutron
+0040755 0 0 /var/lib/neutron
 0100644 0 0 /etc/neutron/rootwrap.conf
 0100644 0 0 /etc/neutron/neutron.conf
 0100644 0 0 /etc/neutron/api-paste.ini
