@@ -105,9 +105,6 @@ ovs-vsctl add-br br-eth1
 ovs-vsctl add-br br-ex
 ovs-vsctl add-port br-eth1 eth1-br-proxy
 ovs-vsctl add-port br-ex ex-br-proxy
-ovs-vsctl add-br br-ex
-ovs-vsctl add-port br-eth1 eth1-br-proxy
-ovs-vsctl add-port br-ex ex-br-proxy
 ovs-vsctl add-port br-eth0 proxy-br-eth1
 ovs-vsctl add-port br-eth0 proxy-br-ex
 ip link set eth1-br-proxy up promisc on
