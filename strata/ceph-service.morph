@@ -4,6 +4,12 @@ build-depends:
 - morph: strata/foundation.morph
 - morph: strata/network-security.morph
 chunks:
+- name: yasm
+  morph: strata/ceph-service/yasm.morph
+  repo: upstream:yasm
+  ref: v1.3.0
+  unpetrify-ref: baserock/morph
+  build-depends: []
 - name: libaio
   morph: strata/ceph-service/libaio.morph
   repo: upstream:libaio
@@ -28,8 +34,8 @@ chunks:
   build-depends:
   - libunwind
 - name: snappy
-  repo: upstream:snappy
-  ref: e77d15ed7e57338cd2f87ed22d88c1938eeecd1a
+  repo: upstream:snappy-git
+  ref: 1ff9be9b8fafc8528ca9e055646f5932aa5db9c4
   unpetrify-ref: baserock/morph
   build-depends: []
 - name: leveldb
