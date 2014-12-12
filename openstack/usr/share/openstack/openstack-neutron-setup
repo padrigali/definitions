@@ -15,7 +15,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-set -e
+set -xe
 
 # Create required system users and groups
 
@@ -64,64 +64,16 @@ if [ ! -e /var/lib/neutron/neutron.sqlite ]; then
 	      stamp --sql juno
 fi
 
-# Create the openvswitch required folders
-if [ ! -d /usr/local/var/run/openvswitch ]; then
-    mkdir -p /usr/local/etc/openvswitch
-    mkdir -p /usr/local/var/run/openvswitch
-fi
-
-# Define openvswitch files
-openvswitch_database=/usr/local/etc/openvswitch/conf.db
-openvswitch_pidfile=/usr/local/var/run/openvswitch/ovsdb-server.pid
-openvswitch_logfile=/usr/local/var/run/openvswitch/ovsdb-server.log
-
-# Create openvswitch database
-ovsdb-tool create $openvswitch_database /usr/share/openvswitch/vswitch.ovsschema
-
-# Start openvswitch database server
-ovsdb-server --remote=punix:/usr/local/var/run/openvswitch/db.sock \
-	     --remote=db:Open_vSwitch,Open_vSwitch,manager_options \
-	     --private-key=db:Open_vSwitch,SSL,private_key \
-	     --certificate=db:Open_vSwitch,SSL,certificate \
-	     --bootstrap-ca-cert=db:Open_vSwitch,SSL,ca_cert \
-	     --pidfile --detach
-
-ovs-vsctl --no-wait init
-
-ovs-vswitchd --pidfile --detach
-ovs-vsctl show
-
-# Create the bridges to use the External network mapped
-# This configuration is for 1 node and it was taken from:
-# https://fosskb.wordpress.com/2014/10/18/openstack-juno-on-ubuntu-14-10/
-# and https://fosskb.wordpress.com/2014/06/10/managing-openstack-internaldataexternal-network-in-one-interface/
-ovs-vsctl add-br br-eth0
-ovs-vsctl add-port br-eth0 ens3
-ifconfig br-eth0 $(hostname -i | awk '{ print $1 }') up
-ip link set br-eth0 promisc on
-ip link add proxy-br-eth1 type veth peer name eth1-br-proxy
-ip link add proxy-br-ex type veth peer name ex-br-proxy
-ovs-vsctl add-br br-eth1
-ovs-vsctl add-br br-ex
-ovs-vsctl add-port br-eth1 eth1-br-proxy
-ovs-vsctl add-port br-ex ex-br-proxy
-ovs-vsctl add-port br-eth0 proxy-br-eth1
-ovs-vsctl add-port br-eth0 proxy-br-ex
-ip link set eth1-br-proxy up promisc on
-ip link set ex-br-proxy up promisc on
-ip link set proxy-br-eth1 up promisc on
-ip link set proxy-br-ex up promisc on
-
 # Remove the one-shot setup service
 rm /etc/systemd/system/multi-user.target.wants/openstack-neutron-setup.service
 
 # Start neutron services
-systemctl start openstack-neutron-server
 systemctl start openstack-neutron-metadata-agent
 systemctl start openstack-neutron-plugin-openvswitch-agent
 systemctl start openstack-neutron-ovs-cleanup
 systemctl start openstack-neutron-dhcp-agent
 systemctl start openstack-neutron-l3-agent
+systemctl start openstack-neutron-server
 
 # Create the links to run neutron services when system start next times.
 ln -s "/etc/systemd/system/openstack-neutron-server.service" \

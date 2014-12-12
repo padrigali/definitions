@@ -1,0 +1,9 @@
+[Unit]
+Description=Run openvswitch-initialize-db (once)
+Requires=openvswitch-db-server.service
+After=openvswitch-db-server.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ovs-vsctl --no-wait init
+Restart=no

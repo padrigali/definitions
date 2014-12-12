@@ -1,6 +1,7 @@
 [Unit]
 Description=Neutron OpenvSwitch Plugin Agent
-After=syslog.target network.target openstack-keystone-setup.service
+Requires=openvswitch.service
+After=syslog.target network.target openvswitch.service
 
 [Service]
 Type=simple

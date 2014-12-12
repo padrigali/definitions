@@ -1,6 +1,7 @@
 [Unit]
 Description=Neutron OVS cleanup
-After=syslog.target network.target
+Requires=openvswitch.service
+After=syslog.target network.target openvswitch.service
 
 [Service]
 Type=simple
