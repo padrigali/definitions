@@ -44,3 +44,4 @@ configuration-extensions:
 - openstack-rabbitmq
 - openstack-cinder
 - openstack-neutron
+- openvswitch

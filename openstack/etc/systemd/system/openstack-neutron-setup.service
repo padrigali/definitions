@@ -1,7 +1,7 @@
 [Unit]
 Description=Run openstack-neutron-setup (once)
-Requires=local-fs.target
-After=local-fs.target openstack-keystone-setup.service
+Requires=openstack-keystone-setup.service openstack-neutron-network-configuration-one-node.service
+After=openstack-keystone-setup.service openstack-neutron-network-configuration-one-node.service
 
 [Service]
 Type=oneshot

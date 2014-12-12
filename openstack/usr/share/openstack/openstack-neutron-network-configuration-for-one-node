@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# Copyright (C) 2014 Codethink Limited
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+set -xe
+
+# Create the bridges to use the External network mapped
+# This configuration is for 1 node and it was taken from:
+# https://fosskb.wordpress.com/2014/10/18/openstack-juno-on-ubuntu-14-10/
+# and https://fosskb.wordpress.com/2014/06/10/managing-openstack-internaldataexternal-network-in-one-interface/
+ovs-vsctl add-br br-eth0
+ovs-vsctl add-port br-eth0 ens3
+ifconfig br-eth0 $(hostname -i | awk '{ print $1 }') up
+ip link set br-eth0 promisc on
+ip link add proxy-br-eth1 type veth peer name eth1-br-proxy
+ip link add proxy-br-ex type veth peer name ex-br-proxy
+ovs-vsctl add-br br-eth1
+ovs-vsctl add-br br-ex
+ovs-vsctl add-port br-eth1 eth1-br-proxy
+ovs-vsctl add-port br-ex ex-br-proxy
+ovs-vsctl add-port br-eth0 proxy-br-eth1
+ovs-vsctl add-port br-eth0 proxy-br-ex
+ip link set eth1-br-proxy up promisc on
+ip link set ex-br-proxy up promisc on
+ip link set proxy-br-eth1 up promisc on
+ip link set proxy-br-ex up promisc on
+
