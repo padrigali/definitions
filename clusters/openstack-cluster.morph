@@ -1,11 +1,13 @@
-name: devel-raw
+name: openstack-one-node
 kind: cluster
 systems:
 - morph: systems/openstack-server.morph
   deploy:
     release:
-      type: kvm
-      location: kvm+ssh://franred@refinery.ducie.codethink.co.uk/franred-openstack-test/home/franred/openstack.img
+      type: rawdisk
+      location: /src/release/baserock-xx-openstack-system-x86_64.img
+     # type: kvm
+     # location: kvm+ssh://franred@refinery.ducie.codethink.co.uk/franred-openstack-test/home/franred/openstack.img
       DISK_SIZE: 5G
       RAM_SIZE: 1G
       VCPUS: 1
