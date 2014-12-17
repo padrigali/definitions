@@ -7,7 +7,7 @@ chunks:
 - name: libaio
   morph: strata/ceph-service/libaio.morph
   repo: upstream:libaio
-  ref: 262e589ea4ac3d1ff809648c8f2caa3836e69b25
+  ref: libaio-0.3.110-1
   unpetrify-ref: baserock/morph
   build-depends: []
 - name: keyutils
@@ -35,7 +35,7 @@ chunks:
 - name: leveldb
   morph: strata/ceph-service/leveldb.morph
   repo: upstream:leveldb
-  ref: 0f0ed46e70967365c851243663689e156fe1b7b5
+  ref: 0f0ed46e70967365c851243663689e156fe1b7b5 
   unpetrify-ref: baserock/morph
   build-depends:
   - snappy
@@ -48,13 +48,13 @@ chunks:
 - name: boost
   morph: strata/ceph-service/boost.morph
   repo: upstream:boost-tarball
-  ref: 1c3648bf5b7d17fcd4fe9bc95802b16fd9eee304
+  ref: boost_1_56_0 
   unpetrify-ref: baserock/markdoffman/morph
   build-depends: []
 - name: ceph
   morph: strata/ceph-service/ceph.morph
   repo: upstream:ceph
-  ref: 8fdf1df512b73bad0eb695cdf9cbf2d09f0327d4
+  ref: v0.88
   unpetrify-ref: baserock/morph
   build-depends:
   - libaio
