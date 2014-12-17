@@ -24,8 +24,9 @@ getent passwd neutron >/dev/null || \
 	useradd --uid 166 -r -g neutron -d /var/lib/neutron -s /sbin/nologin \
 	-c "OpenStack Neutron Daemons" neutron
 
-# Create the keystone user and services
+chown -R neutron:neutron /var/lib/neutron
 
+# Create the keystone user and services
 export OS_SERVICE_TOKEN=##KEYSTONE_TEMPORARY_ADMIN_TOKEN##
 export OS_SERVICE_ENDPOINT='http://localhost:35357/v2.0'
 
@@ -55,25 +56,39 @@ if [ ! -d /var/log/neutron ]; then
 fi
 
 # Setup the neutron database
-if [ ! -e /var/lib/neutron/neutron.sqlite ]; then
-    chown -R neutron:neutron /var/lib/neutron
-    # Stamp the database with the version of neutron we are using. This is
-    # needed before we can run any neutron services.
-    sudo -u neutron neutron-db-manage --config-file /etc/neutron/neutron.conf \
-	      --config-file /etc/neutron/plugins/ml2/ml2_conf.ini \
-	      stamp --sql juno
+if ! sudo -u postgres psql -lqt | grep -q neutron; then
+    # Create postgresSQL user
+    sudo -u postgres createuser \
+	      --pwprompt --encrypted \
+	      --no-adduser --no-createdb \
+	      --no-password \
+	      ##NEUTRON_DB_USER##
+    sudo -u postgres createdb \
+	      --owner=##NEUTRON_DB_USER## \
+	      neutron
+    # Stamp neutron database with the latest stamped version available,
+    # in this case "icehouse"
+    sudo -u neutron neutron-db-manage \
+	              --config-file /etc/neutron/neutron.conf \
+	              --config-file /etc/neutron/plugins/ml2/ml2_conf.ini \
+	              stamp icehouse
+    # Upgrade database to "juno"
+    sudo -u neutron neutron-db-manage \
+                      --config-file /etc/neutron/neutron.conf \
+                      --config-file /etc/neutron/plugins/ml2/ml2_conf.ini \
+                      upgrade juno
 fi
 
 # Remove the one-shot setup service
 rm /etc/systemd/system/multi-user.target.wants/openstack-neutron-setup.service
 
 # Start neutron services
+systemctl start openstack-neutron-server
 systemctl start openstack-neutron-metadata-agent
 systemctl start openstack-neutron-plugin-openvswitch-agent
 systemctl start openstack-neutron-ovs-cleanup
 systemctl start openstack-neutron-dhcp-agent
 systemctl start openstack-neutron-l3-agent
-systemctl start openstack-neutron-server
 
 # Create the links to run neutron services when system start next times.
 ln -s "/etc/systemd/system/openstack-neutron-server.service" \
