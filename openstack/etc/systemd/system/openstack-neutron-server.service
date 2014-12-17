@@ -6,7 +6,10 @@ After=syslog.target network.target openvswitch.service
 [Service]
 Type=simple
 User=neutron
-ExecStart=/usr/bin/neutron-server
+ExecStart=/usr/bin/neutron-server \
+  --config-file=/etc/neutron/neutron.conf \
+  --config-file=/etc/neutron/plugins/ml2/ml2_conf.ini \
+  --log-file=/var/log/neutron/neutron-server.log
 
 [Install]
 WantedBy=multi-user.target
