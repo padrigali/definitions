@@ -83,8 +83,8 @@ chunks:
   - markupsafe
 - name: alembic
   repo: upstream:python-packages/alembic
-  ref: e37162294fc6df9740f4231a75021f391e2a0f98
-  unpetrify-ref: rel_0_6_7
+  ref: 5f952f25caa688d89204d134ee867de7dbad917c
+  unpetrify-ref: rel_0_7_1
   build-depends:
   - sqlalchemy
   - mako
@@ -667,8 +667,8 @@ chunks:
   - sqlparse
 - name: neutron
   repo: upstream:openstack/neutron
-  ref: 0d0c376d09d85a0eabeb8c9258349d1e63a5cdf0
-  unpetrify-ref: 2014.2
+  ref: dfa4b4b9b6b19a627cfb5eb5c6ab9db4961a06ea
+  unpetrify-ref: 2014.2.1
   build-depends:
   - paste
   - pastedeploy
