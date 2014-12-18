@@ -33,11 +33,12 @@ export OS_SERVICE_ENDPOINT='http://localhost:35357/v2.0'
 keystone user-create --name ##NEUTRON_SERVICE_USER## --pass ##NEUTRON_SERVICE_PASSWORD##
 keystone user-role-add --tenant service --user ##NEUTRON_SERVICE_USER## --role admin
 
-keystone service-create --name neutron --type network --description "OpenStack Compute Service"
+keystone service-create --name neutron --type network --description "OpenStack Networking"
 keystone endpoint-create  --service-id $(keystone service-list | awk '/ network / {print $2}') \
 	    	          --publicurl ##NEUTRON_PUBLIC_URL## \
 	                  --internalurl ##NEUTRON_INTERNAL_URL## \
-	                  --adminurl ##NEUTRON_ADMIN_URL##
+	                  --adminurl ##NEUTRON_ADMIN_URL## \
+			  --region regionOne
 
 # Neutron compute configuration
 if [ ! -d /var/run/neutron ]; then
