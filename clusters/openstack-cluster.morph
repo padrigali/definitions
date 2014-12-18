@@ -51,6 +51,6 @@ systems:
       NEUTRON_SERVICE_PASSWORD: veryinsecure
       NEUTRON_DB_USER: neutronDB
       NEUTRON_DB_PASSWORD: veryinsecure
-      NEUTRON_PUBLIC_URL: \"http:\/\/localhost:9696\/v2\/\%\(tenant_id\)s\"
-      NEUTRON_INTERNAL_URL: \"http:\/\/localhost:9696\/v2\/\%\(tenant_id\)s\"
-      NEUTRON_ADMIN_URL: \"http:\/\/localhost:9696\/v2\/\%\(tenant_id\)s\"
+      NEUTRON_PUBLIC_URL: \"http:\/\/localhost:9696"
+      NEUTRON_INTERNAL_URL: \"http:\/\/localhost:9696"
+      NEUTRON_ADMIN_URL: \"http:\/\/localhost:9696"
