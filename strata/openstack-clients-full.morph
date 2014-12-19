@@ -120,3 +120,10 @@ chunks:
   build-depends:
   - python-keystoneclient
   - cliff
+- name: python-saharaclient
+  repo: github:openstack/python-saharaclient
+  ref: eadb40ccb62566f02cb93ec03aa232e48835dec3
+  unpetrify-ref: 0.7.6
+  build-depends:
+  - python-keystoneclient
+  - python-prettytable
