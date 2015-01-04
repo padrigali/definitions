@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Copyright (C) 2013  Codethink Limited
+# Copyright (C) 2013,2014,2015  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ ceph-mon --mkfs -i 0 --monmap /tmp/monmap --keyring /tmp/ceph.mon.keyring
 touch ~/monitor-configured
 """
 
-ceph_storage_config_template = """#!/bin/bash
+ceph_storage_config_template = """#!/bin/sh
 scp 10.0.100.2:/var/lib/ceph/bootstrap-osd/ceph.keyring /var/lib/ceph/bootstrap-osd/
 echo -e "n\np\n1\n\n\nw\n" | fdisk /dev/sdb
 ceph-disk prepare --cluster ceph --cluster-uuid 9ceb9257-7541-4de4-b34b-586079986700 --fs-type ext4 /dev/sdb1
@@ -72,8 +72,8 @@ touch ~/storage-configured
 """
 
 executable_file_permissions = stat.S_IRUSR | stat.S_IXUSR | stat.S_IWUSR | \
-                                             stat.S_IXGRP | stat.S_IRGRP | \
-                                             stat.S_IXOTH | stat.S_IROTH
+			                     stat.S_IXGRP | stat.S_IRGRP | \
+					     stat.S_IXOTH | stat.S_IROTH
 
 class CephConfigurationExtension(cliapp.Application):
     """
@@ -137,6 +137,7 @@ class CephConfigurationExtension(cliapp.Application):
         self.systemd_dir = "/etc/systemd/system/"
         self.systemd_multiuser_dir = "/etc/systemd/system/multi-user.target.wants/"
 
+        print "Copying from "+os.getcwd()
         self.copy_to_img(os.environ["CEPH_CONF"], self.conf_file)
 
         # Copy over bootstrap keyrings
@@ -148,19 +149,20 @@ class CephConfigurationExtension(cliapp.Application):
         # Configure any monitor daemons
         if "CEPH_MON" in os.environ:
             self.create_mon_data_dir(os.environ.get("CEPH_MON_KEYRING"))
-        else:
-            self.create_osd_startup_script("None", "None")
 
         # Configure any object storage daemons
-        osd_re = r"CEPH_OSD_(\d+)_DATA_DIR$"
+        if "CEPH_OSD" in os.environ:
+	    self.create_osd_startup_script("None", "None")
 
-        for env in os.environ.keys():
-            match = re.match(osd_re, env)
-            if match:
-                osd_data_dir_env = match.group(0)
-                osd_id = match.group(1)
+            osd_re = r"CEPH_OSD_(\d+)_DATA_DIR$"
 
-                self.create_osd_data_dir(osd_id, os.environ.get(osd_data_dir_env))
+            for env in os.environ.keys():
+                match = re.match(osd_re, env)
+                if match:
+                    osd_data_dir_env = match.group(0)
+                    osd_id = match.group(1)
+
+                    self.create_osd_data_dir(osd_id, os.environ.get(osd_data_dir_env))
 
         # Configure any mds daemons
         if "CEPH_MDS" in os.environ:
@@ -188,75 +190,81 @@ class CephConfigurationExtension(cliapp.Application):
     def symlink_to_multiuser(self, fname):
         print >> sys.stderr, os.path.join("../", fname)
         print >> sys.stderr, self.dest_dir + os.path.join(self.systemd_multiuser_dir, fname)
+	print "Linking: %s into %s"%(fname, self.systemd_multiuser_dir)
         os.symlink(os.path.join("../", fname),
                    self.dest_dir + os.path.join(self.systemd_multiuser_dir, fname))
 
     def create_mon_data_dir(self, src_keyring):
 
-        #Create the monitor data directory
+        # Create the monitor data directory
         mon_data_dir = os.path.join(self.mon_dir, "{}-{}".format(self.cluster_name, self.hostname))
         os.makedirs(self.dest_dir + mon_data_dir)
 
-        #Create sysvinit file to start via sysvinit
+        # Create sysvinit file to start via sysvinit
         sysvinit_file = os.path.join(mon_data_dir, "sysvinit")
         open(self.dest_dir + sysvinit_file, 'a').close()
 
-        #Create systemd file to initialize the monitor data directory
+        # Create systemd file to initialize the monitor data directory
         keyring = ""
         if src_keyring:
-            #Copy the keyring from local to the image
+            # Copy the keyring from local to the image
             dest_keyring = os.path.join(self.tmp_dir,
                     "{}-{}.mon.keyring".format(self.cluster_name, self.hostname))
             self.copy_to_img(src_keyring, dest_keyring)
             keyring = "--keyring " + dest_keyring
 
         mon_systemd_fname = systemd_monitor_fname_template
-        systemd_script_name = self.dest_dir + os.path.join(self.systemd_dir, mon_systemd_fname)
+
+	systemd_script_name = self.dest_dir + os.path.join(self.systemd_dir, mon_systemd_fname)
+	print "Write monitor systemd script to "+systemd_script_name
         mon_systemd = open(systemd_script_name, 'w')
         mon_systemd.write(systemd_monitor_template)
         mon_systemd.close()
-        #Create a symlink to the multi user target
+        # Create a symlink to the multi user target
         self.symlink_to_multiuser(mon_systemd_fname)
 
     def create_osd_data_dir(self, osd_id, data_dir):
         if not data_dir:
             data_dir = '/srv/osd' + osd_id
 
-        #Create the osd data dir
+        # Create the osd data dir
         os.makedirs(self.dest_dir + data_dir)
 
     def create_osd_startup_script(self, osd_id, data_dir):
         osd_systemd_fname = systemd_osd_fname_template
-        osd_full_name = self.dest_dir + os.path.join(self.systemd_dir, osd_systemd_fname)
+	
+	osd_full_name = self.dest_dir + os.path.join(self.systemd_dir, osd_systemd_fname)
+	print "Write Storage systemd script to "+osd_full_name
 
         osd_systemd = open(osd_full_name, 'w')
 
         osd_systemd.write(systemd_osd_template)
         osd_systemd.close()
 
-        #Create a symlink to the multi user target
+        # Create a symlink to the multi user target
         self.symlink_to_multiuser(osd_systemd_fname)
 
     def create_mds_data_dir(self):
 
-        #Create the monitor data directory
+        # Create the monitor data directory
         mds_data_dir = os.path.join(self.mds_dir, "{}-{}".format(self.cluster_name, self.hostname))
         os.makedirs(self.dest_dir + mds_data_dir)
 
-        #Create sysvinit file to start via sysvinit
+        # Create sysvinit file to start via sysvinit
         sysvinit_file = os.path.join(mds_data_dir, "sysvinit")
         open(self.dest_dir + sysvinit_file, 'a').close()
 
 
     def create_startup_scripts(self):
-        head_setup_file = os.path.join(self.dest_dir, "root", "setup-ceph-head")
+	head_setup_file = os.path.join(self.dest_dir, "root", "setup-ceph-head")
+	print "Copying startup scripts to "+head_setup_file
 
         ceph_head_setup = open(head_setup_file, "w")
         ceph_head_setup.write(ceph_monitor_config_template)
         ceph_head_setup.close()
         os.chmod(head_setup_file, executable_file_permissions)
 
-        osd_setup_file = os.path.join(self.dest_dir, "root", "setup-ceph-node")
+	osd_setup_file = os.path.join(self.dest_dir, "root", "setup-ceph-node")
         ceph_node_setup = open(osd_setup_file, "w")
         ceph_node_setup.write(ceph_storage_config_template)
         ceph_node_setup.close()
