@@ -63,12 +63,20 @@ touch ~/monitor-configured
 """
 
 ceph_storage_config_template = """#!/bin/sh
-scp 10.0.100.2:/var/lib/ceph/bootstrap-osd/ceph.keyring /var/lib/ceph/bootstrap-osd/
+scp 192.168.122.42:/etc/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
+uuid=`uuidgen`
+osdnum=`ceph osd create $uuid`
 echo -e "n\np\n1\n\n\nw\n" | fdisk /dev/sdb
-ceph-disk prepare --cluster ceph --cluster-uuid 9ceb9257-7541-4de4-b34b-586079986700 --fs-type ext4 /dev/sdb1
-sudo ceph-disk activate	/dev/sdb1
-/etc/init.d/ceph start osd.0
-touch ~/storage-configured
+mkdir /var/lib/ceph/osd/ceph-$osdnum
+echo -e "y\n" | mkfs -t ext4 /dev/sdb1
+sudo mount -o user_xattr /dev/sdb1 /var/lib/ceph/osd/ceph-$osdnum
+ceph-osd -i $osdnum --mkfs --mkkey --osd-uuid $uuid
+ceph auth add osd.$osdnum osd 'allow *' mon 'allow profile osd' -i /var/lib/ceph/osd/ceph-$osdnum/keyring
+ceph osd crush add-bucket `hostname` host
+ceph osd crush move `hostname` root=default
+ceph osd crush add  osd.$osdnum 1.0 host=`hostname`
+systemctl start ceph-osd@$osdnum.service
+touch ~/osd-configured
 """
 
 executable_file_permissions = stat.S_IRUSR | stat.S_IXUSR | stat.S_IWUSR | \
@@ -103,6 +111,7 @@ class CephConfigurationExtension(cliapp.Application):
     CEPH_MON_KEYRING - Location of monitor keyring. Required by the
                        monitor if using cephx authentication.
 
+    CEPH_OSD - (Blank) Create a ceph object storage daemon on the image.
     CEPH_OSD_X_DATA_DIR - Location of data directory for OSD.
                           Create an OSD daemon on image. 'X' is an integer
                           id, many osd daemons may be run on same server.
