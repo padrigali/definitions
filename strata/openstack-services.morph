@@ -3,6 +3,7 @@ kind: stratum
 description: Openstack clients and services
 build-depends:
 - morph: strata/erlang.morph
+- morph: strata/xstatic.morph
 - morph: strata/openstack-common.morph
 - morph: strata/openstack-clients-full.morph
 chunks:
