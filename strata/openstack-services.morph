@@ -3,6 +3,7 @@ kind: stratum
 description: Openstack clients and services
 build-depends:
 - morph: strata/erlang.morph
+- morph: strata/django.morph
 - morph: strata/xstatic.morph
 - morph: strata/openstack-common.morph
 - morph: strata/openstack-clients-full.morph
@@ -866,3 +867,14 @@ chunks:
   - sqlalchemy
   - sqlalchemy-migrate
   - webob
+- name: django-openstack-auth
+  repo: upstream:openstack/django_openstack_auth
+  ref: e676c88a329af57d6c4f13df54f6e1e06c1f8360
+  unpetrify-ref: 1.1.8
+  build-depends: []
+- name: horizon
+  repo: upstream:openstack/horizon
+  ref: 3d9a31e2a05288e9a48a51eb4fe693c42e92aac7
+  unpetrify-ref: 2014.2.1
+  build-depends:
+  - django-openstack-auth
