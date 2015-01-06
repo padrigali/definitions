@@ -51,19 +51,24 @@ Wanted-By=multi-user.target
 """
 systemd_osd_fname_template = "ceph-storage-fboot.service"
 
-ceph_monitor_config_template = """#!/bin/bash
+ceph_monitor_config_template = """#!/bin/sh
+hn=`hostname`
+monIp=`gawk '/mon host/ {print $NF}' /etc/ceph/ceph.conf`
+clustFsid=`gawk '/fsid/ {print $NF}' /etc/ceph/ceph.conf`
 ceph-authtool --create-keyring /tmp/ceph.mon.keyring --gen-key -n mon. --cap mon 'allow *'
 ceph-authtool --create-keyring /etc/ceph/ceph.client.admin.keyring --gen-key -n client.admin --set-uid=0 --cap mon 'allow *' --cap osd 'allow *' --cap mds 'allow'
 ceph-authtool /tmp/ceph.mon.keyring --import-keyring /etc/ceph/ceph.client.admin.keyring
-monmaptool --create --add 0 10.0.100.2 --fsid 9ceb9257-7541-4de4-b34b-586079986700 /tmp/monmap
-mkdir /var/lib/ceph/mon/ceph-0
-ceph-mon --mkfs -i 0 --monmap /tmp/monmap --keyring /tmp/ceph.mon.keyring
-/etc/init.d/ceph start mon.0
+monmaptool --create --add $hn $monIp --fsid $clustFsid /tmp/monmap
+mkdir /var/lib/ceph/mon/ceph-$hn
+ceph-mon --mkfs -i $hn --monmap /tmp/monmap --keyring /tmp/ceph.mon.keyring
+systemctl start ceph-mon@$hn.service
 touch ~/monitor-configured
 """
 
 ceph_storage_config_template = """#!/bin/sh
-scp 192.168.122.42:/etc/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
+hn=`hostname`
+monIp=`gawk '/mon host/ {print $NF}' /etc/ceph/ceph.conf`
+scp $monIp:/etc/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
 uuid=`uuidgen`
 osdnum=`ceph osd create $uuid`
 echo -e "n\np\n1\n\n\nw\n" | fdisk /dev/sdb
@@ -72,9 +77,9 @@ echo -e "y\n" | mkfs -t ext4 /dev/sdb1
 sudo mount -o user_xattr /dev/sdb1 /var/lib/ceph/osd/ceph-$osdnum
 ceph-osd -i $osdnum --mkfs --mkkey --osd-uuid $uuid
 ceph auth add osd.$osdnum osd 'allow *' mon 'allow profile osd' -i /var/lib/ceph/osd/ceph-$osdnum/keyring
-ceph osd crush add-bucket `hostname` host
-ceph osd crush move `hostname` root=default
-ceph osd crush add  osd.$osdnum 1.0 host=`hostname`
+ceph osd crush add-bucket $hn host
+ceph osd crush move $hn root=default
+ceph osd crush add  osd.$osdnum 1.0 host=$hn
 systemctl start ceph-osd@$osdnum.service
 touch ~/osd-configured
 """
@@ -113,6 +118,7 @@ class CephConfigurationExtension(cliapp.Application):
 
     CEPH_OSD - (Blank) Create a ceph object storage daemon on the image.
     CEPH_OSD_X_DATA_DIR - Location of data directory for OSD.
+
                           Create an OSD daemon on image. 'X' is an integer
                           id, many osd daemons may be run on same server.
 
