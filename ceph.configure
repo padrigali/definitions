@@ -62,6 +62,7 @@ monmaptool --create --add $hn $monIp --fsid $clustFsid /tmp/monmap
 mkdir /var/lib/ceph/mon/ceph-$hn
 ceph-mon --mkfs -i $hn --monmap /tmp/monmap --keyring /tmp/ceph.mon.keyring
 systemctl start ceph-mon@$hn.service
+ln -s /etc/systemd/system/ceph-mon@.service /etc/systemd/system/multi-user.target.wants/ceph-mon@$hn.service
 touch ~/monitor-configured
 """
 
@@ -82,6 +83,9 @@ ceph osd crush move $hn root=default
 ceph osd crush add  osd.$osdnum 1.0 host=$hn
 systemctl start ceph-osd@$osdnum.service
 touch ~/osd-configured
+# Set up for subsequent boots
+echo "/dev/sdb1 /var/lib/ceph/osd/ceph-$osdnum/ ext4 defaults 0 2"| sudo tee -a /etc/fstab
+ln -s /etc/systemd/system/ceph-osd@.service /etc/systemd/system/multi-user.target.wants/ceph-osd@$osdnum.service
 """
 
 executable_file_permissions = stat.S_IRUSR | stat.S_IXUSR | stat.S_IWUSR | \
