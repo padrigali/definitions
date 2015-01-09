@@ -125,6 +125,12 @@ chunks:
   - sqlite3
   - ncurses
   - readline
+- name: six
+  repo: upstream:six
+  ref: 8cfbff6b764af86d825086fa1637aa009e90d75a
+  unpetrify-ref: 1.9.0
+  build-depends:
+  - cpython
 - name: libtool
   morph: strata/core/libtool.morph
   repo: upstream:libtool
