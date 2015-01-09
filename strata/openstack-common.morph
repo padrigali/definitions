@@ -47,11 +47,6 @@ chunks:
   unpetrify-ref: master
   build-depends:
   - pytz
-- name: six
-  repo: upstream:six
-  ref: 43c2db60d6aab5e3cf397d5126ba04cf60c24435
-  unpetrify-ref: 1.8.0
-  build-depends: []
 - name: cryptography
   morph: strata/openstack-services/cryptography.morph
   repo: upstream:python-packages/cryptography
@@ -59,7 +54,6 @@ chunks:
   unpetrify-ref: 0.6.1
   build-depends:
   - cffi
-  - six
 - name: pyiso8601
   repo: upstream:pyiso8601
   ref: 9eb87a9bab114e9cc9a8d3dceb04362644d89cab
@@ -82,7 +76,6 @@ chunks:
   build-depends:
   - pbr
   - argparse
-  - six
 - name: oslo-config
   repo: upstream:openstack/oslo-config
   ref: 059579ac2189b94bc9e9555b2e9acfb31a83ef53
@@ -90,7 +83,6 @@ chunks:
   build-depends:
   - argparse
   - netaddr
-  - six
   - stevedore
 - name: pyopenssl
   repo: upstream:python-packages/pyopenssl
@@ -104,14 +96,12 @@ chunks:
   build-depends:
   - pbr
   - babel
-  - six
 - name: oslo-utils
   repo: upstream:openstack/oslo-utils
   ref: 6a123fce93895e92004ce9d5bd8dee3c3642cf41
   unpetrify-ref: 0.3.0
   build-depends:
   - babel
-  - six
   - pyiso8601
   - oslo-i18n
 - name: futures
