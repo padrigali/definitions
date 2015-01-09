@@ -1,0 +1,34 @@
+name: httpd-server
+kind: chunk
+configure-commands:
+- ./buildconf --with-apr=/usr/share/apr-1
+- |
+  ./configure --prefix="$PREFIX" \
+              --enable-authnz-fcgi \
+              --enable-mods-shared=all \
+              --enable-mpms-shared=all \
+              --enable-suexec=shared \
+              --with-apr=/usr/bin/apr-2-config \
+              --with-apr-util=/usr/bin/apu-1-config \
+              --with-suexec-bin=/usr/lib/httpd/suexec \
+              --with-suexec-caller=apache \
+              --with-suexec-docroot=/srv/www \
+              --with-suexec-logfile=/var/log/httpd/suexec.log \
+              --with-suexec-uidmin=100 \
+              --with-suexec-userdir=public_html
+build-commands:
+- make
+install-commands:
+- PREFIX="$PREFIX" DESTDIR="$DESTDIR" make install
+system-integration:
+  httpd-server-misc:
+    01-adduser:
+    - groupadd -g 25 apache
+    - |
+      useradd -c "Apache Server" -d /srv/www -g apache \
+              -s /bin/false -u 25 apache
+    02-configure-httpd-server:
+    - mv -v /usr/sbin/suexec /usr/lib/httpd/suexec
+    - chgrp apache /usr/lib/httpd/suexec
+    - chmod 4754 /usr/lib/httpd/suexec
+    - chown -v -R apache:apache /srv/www
