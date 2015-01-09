@@ -1,6 +1,6 @@
 name: databases
 kind: stratum
-description: some popular databases
+description: some popular databases and some utils related to databases
 build-depends:
 - morph: strata/tools.morph
 - morph: strata/nfs.morph
@@ -27,3 +27,8 @@ chunks:
   unpetrify-ref: 2.5.4
   build-depends:
   - postgresql
+- name: python-memcached
+  repo: github:linsomniac/python-memcached
+  ref: 156ee975ff6e5c69e1d6c58b09bedf03c182c5db
+  unpetrify-ref: master
+  build-depends: []
