@@ -1,0 +1,9 @@
+name: apr-util
+kind: chunk
+configure-commands:
+- ./buildconf --with-apr=/usr/share/apr-1
+- ./configure --prefix="$PREFIX" --with-apr=/usr/bin/apr-2-config
+build-commands:
+- make
+install-commands:
+- PREFIX="$PREFIX" DESTDIR="$DESTDIR" make install

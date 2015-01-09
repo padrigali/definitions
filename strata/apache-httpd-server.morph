@@ -1,0 +1,28 @@
+name: apache-httpd-server
+kind: stratum
+description: apache http web server
+build-depends:
+- morph: strata/tools.morph
+- morph: strata/pcre-utils.morph
+chunks:
+- name: apr
+  morph: strata/apache-httpd-server/apr.morph
+  repo: https://github.com/apache/apr.git
+  ref: 4ea9d6236ef2b9eb79feb05167d50c1a732420f0
+  unpetrify-ref: master
+  build-depends: []
+- name: apr-util
+  morph: strata/apache-httpd-server/apr-util.morph
+  repo: https://github.com/apache/apr-util.git
+  ref: 9890706bda63c5d5d5197d482c1b682240431465
+  unpetrify-ref: 1.5.4
+  build-depends:
+  - apr
+- name: httpd
+  morph: strata/apache-httpd-server/httpd-server.morph
+  repo: git://git.apache.org/httpd.git
+  ref: 6d8e0b2fd95268fcba96326ba9dce7bb8f712c19
+  unpetrify-ref: 2.4.10
+  build-depends:
+  - apr
+  - apr-util
