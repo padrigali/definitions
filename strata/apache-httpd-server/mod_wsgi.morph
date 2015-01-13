@@ -1,0 +1,10 @@
+name: mod_wsgi
+kind: chunk
+configure-commands:
+- |
+  ./configure --prefix="$PREFIX" \
+              --with-apxs=/usr/bin/apxs
+build-commands:
+- make
+install-commands:
+- PREFIX="$PREFIX" DESTDIR="$DESTDIR" make install
