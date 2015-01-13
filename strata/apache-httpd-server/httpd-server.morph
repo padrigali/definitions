@@ -4,8 +4,9 @@ configure-commands:
 - ./buildconf --with-apr=/usr/share/apr-1
 - |
   ./configure --prefix="$PREFIX" \
+              --enable-load-all-modules \
               --enable-authnz-fcgi \
-              --enable-mods-shared=all \
+              --enable-mods-shared=reallyall \
               --enable-mpms-shared=all \
               --enable-suexec=shared \
               --with-apr=/usr/bin/apr-2-config \
@@ -15,20 +16,13 @@ configure-commands:
               --with-suexec-docroot=/srv/www \
               --with-suexec-logfile=/var/log/httpd/suexec.log \
               --with-suexec-uidmin=100 \
-              --with-suexec-userdir=public_html
+              --with-suexec-userdir=public_html \
+              --enable-so
 build-commands:
 - make
 install-commands:
 - PREFIX="$PREFIX" DESTDIR="$DESTDIR" make install
-system-integration:
-  httpd-server-misc:
-    01-adduser:
-    - groupadd -g 25 apache
-    - |
-      useradd -c "Apache Server" -d /srv/www -g apache \
-              -s /bin/false -u 25 apache
-    02-configure-httpd-server:
-    - mv -v /usr/sbin/suexec /usr/lib/httpd/suexec
-    - chgrp apache /usr/lib/httpd/suexec
-    - chmod 4754 /usr/lib/httpd/suexec
-    - chown -v -R apache:apache /srv/www
+post-install-commands:
+- |
+  sed -i 's|#!/replace/with/path/to/perl/interpreter -w|#!/usr/bin/perl -w|g' \
+      "$DESTDIR$PREFIX"/bin/apxs
