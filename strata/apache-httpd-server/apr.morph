@@ -16,5 +16,9 @@ install-commands:
               config.guess config.sub; do \
     cp build/$file "$DESTDIR$PREFIX"/share/apr-1/build/$file ; \
   done
-# Create a symlink in the build directory to the include directory
+# Create a symlink in the build directory to the include directory (this is needed for httpd)
 - ln -sf /usr/include/apr-2 "$DESTDIR$PREFIX"/share/apr-1/build/
+post-install-commands:
+# Copy apr headers needed for mod_wsgi
+- cp include/private/apr_support.h "$DESTDIR$PREFIX"/include/apr-2
+- cp include/arch/unix/apr_private.h "$DESTDIR$PREFIX"/include/apr-2

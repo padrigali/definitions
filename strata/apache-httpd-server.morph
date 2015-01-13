@@ -1,6 +1,6 @@
 name: apache-httpd-server
 kind: stratum
-description: apache http web server
+description: apache http web server and some utilities related to it
 build-depends:
 - morph: strata/tools.morph
 - morph: strata/pcre-utils.morph
@@ -26,3 +26,23 @@ chunks:
   build-depends:
   - apr
   - apr-util
+- name: psutil
+  repo: github:giampaolo/psutil
+  ref: 2bc8555f0428af81c2d067aa76168ed7bc5e0179
+  unpetrify-ref: release-2.2.0
+  build-depends: []
+- name: mod_wsgi-metrics
+  repo: github:GrahamDumpleton/mod_wsgi-metrics
+  ref: ec715eb593255229f9f45f3f323edbb845c691d8
+  unpetrify-ref: 1.1.1
+  build-depends:
+  - psutil
+- name: mod_wsgi
+  morph: strata/apache-httpd-server/mod_wsgi.morph
+  repo: github:GrahamDumpleton/mod_wsgi
+  ref: 1be8b37aaf07d8cb3083da99d6fda12375221b07
+  unpetrify-ref: 4.4.5
+  build-depends:
+  - apr
+  - httpd
+  - mod_wsgi-metrics
