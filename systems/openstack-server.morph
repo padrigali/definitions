@@ -27,6 +27,8 @@ strata:
   morph: strata/databases.morph
 - name: erlang
   morph: strata/erlang.morph
+- name: apache-httpd-server
+  morph: strata/apache-httpd-server.morph
 - name: openstack-common
   morph: strata/openstack-common.morph
 - name: openstack-clients-full
@@ -48,3 +50,4 @@ configuration-extensions:
 - openstack-neutron
 - openvswitch
 - postgres
+- apache-httpd-server
