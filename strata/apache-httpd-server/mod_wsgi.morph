@@ -3,8 +3,20 @@ kind: chunk
 configure-commands:
 - |
   ./configure --prefix="$PREFIX" \
+              --enable-shared \
               --with-apxs=/usr/bin/apxs
 build-commands:
 - make
 install-commands:
 - PREFIX="$PREFIX" DESTDIR="$DESTDIR" make install
+post-install-commands:
+- |
+  install -D -m 644 /proc/self/fd/0 <<'EOF' "$DESTDIR$PREFIX"/httpd/conf.d/wsgi.conf
+  # NOTE: mod_wsgi can not coexist in the same apache process as
+  # mod_wsgi_python3.  Only load if mod_wsgi_python3 is not
+  # already loaded.
+
+  <IfModule !wsgi_module>
+  LoadModule wsgi_module /usr/lib/httpd/modules/mod_wsgi.so
+  </IfModule>
+  EOF
