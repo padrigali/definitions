@@ -19,5 +19,5 @@ set -e
 
 ROOT="$1"
 
-ln -sf "/etc/systemd/system/apache-httpd-server-setup.service" \
-    "$ROOT/etc/systemd/system/multi-user.target.wants/apache-httpd-server-setup.service"
+ln -sf "/etc/systemd/system/apache-httpd.service" \
+    "$ROOT/etc/systemd/system/multi-user.target.wants/apache-httpd.service"
