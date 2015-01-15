@@ -38,3 +38,5 @@ mv -v /usr/bin/suexec /usr/lib/httpd/suexec
 chgrp apache /usr/lib/httpd/suexec
 chmod 4754 /usr/lib/httpd/suexec
 chown -R apache:apache /srv/www
+mkdir -p /var/run/httpd/
+chown -R apache:apache /var/run/httpd
