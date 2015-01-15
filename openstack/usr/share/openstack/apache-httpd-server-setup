@@ -20,6 +20,10 @@
 # as default shell in gerrit systems.
 set -e
 
+if [ -f /var/openstack/apache-http-setup ]; then
+	  exit 0
+fi
+
 ###############################################################################
 # Move suexec to the directory where apache is configured to have it          #
 # Check configure in strata/apache-httpd-server/httpd-server.morph            #
@@ -40,3 +44,8 @@ chmod 4754 /usr/lib/httpd/suexec
 chown -R apache:apache /srv/www
 mkdir -p /var/run/httpd/
 chown -R apache:apache /var/run/httpd
+
+
+install -D -m 644 /proc/self/fd/0 <<'EOF' /var/openstack/apache-http-setup
+Apache http setup: success
+EOF
