@@ -68,21 +68,21 @@ touch ~/monitor-configured
 
 ceph_storage_config_template = """#!/bin/sh
 hn=`hostname`
+storageDisk=/dev/sdb
 monIp=`gawk '/mon host/ {print $NF}' /etc/ceph/ceph.conf`
 scp $monIp:/etc/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
 uuid=`uuidgen`
 osdnum=`ceph osd create $uuid`
-echo -e "n\np\n1\n\n\nw\n" | fdisk /dev/sdb
 mkdir /var/lib/ceph/osd/ceph-$osdnum
-echo -e "y\n" | mkfs -t ext4 /dev/sdb1
-sudo mount -o user_xattr /dev/sdb1 /var/lib/ceph/osd/ceph-$osdnum
+echo -e "y\n" | mkfs -t ext4 $storageDisk
+sudo mount -o user_xattr $storageDisk /var/lib/ceph/osd/ceph-$osdnum
 ceph-osd -i $osdnum --mkfs --mkkey --osd-uuid $uuid
 ceph auth add osd.$osdnum osd 'allow *' mon 'allow profile osd' -i /var/lib/ceph/osd/ceph-$osdnum/keyring
 ceph osd crush add-bucket $hn host
 ceph osd crush move $hn root=default
 ceph osd crush add  osd.$osdnum 1.0 host=$hn
 systemctl start ceph-osd@$osdnum.service
-echo "/dev/sdb1 /var/lib/ceph/osd/ceph-$osdnum/ ext4 defaults 0 2"| sudo tee -a /etc/fstab
+echo "$storageDisk /var/lib/ceph/osd/ceph-$osdnum/ ext4 defaults 0 2"| sudo tee -a /etc/fstab
 ln -s /etc/systemd/system/ceph-osd@.service /etc/systemd/system/multi-user.target.wants/ceph-osd@$osdnum.service
 touch ~/osd-configured
 """
