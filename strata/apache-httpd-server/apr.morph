@@ -5,6 +5,7 @@ configure-commands:
 - |
   ./configure --prefix="$PREFIX" \
               --disable-static \
+              --enable-threads \
               --with-installbuilddir="$PREFIX"/share/apr-1/build
 build-commands:
 - make
