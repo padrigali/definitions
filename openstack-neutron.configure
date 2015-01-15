@@ -35,6 +35,7 @@ EOF
 
 sed -f "$ROOT"/etc/openstack-neutron-setup.sed -i \
        "$ROOT"/etc/neutron/neutron.conf \
+       "$ROOT"/etc/nova/nova.conf \
        "$ROOT"/usr/share/openstack/openstack-neutron-setup
 
 ##########################################################################
