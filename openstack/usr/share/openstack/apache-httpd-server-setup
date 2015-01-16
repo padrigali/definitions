@@ -21,7 +21,7 @@
 set -e
 
 if [ -f /var/openstack/apache-http-setup ]; then
-	  exit 0
+  exit 0
 fi
 
 ###############################################################################
@@ -38,14 +38,13 @@ useradd -c "Apache Server" -d /srv/www -g apache \
 # Check configure in strata/apache-httpd-server/httpd-server.morph            #
 ###############################################################################
 mkdir -p /usr/lib/httpd
-mv -v /usr/bin/suexec /usr/lib/httpd/suexec
+mv -v /usr/sbin/suexec /usr/lib/httpd/suexec
 chgrp apache /usr/lib/httpd/suexec
 chmod 4754 /usr/lib/httpd/suexec
 chown -R apache:apache /srv/www
-mkdir -p /var/run/httpd/
-chown -R apache:apache /var/run/httpd
-
 
 install -D -m 644 /proc/self/fd/0 <<'EOF' /var/openstack/apache-http-setup
 Apache http setup: success
 EOF
+
+exit 0
