@@ -15,7 +15,11 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-set -xe
+set -e
+
+if [ -f /var/openstack/openvswitch-setup ]; then
+  exit 0
+fi
 
 # Create the openvswitch required folders
 mkdir -p /usr/local/etc/openvswitch
@@ -32,5 +36,9 @@ openvswitch_logfile=/usr/local/var/run/openvswitch/ovsdb-server.log
 
 # Create openvswitch database
 ovsdb-tool create $openvswitch_database /usr/share/openvswitch/vswitch.ovsschema
+
+install -D -m 644 /proc/self/fd/0 <<'EOF' /var/openstack/openvswitch-setup
+Openvswitch setup: success
+EOF
 
 exit 0
