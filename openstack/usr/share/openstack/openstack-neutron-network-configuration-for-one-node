@@ -17,6 +17,10 @@
 
 set -xe
 
+if [ -f /var/openstack/openvswitch-one-node-setup ]; then
+  exit 0
+fi
+
 # Create the bridges to use the External network mapped
 # This configuration is for 1 node and it was taken from:
 # https://fosskb.wordpress.com/2014/10/18/openstack-juno-on-ubuntu-14-10/
@@ -38,3 +42,8 @@ ip link set ex-br-proxy up promisc on
 ip link set proxy-br-eth1 up promisc on
 ip link set proxy-br-ex up promisc on
 
+install -D -m 644 /proc/self/fd/0 <<'EOF' /var/openstack/openvswitch-one-node-setup
+Openvswitch one node setup: success
+EOF
+
+exit 0

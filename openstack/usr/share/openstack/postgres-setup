@@ -15,7 +15,11 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-set -xe
+set -e
+
+if [ -f /var/openstack/postgres-setup ]; then
+  exit 0
+fi
 
 # Create postgres directories
 install -dm700 /var/lib/pgsql/data
@@ -31,5 +35,8 @@ chown -R postgres:postgres /var/lib/pgsql /var/run/postgresql
 
 test -d /var/lib/pgsql/data/base || sudo -u postgres pg_ctl -D  /var/lib/pgsql/data initdb
 
+install -D -m 644 /proc/self/fd/0 <<'EOF' /var/openstack/postgres-setup
+Postgres setup: success
+EOF
 
 exit 0
