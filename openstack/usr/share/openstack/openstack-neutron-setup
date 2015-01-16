@@ -42,7 +42,7 @@ keystone endpoint-create  --service-id $(keystone service-list | awk '/ network 
 
 # neutron.conf configuration
 service_tenant_id=$(keystone tenant-get service | grep id | tr -d " " | cut -d"|" -f3)
-sed -i 's/##SERVICE_TENANT_ID##/$service_tenant_id/g' /etc/neutron/neutron.conf
+sed -i "s/##SERVICE_TENANT_ID##/$service_tenant_id/g" /etc/neutron/neutron.conf
 
 # Neutron compute configuration
 if [ ! -d /var/run/neutron ]; then
