@@ -31,6 +31,10 @@ strata:
   morph: strata/pcre-utils.morph
 - name: apache-httpd-server
   morph: strata/apache-httpd-server.morph
+- name: django
+  morph: strata/django.morph
+- name: xstatic
+  morph: strata/xstatic.morph
 - name: openstack-common
   morph: strata/openstack-common.morph
 - name: openstack-clients-full
