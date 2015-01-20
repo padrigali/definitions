@@ -1,0 +1,12 @@
+[global]
+fsid = 
+mon initial members = 
+mon host = 
+
+#Clusters require authentication by default.
+auth cluster required = cephx
+auth service required = cephx
+auth client required = cephx
+
+# Set the osd default pool size
+osd pool default size = 2  # Write an object n times.
