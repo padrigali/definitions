@@ -647,8 +647,8 @@ chunks:
   build-depends: []
 - name: keystone
   repo: upstream:openstack/keystone
-  ref: ef8d9aa4e1ca3b5465a5bba0cdb6dcb9be1fe9ca
-  unpetrify-ref: 2014.2
+  ref: 615f79bb97883eee76923527cea13c2f72baa7ff
+  unpetrify-ref: 2014.2.1
   build-depends:
   - webob
   - eventlet
