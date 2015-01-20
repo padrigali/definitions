@@ -1,0 +1,51 @@
+name:  ceph-cluster-openstack
+kind: cluster
+systems:
+- morph: systems/ceph-service-x86_64-generic.morph
+  deploy:
+      ceph-mon-0-openstack:
+          type: openstack
+          # openstack info
+          location: 
+          OPENSTACK_USER: 
+          OPENSTACK_PASSWORD: 
+          OPENSTACK_TENANT: 
+          OPENSTACK_IMAGENAME: mon-0
+          CLOUD_INIT: yes
+          KERNEL_ARGS: console=ttyS0 console=tty0
+          DISK_SIZE: 10G
+          # Ceph info
+          HOSTNAME: mon-0 
+          CEPH_CLUSTER: ceph
+          CEPH_CONF: ceph.conf
+          CEPH_MON:
+      ceph-osd-0-openstack:
+          type: openstack
+          # openstack info
+          location: 
+          OPENSTACK_USER: 
+          OPENSTACK_PASSWORD:
+          OPENSTACK_TENANT:
+          OPENSTACK_IMAGENAME: osd-0
+          CLOUD_INIT: yes
+          KERNEL_ARGS: console=ttyS0 console=tty0
+          DISK_SIZE: 6G
+          # ceph info
+          HOSTNAME: osd-0
+          CEPH_CLUSTER: ceph
+          CEPH_CONF: ceph.conf
+      ceph-osd-1-openstack:
+          type: openstack
+          # openstack info
+          location: 
+          OPENSTACK_USER: 
+          OPENSTACK_PASSWORD: 
+          OPENSTACK_TENANT: 
+          OPENSTACK_IMAGENAME: osd-1
+          CLOUD_INIT: yes
+          KERNEL_ARGS: console=ttyS0 console=tty0
+          DISK_SIZE: 6G
+          # ceph info
+          HOSTNAME: osd-1
+          CEPH_CLUSTER: ceph
+          CEPH_CONF: ceph.conf
