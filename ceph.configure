@@ -59,7 +59,7 @@ ceph-authtool --create-keyring /tmp/ceph.mon.keyring --gen-key -n mon. --cap mon
 ceph-authtool --create-keyring /etc/ceph/ceph.client.admin.keyring --gen-key -n client.admin --set-uid=0 --cap mon 'allow *' --cap osd 'allow *' --cap mds 'allow'
 ceph-authtool /tmp/ceph.mon.keyring --import-keyring /etc/ceph/ceph.client.admin.keyring
 monmaptool --create --add $hn $monIp --fsid $clustFsid /tmp/monmap
-mkdir /var/lib/ceph/mon/ceph-$hn
+mkdir -p /var/lib/ceph/mon/ceph-$hn
 ceph-mon --mkfs -i $hn --monmap /tmp/monmap --keyring /tmp/ceph.mon.keyring
 systemctl start ceph-mon@$hn.service
 ln -s /etc/systemd/system/ceph-mon@.service /etc/systemd/system/multi-user.target.wants/ceph-mon@$hn.service
@@ -215,21 +215,21 @@ class CephConfigurationExtension(cliapp.Application):
     def create_mon_data_dir(self, src_keyring):
 
         #Create the monitor data directory
-        mon_data_dir = os.path.join(self.mon_dir, "{}-{}".format(self.cluster_name, self.hostname))
-        os.makedirs(self.dest_dir + mon_data_dir)
+        #mon_data_dir = os.path.join(self.mon_dir, "{}-{}".format(self.cluster_name, self.hostname))
+        #os.makedirs(self.dest_dir + mon_data_dir)
 
         #Create sysvinit file to start via sysvinit
-        sysvinit_file = os.path.join(mon_data_dir, "sysvinit")
-        open(self.dest_dir + sysvinit_file, 'a').close()
+        #sysvinit_file = os.path.join(mon_data_dir, "sysvinit")
+        #open(self.dest_dir + sysvinit_file, 'a').close()
 
         #Create systemd file to initialize the monitor data directory
         keyring = ""
-        if src_keyring:
-            #Copy the keyring from local to the image
-            dest_keyring = os.path.join(self.tmp_dir,
-                    "{}-{}.mon.keyring".format(self.cluster_name, self.hostname))
-            self.copy_to_img(src_keyring, dest_keyring)
-            keyring = "--keyring " + dest_keyring
+        #if src_keyring:
+        #    #Copy the keyring from local to the image
+        #    dest_keyring = os.path.join(self.tmp_dir,
+        #            "{}-{}.mon.keyring".format(self.cluster_name, self.hostname))
+        #    self.copy_to_img(src_keyring, dest_keyring)
+        #    keyring = "--keyring " + dest_keyring
 
         mon_systemd_fname = systemd_monitor_fname_template
 	systemd_script_name = self.dest_dir + os.path.join(self.systemd_dir, mon_systemd_fname)
