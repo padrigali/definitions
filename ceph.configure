@@ -68,7 +68,7 @@ touch ~/monitor-configured
 
 ceph_storage_config_template = """#!/bin/sh
 hn=`hostname`
-storageDisk=/dev/sdb
+storageDisk=/dev/vdb
 monIp=`gawk '/mon host/ {print $NF}' /etc/ceph/ceph.conf`
 scp $monIp:/etc/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
 uuid=`uuidgen`
