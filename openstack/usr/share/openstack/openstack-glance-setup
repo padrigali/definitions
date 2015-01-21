@@ -36,12 +36,41 @@ keystone endpoint-create  --service-id $(keystone service-list | awk '/ image / 
 	                  --internalurl ##GLANCE_INTERNAL_URL## \
 	                  --adminurl ##GLANCE_ADMIN_URL##
 
-# Setup the glance database
-if [ ! -e /var/lib/glance/glance.sqlite ]; then
-    chown -R glance:glance /var/lib/glance
+# Create run directory for glance
+if [ ! -d /var/run/glance ]; then
+    mkdir -p /var/run/glance
+    chown -R glance:glance /var/run/glance
+fi
+
+# Create the lock directory for glance
+if [ ! -d /var/lock/glance ]; then
+    mkdir -p /var/lock/glance
+    chown -R glance:glance /var/lock/glance
+fi
+
+# Create the log directory for glance
+if [ ! -d /var/log/glance ]; then
+    mkdir -p /var/log/glance
     chown -R glance:glance /var/log/glance
+fi
+
+# Setup the glance database
+if ! sudo -u postgres psql -lqt | grep -q glance; then
+    # Create posgreSQL user
+    sudo -u postgres createuser \
+	    --pwprompt --encrypted \
+	    --no-adduser --no-createdb \
+	    --no-password \
+	    ##GLANCE_DB_USER##
+
+    sudo -u postgres createdb \
+	    --owner=##GLANCE_DB_USER## \
+	    glance
+
     sudo -u glance glance-manage db_sync
 fi
+
+chown -R glance:glance /var/lib/glance
 
 # Remove the one-shot setup service
 rm /etc/systemd/system/multi-user.target.wants/openstack-glance-setup.service

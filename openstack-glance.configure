@@ -29,6 +29,9 @@ s/##GLANCE_SERVICE_PASSWORD##/$GLANCE_SERVICE_PASSWORD/g
 s/##GLANCE_PUBLIC_URL##/$GLANCE_PUBLIC_URL/g
 s/##GLANCE_INTERNAL_URL##/$GLANCE_INTERNAL_URL/g
 s/##GLANCE_ADMIN_URL##/$GLANCE_ADMIN_URL/g
+s/##GLANCE_HOST##/$GLANCE_HOST/g
+s/##GLANCE_DB_USER##/$GLANCE_DB_USER/g
+s/##GLANCE_DB_PASSWORD##/$GLANCE_DB_PASSWORD/g
 EOF
 
 sed -f "$ROOT"/etc/openstack-glance-setup.sed -i \
@@ -37,6 +40,7 @@ sed -f "$ROOT"/etc/openstack-glance-setup.sed -i \
        "$ROOT"/etc/glance/glance-scrubber.conf \
        "$ROOT"/etc/glance/glance-cache.conf \
        "$ROOT"/etc/cinder/cinder.conf \
+       "$ROOT"/etc/nova/nova.conf \
        "$ROOT"/usr/share/openstack/openstack-glance-setup 
 
 ##########################################################################
