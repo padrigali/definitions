@@ -56,7 +56,6 @@ hn=`hostname`
 monIp=`gawk '/mon host/ {print $NF}' /etc/ceph/ceph.conf`
 clustFsid=`gawk '/fsid/ {print $NF}' /etc/ceph/ceph.conf`
 ceph-authtool --create-keyring /tmp/ceph.mon.keyring --gen-key -n mon. --cap mon 'allow *'
-ceph-authtool --create-keyring /etc/ceph/ceph.client.admin.keyring --gen-key -n client.admin --set-uid=0 --cap mon 'allow *' --cap osd 'allow *' --cap mds 'allow'
 ceph-authtool /tmp/ceph.mon.keyring --import-keyring /etc/ceph/ceph.client.admin.keyring
 monmaptool --create --add $hn $monIp --fsid $clustFsid /tmp/monmap
 mkdir -p /var/lib/ceph/mon/ceph-$hn
@@ -69,8 +68,6 @@ touch ~/monitor-configured
 ceph_storage_config_template = """#!/bin/sh
 hn=`hostname`
 storageDisk=/dev/vdb
-monIp=`gawk '/mon host/ {print $NF}' /etc/ceph/ceph.conf`
-scp $monIp:/etc/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
 uuid=`uuidgen`
 osdnum=`ceph osd create $uuid`
 mkdir /var/lib/ceph/osd/ceph-$osdnum
@@ -109,11 +106,14 @@ class CephConfigurationExtension(cliapp.Application):
                          keys.
     CEPH_BOOTSTRAP_MDS - Registered key capable of generating MDS
                          keys.
-
+    
     Bootstrap keys are required for creating OSD daemons on servers
     that do not have a running monitor daemon. They are gathered
     by 'ceph-deploy gatherkeys' but can be generated and registered
     separately.
+
+    CEPH_CLIENT_ADMIN - Key required by any ceph action that requires
+                        client admin authentication to run
 
     CEPH_MON - (Blank) Create a ceph monitor daemon on the image.
     CEPH_MON_KEYRING - Location of monitor keyring. Required by the
@@ -146,6 +146,7 @@ class CephConfigurationExtension(cliapp.Application):
         self.hostname = os.environ["HOSTNAME"]
 
         self.conf_file = "/etc/ceph/{}.conf".format(self.cluster_name)
+	self.admin_file = "/etc/ceph/{}.client.admin.keyring".format(self.cluster_name)
         self.mon_dir = "/var/lib/ceph/mon/"
         self.osd_dir = "/var/lib/ceph/osd/"
         self.mds_dir = "/var/lib/ceph/mds/"
@@ -163,6 +164,10 @@ class CephConfigurationExtension(cliapp.Application):
             self.copy_bootstrap_osd(os.environ["CEPH_BOOTSTRAP_OSD"]);
         if "CEPH_BOOTSTRAP_MDS" in os.environ:
             self.copy_bootstrap_mds(os.environ["CEPH_BOOTSTRAP_MDS"]);
+
+	# COpy over admin keyring
+        if "CEPH_CLIENT_ADMIN" in os.environ:
+	    self.copy_to_img(os.environ["CEPH_CLIENT_ADMIN"], self.admin_file);
 
         # Configure any monitor daemons
         if "CEPH_MON" in os.environ:
