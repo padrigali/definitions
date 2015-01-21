@@ -19,6 +19,7 @@ systems:
           CEPH_CLUSTER: ceph
           CEPH_CONF: ceph.conf
           CEPH_MON:
+          CEPH_CLIENT_ADMIN: ceph.client.admin.keyring
       ceph-osd-0-openstack:
           type: openstack
           # openstack info
@@ -34,6 +35,8 @@ systems:
           HOSTNAME: osd-0
           CEPH_CLUSTER: ceph
           CEPH_CONF: ceph.conf
+          CEPH_CLIENT_ADMIN: ceph.client.admin.keyring
+          CEPH_OSD:
       ceph-osd-1-openstack:
           type: openstack
           # openstack info
@@ -49,3 +52,5 @@ systems:
           HOSTNAME: osd-1
           CEPH_CLUSTER: ceph
           CEPH_CONF: ceph.conf
+          CEPH_CLIENT_ADMIN: ceph.client.admin.keyring
+          CEPH_OSD:
