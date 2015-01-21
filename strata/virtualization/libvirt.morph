@@ -21,3 +21,11 @@ configure-commands:
   --without-storage-disk --with-storage-rbd --without-storage-sheepdog \
   --without-storage-gluster --without-wireshark-dissector \
   --prefix="$PREFIX"
+system-integration:
+  libvirt-misc:
+    01-addgroup:
+    - groupadd libvirt
+    02-setup_libvirtconf:
+    - sed -i 's/#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/' /etc/libvirt/libvirtd.conf
+    - sed -i 's/#unix_sock_rw_perms = "0770"/unix_sock_rw_perms = "0770"/' /etc/libvirt/libvirtd.conf
+    - sed -i 's/#unix_sock_ro_perms = "0777"/unix_sock_ro_perms = "0777"/' /etc/libvirt/libvirtd.conf
