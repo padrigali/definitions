@@ -61,8 +61,18 @@ if [ ! -d /var/lib/nova/instances ]; then
 fi
 
 # Setup the nova database
-if [ ! -e /var/lib/nova/nova.sqlite ]; then
-    chown -R nova:nova /var/lib/nova
+if ! sudo -u postgres psql -lqt | grep -q nova; then
+    # Create posgreSQL user
+    sudo -u postgres createuser \
+	    --pwprompt --encrypted \
+	    --no-adduser --no-createdb \
+	    --no-password \
+	    ##NOVA_DB_USER##
+
+    sudo -u postgres createdb \
+	    --owner=##NOVA_DB_USER## \
+	    nova
+
     sudo -u nova nova-manage db sync
 fi
 
@@ -71,6 +81,8 @@ if [ ! -d /usr/share/novnc ]; then
     mkdir /usr/share/novnc
     chown -R nova:nova /usr/share/novnc
 fi
+
+chown -R nova:nova /var/lib/nova
 
 # Add nova to the libvirt group
 usermod -a -G libvirt nova

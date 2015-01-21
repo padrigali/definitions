@@ -66,17 +66,29 @@ if [ ! -d /var/log/cinder ]; then
     chown -R cinder:cinder /var/log/cinder
 fi
 
-# Setup the cinder database
-if [ ! -e /var/lib/cinder/cinder.sqlite ]; then
-    chown -R cinder:cinder /var/lib/cinder
-    sudo -u cinder cinder-manage db sync
-fi
-
 # Create the volumes directory for cinder
 if [ ! -d /var/lib/cinder/volumes ]; then
     mkdir -p /var/lib/cinder/volumes
     chown -R cinder:cinder /var/lib/cinder/volumes
 fi
+
+# Setup the cinder database
+if ! sudo -u postgres psql -lqt | grep -q cinder; then
+    # Create posgreSQL user
+    sudo -u postgres createuser \
+	    --pwprompt --encrypted \
+	    --no-adduser --no-createdb \
+	    --no-password \
+	    ##CINDER_DB_USER##
+
+    sudo -u postgres createdb \
+	    --owner=##CINDER_DB_USER## \
+	    cinder
+
+    sudo -u cinder cinder-manage db sync
+fi
+
+chown -R cinder:cinder /var/lib/cinder
 
 # This is only for testing purposes and we need to change it for
 # something more robust to deploy in production.

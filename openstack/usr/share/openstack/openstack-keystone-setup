@@ -24,12 +24,39 @@ getent passwd keystone >/dev/null || \
 	useradd --uid 163 -r -g keystone -d /var/lib/keystone -s /sbin/nologin \
 	-c "OpenStack Keystone Daemons" keystone
 
-# Setup the keystone database
+# Keystone compute configuration
+if [ ! -d /var/run/keystone ]; then
+    mkdir -p /var/run/keystone
+    chown -R keystone:keystone /var/run/keystone
+fi
 
-if [ ! -e /var/lib/keystone/keystone.sqlite ]; then
-    chown -R keystone:keystone /var/lib/keystone
+if [ ! -d /var/lock/keystone ]; then
+    mkdir -p /var/lock/keystone
+    chown -R keystone:keystone /var/lock/keystone
+fi
+
+if [ ! -d /var/log/keystone ]; then
+    mkdir -p /var/log/keystone
+    chown -R keystone:keystone /var/log/keystone
+fi
+
+# Setup the keystone database
+if ! sudo -u postgres psql -lqt | grep -q keystone; then
+    # Create posgreSQL user
+    sudo -u postgres createuser \
+	    --pwprompt --encrypted \
+	    --no-adduser --no-createdb \
+	    --no-password \
+	    ##KEYSTONE_DB_USER##
+
+    sudo -u postgres createdb \
+	    --owner=##KEYSTONE_DB_USER## \
+	    keystone
+
     sudo -u keystone keystone-manage db_sync
 fi
+
+chown -R keystone:keystone /var/lib/keystone
 
 systemctl start openstack-keystone
 

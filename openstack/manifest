@@ -16,7 +16,6 @@
 0040755 0 0 /var/lib/glance/image-cache/invalid
 0040755 0 0 /var/lib/glance/image-cache/queue
 0040755 0 0 /var/lib/glance/images
-0040755 0 0 /var/log/glance
 0100644 0 0 /etc/glance/logging.conf
 0100644 0 0 /etc/glance/glance-api.conf
 0100644 0 0 /etc/glance/glance-registry.conf
