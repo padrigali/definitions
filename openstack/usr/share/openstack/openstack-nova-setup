@@ -66,16 +66,14 @@ if [ ! -e /var/lib/nova/nova.sqlite ]; then
     sudo -u nova nova-manage db sync
 fi
 
-# Nova compute needs to write in /var/run/libvirt/libvirt-sock
-# to start the hypervisor
-chmod 766 /var/run/libvirt/libvirt-sock
-
 # Nova novncproxy needs /usr/share/novnc folder available
 if [ ! -d /usr/share/novnc ]; then
     mkdir /usr/share/novnc
     chown -R nova:nova /usr/share/novnc
 fi
 
+# Add nova to the libvirt group
+usermod -a -G libvirt nova
 
 # Check existence of Network Block Device module in the kernel
 # NOTE: modprobe does not work actually and returns always
