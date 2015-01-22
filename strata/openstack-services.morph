@@ -616,8 +616,8 @@ chunks:
   - eventlet
 - name: glance
   repo: upstream:openstack/glance
-  ref: 742c898956d655affa7351505c8a3a5c72881eae
-  unpetrify-ref: 2014.2
+  ref: 055adff1d95dca72074da898b541cb4a6b62406d
+  unpetrify-ref: 2014.2.1
   build-depends:
   - greenlet
   - sqlalchemy
@@ -730,8 +730,8 @@ chunks:
   build-depends: []
 - name: nova
   repo: upstream:openstack/nova
-  ref: c5ac21f3dbb4ad59efcb631d91e4e64f77fba43f
-  unpetrify-ref: 2014.2
+  ref: ba25e9ea6d0d42dd3b78cc6440710fd9362ae1b5
+  unpetrify-ref: 2014.2.1
   build-depends:
   - sqlalchemy
   - anyjson
@@ -762,8 +762,8 @@ chunks:
   - oslo-vmware
 - name: cinder
   repo: upstream:openstack/cinder
-  ref: 2cb1aaf69d17963cc7205002fa194b3b41b51d5f
-  unpetrify-ref: master
+  ref: b48aee211ad9b2571c8554dd162b37b8a8d80a42
+  unpetrify-ref: 2014.2.1
   build-depends:
   - anyjson
   - eventlet
