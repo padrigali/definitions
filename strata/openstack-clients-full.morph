@@ -27,13 +27,13 @@ chunks:
   unpetrify-ref: master
   build-depends: []
 - name: python-keystoneclient
-  repo: upstream:python-keystoneclient
+  repo: upstream:openstack/python-keystoneclient
   ref: 79d1eec35aad874a7c08ff22c39260884a5524ba
   unpetrify-ref: 0.11.1
   build-depends:
   - python-prettytable
 - name: python-glanceclient
-  repo: upstream:python-glanceclient
+  repo: upstream:openstack/python-glanceclient
   ref: 8a877b2752162d6a2db43d7d61d6311c4f42285b
   unpetrify-ref: 0.14.1
   build-depends:
@@ -41,7 +41,7 @@ chunks:
   - python-keystoneclient
   - warlock
 - name: python-novaclient
-  repo: upstream:python-novaclient
+  repo: upstream:openstack/python-novaclient
   ref: 5ecfdac6b34769e200ff5c4c7429c20518c5b24f
   unpetrify-ref: 2.20.0
   build-depends:
