@@ -95,6 +95,9 @@ configure-commands:
 - scripts/config -e NET_SCH_HTB
 - scripts/config -e NET_SCH_HFSC
 - scripts/config -e VETH
+- scripts/config -e USB_NET_DM9601
+- scripts/config -e USB_USBNET
+- scripts/config -e E1000E
 - yes '' | make oldconfig
 build-commands:
 - make $MAKEFLAGS
