@@ -67,7 +67,7 @@ touch ~/monitor-configured
 
 ceph_storage_config_template = """#!/bin/sh
 hn=`hostname`
-storageDisk=/dev/vdb
+storageDisk={}
 uuid=`uuidgen`
 osdnum=`ceph osd create $uuid`
 mkdir /var/lib/ceph/osd/ceph-$osdnum
@@ -121,9 +121,12 @@ class CephConfigurationExtension(cliapp.Application):
 
     CEPH_OSD - (Blank) Create a ceph object storage daemon on the image.
     CEPH_OSD_X_DATA_DIR - Location of data directory for OSD.
-
                           Create an OSD daemon on image. 'X' is an integer
                           id, many osd daemons may be run on same server.
+    CEPH_OSD_STORAGE_DEV - Location of the storage device to be used to host the
+                           osd file system. This will be set to /dev/sdb by 
+			   default. For openstack deploys this should be set to
+			   /dev/vdb.
 
     CEPH_MDS - (Blank) Create a metadata server daemon on server.
     """
@@ -144,8 +147,9 @@ class CephConfigurationExtension(cliapp.Application):
 
         self.cluster_name = os.environ["CEPH_CLUSTER"]
         self.hostname = os.environ["HOSTNAME"]
-
-        self.conf_file = "/etc/ceph/{}.conf".format(self.cluster_name)
+        self.osd_storage_dev = "/dev/sdb"
+        
+	self.conf_file = "/etc/ceph/{}.conf".format(self.cluster_name)
 	self.admin_file = "/etc/ceph/{}.client.admin.keyring".format(self.cluster_name)
         self.mon_dir = "/var/lib/ceph/mon/"
         self.osd_dir = "/var/lib/ceph/osd/"
@@ -155,6 +159,7 @@ class CephConfigurationExtension(cliapp.Application):
         self.bootstrap_osd_dir = "/var/lib/ceph/bootstrap-osd/"
         self.systemd_dir = "/etc/systemd/system/"
         self.systemd_multiuser_dir = "/etc/systemd/system/multi-user.target.wants/"
+
 
         print "Copying from "+os.getcwd()
         self.copy_to_img(os.environ["CEPH_CONF"], self.conf_file)
@@ -187,7 +192,11 @@ class CephConfigurationExtension(cliapp.Application):
 
                     self.create_osd_data_dir(osd_id, os.environ.get(osd_data_dir_env))
 
-        # Configure any mds daemons
+        # Update the location of osd storage dev if necessary 
+	if "CEPH_OSD_STORAGE_DEV" in os.environ:
+	    self.osd_storage_dev = os.environ["CEPH_OSD_STORAGE_DEV"]
+
+	# Configure any mds daemons
         if "CEPH_MDS" in os.environ:
             self.create_mds_data_dir()
 
@@ -209,7 +218,7 @@ class CephConfigurationExtension(cliapp.Application):
     def copy_bootstrap_mds(self, src_file):
         self.copy_to_img(src_file,
                 os.path.join(self.bootstrap_mds_dir, "{}.keyring".format(self.cluster_name)))
-
+	
     def symlink_to_multiuser(self, fname):
         print >> sys.stderr, os.path.join("../", fname)
         print >> sys.stderr, self.dest_dir + os.path.join(self.systemd_multiuser_dir, fname)
@@ -288,7 +297,7 @@ class CephConfigurationExtension(cliapp.Application):
 
 	osd_setup_file = os.path.join(self.dest_dir, "root", "setup-ceph-node")
         ceph_node_setup = open(osd_setup_file, "w")
-        ceph_node_setup.write(ceph_storage_config_template)
+        ceph_node_setup.write(ceph_storage_config_template.format(self.osd_storage_dev))
         ceph_node_setup.close()
         os.chmod(osd_setup_file, executable_file_permissions)
 
