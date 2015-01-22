@@ -136,16 +136,13 @@ class CephConfigurationExtension(cliapp.Application):
         if "HOSTNAME" not in os.environ:
             print "ERROR: Need a hostname defined by 'HOSTNAME'"
             sys.exit(1)
-        if "CEPH_CLUSTER" not in os.environ:
-            print "ERROR: Need a cluster name defined by 'CEPH_CLUSTER'"
-            sys.exit(1)
         if "CEPH_CONF" not in os.environ:
             print "ERROR: Need a ceph conf file defined by 'CEPH_CONF'"
             sys.exit(1)
 
         self.dest_dir = args[0]
 
-        self.cluster_name = os.environ["CEPH_CLUSTER"]
+        self.cluster_name = "ceph"
         self.hostname = os.environ["HOSTNAME"]
         self.osd_storage_dev = "/dev/sdb"
         
@@ -164,13 +161,18 @@ class CephConfigurationExtension(cliapp.Application):
         print "Copying from "+os.getcwd()
         self.copy_to_img(os.environ["CEPH_CONF"], self.conf_file)
 
+
+        # If the clustername is provided set it accprdingly. Default is "ceph"
+        if "CEPH_CLUSTER" in os.environ:
+            self.cluster_name = os.environ["CEPH_CLUSTER"]
+
         # Copy over bootstrap keyrings
         if "CEPH_BOOTSTRAP_OSD" in os.environ:
             self.copy_bootstrap_osd(os.environ["CEPH_BOOTSTRAP_OSD"]);
         if "CEPH_BOOTSTRAP_MDS" in os.environ:
             self.copy_bootstrap_mds(os.environ["CEPH_BOOTSTRAP_MDS"]);
 
-	# COpy over admin keyring
+	# Copy over admin keyring
         if "CEPH_CLIENT_ADMIN" in os.environ:
 	    self.copy_to_img(os.environ["CEPH_CLIENT_ADMIN"], self.admin_file);
 
