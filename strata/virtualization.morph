@@ -129,7 +129,7 @@ chunks:
   build-depends: []
 - name: openvswitch
   morph: strata/virtualization/openvswitch.morph
-  repo: github:openvswitch/ovs
+  repo: upstream:openvswitch
   ref: 2b70c4b929d18d1f36dcdeb71ea5c383cbb662e9
   unpretrify-ref: v2.3
   build-depends: []
