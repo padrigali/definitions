@@ -108,7 +108,7 @@ configure-commands:
 - scripts/config -e IP_NF_TARGET_CLUSTERIP
 - scripts/config -e IP_NF_TARGET_ECN
 - scripts/config -e IP_NF_TARGET_TTL
-- scripts/config -e IP_NF_NF_RAW
+- scripts/config -e IP_NF_RAW
 - scripts/config -e IP_NF_SECURITY
 - scripts/config -e IP_NF_ARPTABLES
 - scripts/config -e VXLAN
