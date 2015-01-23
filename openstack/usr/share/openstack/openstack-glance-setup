@@ -25,7 +25,7 @@ getent passwd glance >/dev/null || \
 
 # Create required keystone tenants, users and roles
 export OS_SERVICE_TOKEN=##KEYSTONE_TEMPORARY_ADMIN_TOKEN##
-export OS_SERVICE_ENDPOINT='http://localhost:35357/v2.0'
+export OS_SERVICE_ENDPOINT='http://127.0.0.1:35357/v2.0'
 
 keystone user-create --name ##GLANCE_SERVICE_USER## --pass ##GLANCE_SERVICE_PASSWORD##
 keystone user-role-add --tenant service --user ##GLANCE_SERVICE_USER## --role admin

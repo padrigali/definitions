@@ -27,7 +27,7 @@ getent passwd cinder >/dev/null || \
 # Create the keystone user and services
 
 export OS_SERVICE_TOKEN=##KEYSTONE_TEMPORARY_ADMIN_TOKEN##
-export OS_SERVICE_ENDPOINT='http://localhost:35357/v2.0'
+export OS_SERVICE_ENDPOINT='http://127.0.0.1:35357/v2.0'
 
 keystone user-create --name ##CINDER_USER## --pass ##CINDER_PASSWORD##
 keystone user-role-add --tenant service --user ##CINDER_USER## --role admin
