@@ -111,6 +111,7 @@ configure-commands:
 - scripts/config -e IP_NF_NF_RAW
 - scripts/config -e IP_NF_SECURITY
 - scripts/config -e IP_NF_ARPTABLES
+- scripts/config -e VXLAN
 - yes '' | make oldconfig
 build-commands:
 - make $MAKEFLAGS
