@@ -130,6 +130,6 @@ chunks:
 - name: openvswitch
   morph: strata/virtualization/openvswitch.morph
   repo: upstream:openvswitch
-  ref: 2b70c4b929d18d1f36dcdeb71ea5c383cbb662e9
-  unpretrify-ref: v2.3
+  ref: 0dfed4ba9c8a16a1f316d709b7831a4e139472d4
+  unpretrify-ref: v2.3.1
   build-depends: []
