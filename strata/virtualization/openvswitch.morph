@@ -4,7 +4,7 @@ build-system: manual
 pre-configure-commands:
 - ./boot.sh
 configure-commands:
-- ./configure
+- ./configure --enable-ssl
 build-commands:
 - make
 install-commands:
