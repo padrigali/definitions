@@ -35,6 +35,7 @@ sed -f "$ROOT"/etc/openstack-rabbitmq-setup.sed -i \
        "$ROOT"/etc/nova/nova.conf \
        "$ROOT"/etc/cinder/cinder.conf \
        "$ROOT"/etc/neutron/neutron.conf \
+       "$ROOT"/etc/glance/glance-api.conf \
        "$ROOT"/usr/share/openstack/openstack-rabbitmq-setup
 
 ##########################################################################

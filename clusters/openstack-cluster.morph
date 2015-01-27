@@ -60,6 +60,7 @@ systems:
       NEUTRON_SERVICE_PASSWORD: veryinsecure
       NEUTRON_DB_USER: neutronDB
       NEUTRON_DB_PASSWORD: veryinsecure
-      NEUTRON_PUBLIC_URL: \"http:\/\/127.0.0.1:9696"
-      NEUTRON_INTERNAL_URL: \"http:\/\/127.0.0.1:9696"
-      NEUTRON_ADMIN_URL: \"http:\/\/127.0.0.1:9696"
+      NEUTRON_PUBLIC_URL: http:\/\/127.0.0.1:9696
+      NEUTRON_INTERNAL_URL: http:\/\/127.0.0.1:9696
+      NEUTRON_ADMIN_URL: http:\/\/127.0.0.1:9696
+      METADATA_PROXY_SHARED_SECRET: novaneutronmetasecret

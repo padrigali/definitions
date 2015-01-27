@@ -31,10 +31,12 @@ s/##NEUTRON_DB_PASSWORD##/$NEUTRON_DB_PASSWORD/g
 s/##NEUTRON_PUBLIC_URL##/$NEUTRON_PUBLIC_URL/g
 s/##NEUTRON_INTERNAL_URL##/$NEUTRON_INTERNAL_URL/g
 s/##NEUTRON_ADMIN_URL##/$NEUTRON_ADMIN_URL/g
+s/##METADATA_PROXY_SHARED_SECRET##/$METADATA_PROXY_SHARED_SECRET/g
 EOF
 
 sed -f "$ROOT"/etc/openstack-neutron-setup.sed -i \
        "$ROOT"/etc/neutron/neutron.conf \
+       "$ROOT"/etc/neutron/metadata_agent.ini \
        "$ROOT"/etc/nova/nova.conf \
        "$ROOT"/usr/share/openstack/openstack-neutron-setup
 
