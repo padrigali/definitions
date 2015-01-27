@@ -1,7 +1,7 @@
 [Unit]
 Description=Neutron DHCP Agent
 After=syslog.target network.target
-wants=neutron-ovs-cleanup.service
+Wants=neutron-ovs-cleanup.service
 
 [Service]
 Type=simple
