@@ -42,6 +42,9 @@ sed -f "$ROOT"/etc/openstack-neutron-setup.sed -i \
 
 ##########################################################################
 
+ln -sf "/etc/systemd/system/openvswitch-create-links-one-node.service" \
+    "$ROOT/etc/systemd/system/multi-user.target.wants/openvswitch-create-links-one-node.service"
+
 ln -sf "/etc/systemd/system/openstack-neutron-network-configuration-one-node.service" \
     "$ROOT/etc/systemd/system/multi-user.target.wants/openstack-neutron-network-configuration-one-node.service"
 

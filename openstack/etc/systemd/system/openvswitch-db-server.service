@@ -1,7 +1,7 @@
 [Unit]
 Description=Open vSwitch Database server Daemon
-Requires=openvswitch-setup.service openvswitch-create-links-one-node.service
-After=network-online.target openvswitch-setup.service openvswitch-create-links-one-node.service
+Requires=openvswitch-setup.service
+After=network-online.target openvswitch-setup.service
 
 [Service]
 Type=forking
