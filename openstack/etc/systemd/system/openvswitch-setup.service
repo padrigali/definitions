@@ -1,6 +1,7 @@
 [Unit]
 Description=Run openvswitch-setup (once)
-Requires=local-fs.target network.target
+Requires=local-fs.target network-online.target openvswitch-create-links-one-node.service
+After=network-online.target openvswitch-create-links-one-node.service
 
 [Service]
 Type=oneshot
