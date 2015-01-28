@@ -1,0 +1,11 @@
+[Unit]
+Description=Create Veth pairs
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/share/openstack/create_openvswitch_veth_pairs
+
+[Install]
+WantedBy=multi-user.target
+

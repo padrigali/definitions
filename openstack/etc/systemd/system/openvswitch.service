@@ -1,7 +1,7 @@
 [Unit]
 Description=Open vSwitch Daemon
-Requires=network.target openvswitch-db-server.service openvswitch-initialize-db.service
-After=network.target openvswitch-db-server.service openvswitch-initialize-db.service
+Requires=network-online.target openvswitch-db-server.service openvswitch-initialize-db.service
+After=network-online.target openvswitch-db-server.service openvswitch-initialize-db.service
 
 [Service]
 Type=forking
