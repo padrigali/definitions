@@ -1,6 +1,5 @@
 [Unit]
 Description=Run apache-httpd-server-setup (once)
-Requires=local-fs.target
 After=local-fs.target
 
 [Service]

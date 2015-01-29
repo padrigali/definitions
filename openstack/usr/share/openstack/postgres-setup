@@ -27,7 +27,7 @@ install -dm755 /var/run/postgresql
 
 # Create required system users and groups
 getent group postgress >/dev/null || groupadd -r -g 41 postgres
-getent passwd neutron >/dev/null || \
+getent passwd postgres >/dev/null || \
 	useradd --uid 41 -r -g postgres -d /var/lib/pgsql -s /sbin/nologin \
 	-c "PostgreSQL Server" postgres
 
