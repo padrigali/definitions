@@ -19,7 +19,10 @@ set -e
 
 ROOT="$1"
 
-ln -sf "/etc/systemd/system/openvswitch-db-server.service" \
-    "$ROOT/etc/systemd/system/multi-user.target.wants/openvswitch-db-server.service"
-ln -sf "/etc/systemd/system/openvswitch.service" \
-    "$ROOT/etc/systemd/system/multi-user.target.wants/openvswitch.service"
+services=("openvswitch-setup.service" "openvswitch-db-server.service"
+          "openvswitch-initialize-db.service" "openvswitch.service")
+
+for service in ${services[@]}; do
+  ln -sf "/etc/systemd/system/$service" \
+    "$ROOT/etc/systemd/system/multi-user.target.wants/$service"
+done

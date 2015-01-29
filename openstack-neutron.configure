@@ -20,7 +20,7 @@ set -e
 ROOT="$1"
 
 ##########################################################################
-# Substitutions in configuration files
+# Substitutions in configuration files                                   #
 ##########################################################################
 
 cat <<EOF > "$ROOT"/etc/openstack-neutron-setup.sed
@@ -41,19 +41,27 @@ sed -f "$ROOT"/etc/openstack-neutron-setup.sed -i \
        "$ROOT"/usr/share/openstack/openstack-neutron-setup
 
 ##########################################################################
+# Create the links to enable the neutron systemd services                #
+##########################################################################
+services=("openstack-neutron-network-configuration-one-node.service"
+          "openvswitch-create-links-one-node.service"
+          "openstack-neutron-dhcp-agent.service"
+          "openstack-neutron-l3-agent.service"
+          "openstack-neutron-metadata-agent.service"
+          "openstack-neutron-network-configuration-one-node.service"
+          "openstack-neutron-ovs-cleanup.service"
+          "openstack-neutron-plugin-openvswitch-agent.service"
+          "openstack-neutron-server.service"
+	  "openstack-neutron-setup.service")
 
-ln -sf "/etc/systemd/system/openvswitch-create-links-one-node.service" \
-    "$ROOT/etc/systemd/system/multi-user.target.wants/openvswitch-create-links-one-node.service"
-
-ln -sf "/etc/systemd/system/openstack-neutron-network-configuration-one-node.service" \
-    "$ROOT/etc/systemd/system/multi-user.target.wants/openstack-neutron-network-configuration-one-node.service"
-
-ln -sf "/etc/systemd/system/openstack-neutron-setup.service" \
-    "$ROOT/etc/systemd/system/multi-user.target.wants/openstack-neutron-setup.service"
+for service in ${services[@]}; do
+  ln -sf "/etc/systemd/system/$service" \
+    "$ROOT/etc/systemd/system/multi-user.target.wants/$service"
+done
 
 ##########################################################################
-# Add neutron to sudoers controlling which commands is running as a root
-# using the openstack rootwrap.
+# Add neutron to sudoers controlling which commands is running as a root #
+# using the openstack rootwrap.                                          #
 ##########################################################################
 install -D -m 0440 /proc/self/fd/0 <<'EOF' "$ROOT"/etc/sudoers.d/neutron-rootwrap
 neutron ALL=(root) NOPASSWD: /usr/bin/neutron-rootwrap /etc/neutron/rootwrap.conf *
