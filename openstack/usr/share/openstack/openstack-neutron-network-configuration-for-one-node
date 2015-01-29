@@ -21,6 +21,9 @@ set -xe
 eth_dev="$(ip addr | perl -pe 'if (/^\d+: ([^:]+)/) { $iface=$1; } if (m@^\s*inet ([^/]+)/@) { print "$iface $1\n"; } $_=undef;' | grep "^e" | head -1 | awk '{ print $1 } ')"
 eth_ip="$(ip addr | perl -pe 'if (/^\d+: ([^:]+)/) { $iface=$1; } if (m@^\s*inet ([^/]+)/@) { print "$iface $1\n"; } $_=undef;' | grep "^e" | head -1 | awk '{ print $2 } ')"
 
+ip link add proxy-br-eth1 type veth peer name eth1-br-proxy
+ip link add proxy-br-ex type veth peer name ex-br-proxy
+
 if [ -f /var/openstack/openvswitch-one-node-setup ]; then
   exit 0
 fi

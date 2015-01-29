@@ -24,8 +24,6 @@ eth_ip="$(ip addr | perl -pe 'if (/^\d+: ([^:]+)/) { $iface=$1; } if (m@^\s*inet
 # Create the veth pairs between bridges (configuration one node)
 ifconfig br-eth0 $eth_ip up
 ip link set br-eth0 promisc on
-ip link add proxy-br-eth1 type veth peer name eth1-br-proxy
-ip link add proxy-br-ex type veth peer name ex-br-proxy
 ip link set eth1-br-proxy up promisc on
 ip link set ex-br-proxy up promisc on
 ip link set proxy-br-eth1 up promisc on
