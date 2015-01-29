@@ -1,6 +1,6 @@
 [Unit]
 Description=Create Veth pairs
-After=network-online.target
+After=network-online.target openstack-neutron-network-configuration-one-node.service
 
 [Service]
 Type=simple

@@ -1,6 +1,6 @@
 [Unit]
 Description=Neutron Metadata Plugin Agent
-After=syslog.target network.target openstack-keystone-setup.service
+After=network-online.target openstack-neutron-setup.service
 
 [Service]
 Type=simple

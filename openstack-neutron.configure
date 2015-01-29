@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-# Copyright (C) 2014 Codethink Limited
+# Copyright (C) 2014-2015 Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -43,15 +43,15 @@ sed -f "$ROOT"/etc/openstack-neutron-setup.sed -i \
 ##########################################################################
 # Create the links to enable the neutron systemd services                #
 ##########################################################################
-services=("openstack-neutron-network-configuration-one-node.service"
-          "openvswitch-create-links-one-node.service"
-          "openstack-neutron-dhcp-agent.service"
-          "openstack-neutron-l3-agent.service"
-          "openstack-neutron-metadata-agent.service"
-          "openstack-neutron-network-configuration-one-node.service"
-          "openstack-neutron-ovs-cleanup.service"
-          "openstack-neutron-plugin-openvswitch-agent.service"
-          "openstack-neutron-server.service"
+services=("openstack-neutron-network-configuration-one-node.service" \
+          "openvswitch-create-links-one-node.service" \
+          "openstack-neutron-dhcp-agent.service" \
+          "openstack-neutron-l3-agent.service" \
+          "openstack-neutron-metadata-agent.service" \
+          "openstack-neutron-network-configuration-one-node.service" \
+          "openstack-neutron-ovs-cleanup.service" \
+          "openstack-neutron-plugin-openvswitch-agent.service" \
+          "openstack-neutron-server.service" \
 	  "openstack-neutron-setup.service")
 
 for service in ${services[@]}; do

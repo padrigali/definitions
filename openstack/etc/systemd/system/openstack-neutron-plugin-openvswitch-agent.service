@@ -1,7 +1,6 @@
 [Unit]
 Description=Neutron OpenvSwitch Plugin Agent
-Requires=openvswitch.service
-After=syslog.target network.target openvswitch.service
+After=network-online.target openstack-neutron-setup.service
 
 [Service]
 Type=simple

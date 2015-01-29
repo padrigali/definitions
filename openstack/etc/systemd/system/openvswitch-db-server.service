@@ -1,7 +1,6 @@
 [Unit]
-Description=Open vSwitch Database server Daemon
-Requires=openvswitch-setup.service
-After=network-online.target openvswitch-setup.service
+Description=Open vSwitch Database Server Daemon
+After=local-fs.target openvswitch-setup.service
 
 [Service]
 Type=forking

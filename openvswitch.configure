@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-# Copyright (C) 2014 Codethink Limited
+# Copyright (C) 2015 Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,8 +19,10 @@ set -e
 
 ROOT="$1"
 
-services=("openvswitch-setup.service" "openvswitch-db-server.service"
-          "openvswitch-initialize-db.service" "openvswitch.service")
+services=("openvswitch-setup.service" \
+	  "openvswitch-db-server.service" \
+          "openvswitch-initialize-db.service" \
+          "openvswitch.service")
 
 for service in ${services[@]}; do
   ln -sf "/etc/systemd/system/$service" \
