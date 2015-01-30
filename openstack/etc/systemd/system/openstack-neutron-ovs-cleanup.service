@@ -1,6 +1,5 @@
 [Unit]
 Description=Neutron OVS cleanup
-Wants=openstack-neutron-setup.service
 After=network-online.target openstack-neutron-setup.service
 
 [Service]
