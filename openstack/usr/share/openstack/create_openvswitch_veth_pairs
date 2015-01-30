@@ -28,3 +28,5 @@ ip link set eth1-br-proxy up promisc on
 ip link set ex-br-proxy up promisc on
 ip link set proxy-br-eth1 up promisc on
 ip link set proxy-br-ex up promisc on
+
+exit 0
