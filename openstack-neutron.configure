@@ -48,7 +48,6 @@ services=("openstack-neutron-network-configuration-one-node.service" \
           "openstack-neutron-dhcp-agent.service" \
           "openstack-neutron-l3-agent.service" \
           "openstack-neutron-metadata-agent.service" \
-          "openstack-neutron-network-configuration-one-node.service" \
           "openstack-neutron-ovs-cleanup.service" \
           "openstack-neutron-plugin-openvswitch-agent.service" \
           "openstack-neutron-server.service" \
