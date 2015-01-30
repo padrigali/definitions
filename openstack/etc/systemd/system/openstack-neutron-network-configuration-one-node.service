@@ -4,7 +4,7 @@ Wants=network-online.target
 After=network-online.target openvswitch.service
 
 [Service]
-Type=simple
+Type=oneshot
 ExecStart=/usr/share/openstack/openstack-neutron-network-configuration-for-one-node
 Restart=no
 RemainAfterExit=yes
