@@ -17,6 +17,10 @@
 
 set -xe
 
+if [ -f /var/openstack/openstack-neutron-setup ]; then
+  exit 0
+fi
+
 # Create required system users and groups
 
 getent group neutron >/dev/null || groupadd -r --gid 166 neutron
@@ -84,34 +88,8 @@ if ! sudo -u postgres psql -lqt | grep -q neutron; then
                       upgrade juno
 fi
 
-# Remove the one-shot setup service
-rm /etc/systemd/system/multi-user.target.wants/openstack-neutron-setup.service
-
-# Start neutron services
-systemctl start openstack-neutron-server
-systemctl start openstack-neutron-metadata-agent
-systemctl start openstack-neutron-plugin-openvswitch-agent
-systemctl start openstack-neutron-ovs-cleanup
-systemctl start openstack-neutron-dhcp-agent
-systemctl start openstack-neutron-l3-agent
-
-# Create the links to run neutron services when system start next times.
-ln -s "/etc/systemd/system/openstack-neutron-server.service" \
-    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-server.service"
-
-ln -s "/etc/systemd/system/openstack-neutron-metadata-agent.service" \
-    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-metadata-agent.service"
-
-ln -s "/etc/systemd/system/openstack-neutron-plugin-openvswitch-agent.service" \
-    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-plugin-openvswitch-agent.service"
-
-ln -s "/etc/systemd/system/openstack-neutron-ovs-cleanup.service" \
-    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-ovs-cleanup.service"
-
-ln -s "/etc/systemd/system/openstack-neutron-dhcp-agent.service" \
-    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-dhcp-agent.service"
-
-ln -s "/etc/systemd/system/openstack-neutron-l3-agent.service" \
-    "/etc/systemd/system/multi-user.target.wants/openstack-neutron-l3-agent.service"
+install -D -m 644 /proc/self/fd/0 <<'EOF' /var/openstack/openstack-neutron-setup
+Openstack neutron setup: success
+EOF
 
 exit 0
