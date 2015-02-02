@@ -7,7 +7,7 @@ After=network-online.target openstack-neutron-network-configuration-one-node.ser
 Type=oneshot
 ExecStart=/usr/share/openstack/create_openvswitch_veth_pairs
 RemainAfterExit=yes
-Reboot=no
+Restart=no
 
 [Install]
 WantedBy=multi-user.target
