@@ -9,3 +9,15 @@ chunks:
   ref: 50231ad2a554fcb02462bed6405c970833c1baee
   unpetrify-ref: v3.17.0
   build-depends: []
+- name: libmnl
+  repo: git://git.netfilter.org/libmnl
+  ref: c9f19b98cd8e108617e825e071091df14f78c53a
+  unpetrify-ref: master
+  build-depends: []
+- name: ipset
+  morph: strata/networking-utils/ipset.morph
+  repo: git://git.netfilter.org/ipset
+  ref: cf25c4c50e9996af30499e5b1c3354ab53be7237
+  unpetrify-ref: v6.24
+  build-depends:
+  - libmnl
