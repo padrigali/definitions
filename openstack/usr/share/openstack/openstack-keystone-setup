@@ -61,7 +61,7 @@ chown -R keystone:keystone /var/lib/keystone
 systemctl start openstack-keystone
 
 export OS_SERVICE_TOKEN=##KEYSTONE_TEMPORARY_ADMIN_TOKEN##
-export OS_SERVICE_ENDPOINT='http://127.0.0.1:35357/v2.0'
+export OS_SERVICE_ENDPOINT='http://onenode:35357/v2.0'
 
 # This script creates a TEMPORARY admin user, with a password that may
 # float arount on the system. Please delete this user once you have set up
