@@ -32,7 +32,7 @@ chown -R neutron:neutron /var/lib/neutron
 
 # Create the keystone user and services
 export OS_SERVICE_TOKEN=##KEYSTONE_TEMPORARY_ADMIN_TOKEN##
-export OS_SERVICE_ENDPOINT='http://127.0.0.1:35357/v2.0'
+export OS_SERVICE_ENDPOINT='http://onenode:35357/v2.0'
 
 keystone user-create --name ##NEUTRON_SERVICE_USER## --pass ##NEUTRON_SERVICE_PASSWORD##
 keystone user-role-add --tenant service --user ##NEUTRON_SERVICE_USER## --role admin
