@@ -230,6 +230,7 @@ configure-commands:
 - scripts/config -e NETFILTER_XT_MATCH_TIME
 - scripts/config -e NETFILTER_XT_MATCH_U32
 - scripts/config -e IP_VS
+- scripts/config -e BRIDGE_NETFILTER
 - yes '' | make oldconfig
 build-commands:
 - make $MAKEFLAGS
