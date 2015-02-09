@@ -7,17 +7,10 @@ build-depends:
 chunks:
 - name: apr
   morph: strata/apache-httpd-server/apr.morph
-  repo: https://github.com/apache/apr.git
-  ref: 4ea9d6236ef2b9eb79feb05167d50c1a732420f0
-  unpetrify-ref: master
+  repo: git://git.apache.org/apr.git
+  ref: 3c818c6d7351f0130282d212a69035642f5fecad
+  unpetrify-ref: trunk
   build-depends: []
-- name: apr-util
-  morph: strata/apache-httpd-server/apr-util.morph
-  repo: https://github.com/apache/apr-util.git
-  ref: 9890706bda63c5d5d5197d482c1b682240431465
-  unpetrify-ref: 1.5.4
-  build-depends:
-  - apr
 - name: httpd
   morph: strata/apache-httpd-server/httpd-server.morph
   repo: git://git.apache.org/httpd.git
@@ -25,7 +18,6 @@ chunks:
   unpetrify-ref: 2.4.10
   build-depends:
   - apr
-  - apr-util
 - name: psutil
   repo: github:giampaolo/psutil
   ref: 2bc8555f0428af81c2d067aa76168ed7bc5e0179

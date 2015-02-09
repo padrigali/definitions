@@ -36,4 +36,6 @@ post-install-commands:
   sed -i 's|#!/replace/with/path/to/perl/interpreter -w|#!/usr/bin/perl -w|g' \
       "$DESTDIR$PREFIX"/bin/apxs
 - mkdir -p "$DESTDIR$PREFIX"/httpd/conf.d
+# Add conf.d directory as a directory where apache will be looking for other configurations
+# to load.
 - echo 'Include /usr/httpd/conf.d/*.conf' >> "$DESTDIR$PREFIX"/httpd/conf/httpd.conf
