@@ -5,7 +5,7 @@ systems:
   deploy:
     release:
       type: rawdisk
-      location: /src/release/baserock-xx-openstack-system-x86_64.img
+      location: baserock-xx-openstack-system-x86_64.img
      # type: kvm
      # location: kvm+ssh://franred@refinery.ducie.codethink.co.uk/franred-openstack-test/home/franred/openstack.img
       DISK_SIZE: 5G
