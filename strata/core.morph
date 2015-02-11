@@ -118,12 +118,6 @@ chunks:
   unpetrify-ref: libtool-2.4.5
   build-depends:
   - bash
-- name: six
-  repo: upstream:six
-  ref: 8cfbff6b764af86d825086fa1637aa009e90d75a
-  unpetrify-ref: 1.9.0
-  build-depends:
-  - cpython
 - name: gtk-doc-stub
   repo: upstream:gtk-doc-stub
   ref: 58ec0d8593541ef7ae522ce42ebec6f98536c4e0
