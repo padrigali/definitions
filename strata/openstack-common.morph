@@ -5,18 +5,8 @@ description: |
              clients and services.
 build-depends:
 - morph: strata/foundation.morph
+- morph: strata/python-core.morph
 chunks:
-- name: pip
-  repo: upstream:pip
-  ref: 81f21f2261d422d243f66b2dfeef0faae72ab119
-  unpetrify-ref: 1.5.6
-  build-depends: []
-- name: pbr
-  repo: upstream:pbr
-  ref: ee94082d4884dafea419c321bec40aa22244d07f
-  unpetrify-ref: 0.10.0
-  build-depends:
-  - pip
 - name: pycparser
   repo: upstream:python-packages/pycparser
   ref: c926670643ebb5f88a2bf56579fc9934c82be6d2
@@ -74,7 +64,6 @@ chunks:
   unpetrify-ref: 1.0.0.0a2
   repo: upstream:openstack/stevedore
   build-depends:
-  - pbr
   - argparse
 - name: oslo-config
   repo: upstream:openstack/oslo-config
@@ -94,7 +83,6 @@ chunks:
   ref: 040f1d6afa733527385d2309e485bf37e9843b0e
   unpetrify-ref: 0.4.0
   build-depends:
-  - pbr
   - babel
 - name: oslo-utils
   repo: upstream:openstack/oslo-utils
@@ -113,8 +101,7 @@ chunks:
   repo: upstream:openstack/oslo-serialization.git
   ref: 80fec894a54253d9b4c80dd8a563957966ca0b88
   unpetrify-ref: 0.3.0
-  build-depends:
-  - pbr
+  build-depends: []
 - name: jsonschema
   repo: upstream:jsonschema
   ref: 35b60f390098d3306c03eee27ceec8cf8a493579
