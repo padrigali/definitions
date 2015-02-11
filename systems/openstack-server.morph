@@ -19,6 +19,8 @@ strata:
   morph: strata/tools.morph
 - name: cloudinit-support
   morph: strata/cloudinit-support.morph
+- name: lvm
+  morph: strata/lvm.morph
 - name: virtualization
   morph: strata/virtualization.morph
 - name: connectivity
