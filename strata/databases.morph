@@ -16,11 +16,18 @@ chunks:
   ref: 9ee59fca9c5c429185d35779c2d5db64005091b0
   unpetrify-ref: baserock/3.0
   build-depends: []
+- name: libevent
+  repo: upstream:libevent
+  morph: strata/databases/libevent.morph
+  ref: 0b49ae34594533daa82c06a506078de9e336a013
+  unpetrify-ref: release-2.1.5-beta
+  build-depends: []
 - name: memcached
   repo: upstream:memcached
-  ref: d8b1047620a54443f6bdca7f0dc5ee3b4d99378e
-  unpetrify-ref: master
-  build-depends: []
+  ref: c5530027c8ea28674358327ab8212ebaf014c848 
+  unpetrify-ref: master/1.4.22
+  build-depends:
+  - libevent 
 - name: psycopg2
   repo: github:psycopg/psycopg2
   ref: 00cafbe85bb82d85cbfe0f062a73c562433b5bc8
