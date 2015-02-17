@@ -49,6 +49,8 @@ strata:
   morph: strata/openstack-clients-full.morph
 - name: openstack-services
   morph: strata/openstack-services.morph
+- name: ansible
+  morph: strata/ansible.morph
 configuration-extensions:
 - set-hostname
 - add-config-files
