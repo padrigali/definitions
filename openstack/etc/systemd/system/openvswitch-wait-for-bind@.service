@@ -1,0 +1,16 @@
+# Open vSwitch doesn't wait for all the interfaces to be configured before
+# reporting "started", but we need to start networkd after they have been bound,
+# so this unit waits for the interface to be bound before continuing, and is
+# ordered before network-pre.target, which networkd orders itself after.
+[Unit]
+Description=Wait for Open vSwitch to bind %i
+Requires=openvswitch.service
+After=openvswitch.service
+Before=network-pre.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/bin/sh -c \
+    'while ! readlink /sys/class/net/$1/master; do sleep 1; done' \
+    - %I
