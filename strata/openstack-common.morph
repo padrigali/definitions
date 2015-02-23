@@ -19,12 +19,9 @@ chunks:
   build-depends:
   - pycparser
 - name: pytz
-# TODO: Rebase baserock/morph with the latest stable
-#       tag.
-  morph: strata/openstack-clients/pytz.morph
-  repo: upstream:pytz
-  ref: 384207f01fd5b8bf1eb20cb64c17679084731944
-  unpetrify-ref: baserock/morph
+  repo: upstream:pytz-tarball
+  ref: c414cb801776e11c769fb36c0d37b8d7a7c8712c
+  unpetrify-ref: pytz-2014.10
   build-depends: []
 - name: python-requests
   repo: upstream:python-requests
