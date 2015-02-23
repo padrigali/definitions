@@ -35,7 +35,7 @@ chunks:
 - name: rsync
   morph: strata/tools/rsync.morph
   repo: upstream:rsync
-  ref: 7cb0de6326c915a72253fd103dae93308031ec3f
+  ref: 7cb0de6326c915a72253fd103dae93308031ec3f 
   unpetrify-ref: v3.1.1
   build-depends: []
 - name: strace

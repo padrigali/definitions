@@ -25,9 +25,15 @@ fi
 # Move suexec to the directory where apache is configured to have it          #
 # Check configure in strata/apache-httpd-server/httpd-server.morph            #
 ###############################################################################
+<<<<<<< HEAD
 mkdir -p /var/www
 groupadd -r apache
 useradd -c "Apache Server" -d /var/www -g apache \
+=======
+mkdir -p /srv/www
+groupadd -r apache
+useradd -c "Apache Server" -d /srv/www -g apache \
+>>>>>>> 3c63a53f7e8fbf0443c76c45047e8f5fa934c9de
 	-s /bin/false apache
 
 ###############################################################################
