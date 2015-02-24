@@ -52,13 +52,14 @@ ip link set ex-br-proxy up promisc on
 ip link set proxy-br-eth1 up promisc on
 ip link set proxy-br-ex up promisc on
 
-# Disable dhcp on the ethernet device we've bound into Open vSwitch
+# Disable dhcp on the bound physical interface, and all the internal interfaces
 install -D -m 644 /proc/self/fd/0 <<EOF /etc/systemd/network/00-disable-$eth_dev-config.network
 [Match]
-Name=$eth_dev
+Name=$eth_dev br-eth1 br-ex eth1-br-proxy ex-br-proxy proxy-br-eth1 proxy-br-ex ovs-system
 EOF
 
-# DHCP on the Open vSwitch device
+
+# DHCP on the Open vSwitch device that replaces our external interface
 install -D -m 644 /proc/self/fd/0 <<EOF /etc/systemd/network/10-br-ex-dhcp.network
 [Match]
 Name=br-eth0
