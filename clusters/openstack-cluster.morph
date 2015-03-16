@@ -47,13 +47,9 @@ systems:
       NOVA_DB_PASSWORD: veryinsecure
       CINDER_USER: cinder
       CINDER_PASSWORD: veryinsecure
-      CINDER_PUBLIC_URL: \"http:\/\/onenode:8776\/v1\/\%\(tenant_id\)s\"
-      CINDER_INTERNAL_URL: \"http:\/\/onenode:8776\/v1\/\%\(tenant_id\)s\"
-      CINDER_ADMIN_URL: \"http:\/\/onenode:8776\/v1\/\%\(tenant_id\)s\"
-      CINDER_USER_V2: cinderv2
-      CINDER_PUBLIC_URL_V2: \"http:\/\/onenode:8776\/v2\/\%\(tenant_id\)s\"
-      CINDER_INTERNAL_URL_V2: \"http:\/\/onenode:8776\/v2\/\%\(tenant_id\)s\"
-      CINDER_ADMIN_URL_V2: \"http:\/\/onenode:8776\/v2\/\%\(tenant_id\)s\"
+      CINDER_PUBLIC_URL: \"http:\/\/onenode:8776\/v2\/\%\(tenant_id\)s\"
+      CINDER_INTERNAL_URL: \"http:\/\/onenode:8776\/v2\/\%\(tenant_id\)s\"
+      CINDER_ADMIN_URL: \"http:\/\/onenode:8776\/v2\/\%\(tenant_id\)s\"
       CINDER_DB_USER: cinderDB
       CINDER_DB_PASSWORD: veryinsecure
       NEUTRON_SERVICE_USER: neutron
