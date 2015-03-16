@@ -233,6 +233,7 @@ configure-commands:
 - scripts/config -e USB_NET_DM9601
 - scripts/config -e USB_USBNET
 - scripts/config -e E1000E
+- scripts/config -e CONFIG_CRYPTO_CRC32C
 - yes '' | make oldconfig
 build-commands:
 - make $MAKEFLAGS
