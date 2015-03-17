@@ -34,8 +34,8 @@ keystone user-role-add --tenant service --user ##CINDER_USER## --role admin
 
 # Register a service and endpoint for version 2 of the Block Storage service API
 keystone service-create --name ##CINDER_USER## \
-	                --type volume --description "OpenStack Block Storage"
-keystone endpoint-create  --service-id $(keystone service-list | awk '/ volume / {print $2}') \
+	                --type volumev2 --description "OpenStack Block Storage"
+keystone endpoint-create  --service-id $(keystone service-list | awk '/ volumev2 / {print $2}') \
 	    	          --publicurl ##CINDER_PUBLIC_URL## \
 	                  --internalurl ##CINDER_INTERNAL_URL## \
 	                  --adminurl ##CINDER_ADMIN_URL##
