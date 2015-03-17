@@ -680,6 +680,18 @@ chunks:
   ref: 9817ec3e47bca8fba9a7cac56d785e9d644f7473
   unpetrify-ref: rfc3986-0.2.0
   build-depends: []
+- name: configshell-fb
+  repo: github:agrover/configshell-fb 
+  ref: 8c151ccdd75956da60b2304417c41a60a2c28231
+  unpetrify-ref: 1.1.fb17
+  build-depends: []
+- name: targetcli-fb
+  repo: github:agrover/targetcli-fb
+  ref: c62610f3c2da6b4d364028c18bcc7f0d3da54477 
+  unpetrify-ref: 2.1.fb39
+  build-depends:
+  - configshell-fb
+  - rtslib-fb
 - name: nova
   morph: strata/openstack-services/nova.morph
   repo: upstream:openstack/nova
