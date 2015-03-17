@@ -49,3 +49,8 @@ chunks:
   ref: 7a48f1e84049577370cf28632a75d2fd01e4142d
   unpetrify-ref: master
   build-depends: []
+- name: configobj
+  repo: github:DiffSK/configobj
+  ref: 9d2aab01c77dce600b296ba9da1163cc0bbc14e0 
+  unpetrify-ref: v5.0.6
+  build-depends: []
