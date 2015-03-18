@@ -690,6 +690,11 @@ chunks:
   ref: 9817ec3e47bca8fba9a7cac56d785e9d644f7473
   unpetrify-ref: rfc3986-0.2.0
   build-depends: []
+- name: urwid
+  repo: upstream:python-packages/urwid
+  ref: 838839f7a300a774240d52f943aafd6ff44b2413
+  unpetrify-ref: release-1.3.0
+  build-depends: []
 - name: configshell-fb
   repo: upstream:python-packages/configshell-fb
   ref: 8c151ccdd75956da60b2304417c41a60a2c28231
