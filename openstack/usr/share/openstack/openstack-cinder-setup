@@ -22,7 +22,7 @@ set -e
 getent group cinder >/dev/null || groupadd -r --gid 165 cinder
 getent passwd cinder >/dev/null || \
 	useradd --uid 165 -r -g cinder -d /var/lib/cinder -s /sbin/nologin \
-	-c "OpenStack Cinder Daemons" cinder 
+	-c "OpenStack Cinder Daemons" cinder
 
 # Create the keystone user and services
 
@@ -32,13 +32,25 @@ export OS_SERVICE_ENDPOINT='http://onenode:35357/v2.0'
 keystone user-create --name ##CINDER_USER## --pass ##CINDER_PASSWORD##
 keystone user-role-add --tenant service --user ##CINDER_USER## --role admin
 
-# Register a service and endpoint for version 2 of the Block Storage service API
-keystone service-create --name ##CINDER_USER## \
-	                --type volumev2 --description "OpenStack Block Storage"
-keystone endpoint-create  --service-id $(keystone service-list | awk '/ volumev2 / {print $2}') \
+# Both the volume and volumev2 block storage services must be registered
+# with keystone so other OpenStack services can locate them.
+# Though the volumev2 api will be used by default, volume is still required.
+# See https://bugs.launchpad.net/python-novaclient/+bug/1392846
+
+# Register a service and endpoint for version 1 of the Block Storage service API
+keystone service-create --name ##CINDER_USER## --type volume --description "OpenStack Block Storage"
+keystone endpoint-create  --service-id $(keystone service-list | awk '/ volume / {print $2}') \
 	    	          --publicurl ##CINDER_PUBLIC_URL## \
 	                  --internalurl ##CINDER_INTERNAL_URL## \
 	                  --adminurl ##CINDER_ADMIN_URL##
+
+# Register a service and endpoint for version 2 of the Block Storage service API
+keystone service-create --name ##CINDER_USER_V2## \
+	                --type volumev2 --description "OpenStack Block Storage"
+keystone endpoint-create  --service-id $(keystone service-list | awk '/ volumev2 / {print $2}') \
+	    	          --publicurl ##CINDER_PUBLIC_URL_V2## \
+	                  --internalurl ##CINDER_INTERNAL_URL_V2## \
+	                  --adminurl ##CINDER_ADMIN_URL_V2##
 
 # Create run directory for cinder
 if [ ! -d /var/run/cinder ]; then
