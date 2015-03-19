@@ -133,4 +133,9 @@ ln -s "/etc/systemd/system/openstack-cinder-volume.service" \
 ln -s "/etc/systemd/system/openstack-cinder-backup.service" \
     "/etc/systemd/system/multi-user.target.wants/openstack-cinder-backup.service"
 
+# Run the target service required for attaching volumes
+depmod -a
+systemctl enable target
+systemctl start target
+
 exit 0
