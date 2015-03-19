@@ -16,12 +16,18 @@ chunks:
   ref: 16305a24e67966ace06d55e2a0b98cc0e3127a93
   unpetrify-ref: 1.22.3
   build-depends: []
+- name: cython
+  repo: upstream:cython
+  ref: f66e01ff743b6d010245a08b144a94e474f29967
+  unpetrify-ref: 0.21.1
+  build-depends: []
 - name: kmod
   morph: strata/foundation/kmod.morph
   repo: upstream:kmod
-  ref: ae58de0fcb4a6528dd365e23d383bbe2eaf2d566
-  unpetrify-ref: v18
-  build-depends: []
+  ref: d9c71758595cad72c8278179eabf17017615f704 
+  unpetrify-ref: v20
+  build-depends: 
+  - cython
 - name: time-zone-database
   morph: strata/foundation/time-zone-database.morph
   repo: upstream:tz
