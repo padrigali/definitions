@@ -234,6 +234,7 @@ configure-commands:
 - scripts/config -e USB_USBNET
 - scripts/config -e E1000E
 - scripts/config -e CONFIG_CRYPTO_CRC32C
+- scripts/config -e CONFIG_CONFIGFS_FS
 - yes '' | make oldconfig
 build-commands:
 - make $MAKEFLAGS
