@@ -8,7 +8,6 @@ configure-commands:
 - ./configure --prefix=/usr --bindir=/bin --libdir=/lib --sysconfdir=/etc --without-xz
   --with-zlib --disable-manpages --enable-python
 build-commands:
-- cd libkmod/python/kmod/ && cython *.pyx && cd ../../..
 - make
 install-commands:
 - make DESTDIR="$DESTDIR" pkgconfigdir=/usr/lib/pkgconfig install
