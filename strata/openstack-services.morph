@@ -341,6 +341,7 @@ chunks:
   repo: upstream:python-packages/rtslib-fb
   ref: a020fbadfe530bc0773b73501c2cee420c435f87
   unpetrify-ref: v2.1.fb50
+  morph: strata/openstack-services/rtslib-fb.morph
   build-depends: []
 - name: netifaces
   repo: upstream:python-packages/netifaces
