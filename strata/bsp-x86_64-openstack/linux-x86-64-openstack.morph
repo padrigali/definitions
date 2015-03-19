@@ -235,6 +235,8 @@ configure-commands:
 - scripts/config -e E1000E
 - scripts/config -e CONFIG_CRYPTO_CRC32C
 - scripts/config -e CONFIG_CONFIGFS_FS
+- scripts/config -e CONFIG_EXPERT
+- scripts/config -e CONFIG_TARGET_CORE
 - yes '' | make oldconfig
 build-commands:
 - make $MAKEFLAGS
