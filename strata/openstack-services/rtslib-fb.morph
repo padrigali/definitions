@@ -5,7 +5,7 @@ build-commands:
 install-commands:
 - python setup.py install --prefix="$PREFIX" --root="$DESTDIR"
 post-install-commands:
-- mkdir -p "$DESTDIR$PREFIX"/sys/systemd/system
+- mkdir -p "$DESTDIR$PREFIX"/lib/systemd/system
 - |
   cat <<EOF > "$DESTDIR$PREFIX"/lib/systemd/system/target.service
   [Unit]
