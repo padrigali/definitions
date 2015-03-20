@@ -121,17 +121,23 @@ systemctl start openstack-cinder-volume
 systemctl start openstack-cinder-backup
 
 # Create the links to run nova services when system start next times.
-ln -s "/etc/systemd/system/openstack-cinder-api.service" \
+ln -sf "/etc/systemd/system/openstack-cinder-api.service" \
     "/etc/systemd/system/multi-user.target.wants/openstack-cinder-api.service"
 
-ln -s "/etc/systemd/system/openstack-cinder-scheduler.service" \
+ln -sf "/etc/systemd/system/openstack-cinder-scheduler.service" \
     "/etc/systemd/system/multi-user.target.wants/openstack-cinder-scheduler.service"
 
-ln -s "/etc/systemd/system/openstack-cinder-volume.service" \
+ln -sf "/etc/systemd/system/openstack-cinder-volume.service" \
     "/etc/systemd/system/multi-user.target.wants/openstack-cinder-volume.service"
 
-ln -s "/etc/systemd/system/openstack-cinder-backup.service" \
+ln -sf "/etc/systemd/system/openstack-cinder-backup.service" \
     "/etc/systemd/system/multi-user.target.wants/openstack-cinder-backup.service"
+
+# Create the cinder LVM type and set a volume backend name
+export OS_SERVICE_TOKEN=##KEYSTONE_TEMPORARY_ADMIN_TOKEN##
+export OS_SERVICE_ENDPOINT='http://onenode:35357/v2.0'
+cinder type-create lvms
+cinder type-key lvms set volume_backend_name=LVM_iSCSI
 
 # Run the target service required for attaching volumes
 depmod -a
