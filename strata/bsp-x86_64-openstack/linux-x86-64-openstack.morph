@@ -237,6 +237,7 @@ configure-commands:
 - scripts/config -e CONFIGFS_FS
 - scripts/config -e EXPERT
 - scripts/config -e TARGET_CORE
+- scritps/config -e ISCSI_TARGET
 - yes '' | make oldconfig
 build-commands:
 - make $MAKEFLAGS
