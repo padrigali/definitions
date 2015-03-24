@@ -15,7 +15,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-set -e
+set -xe
 
 # Create required system users and groups
 
@@ -135,7 +135,7 @@ ln -s "/etc/systemd/system/openstack-cinder-backup.service" \
 
 # Run the target service required for attaching volumes
 depmod -a
-systemctl enable target
-systemctl start target
+systemctl enable target.service
+systemctl start target.service
 
 exit 0
