@@ -48,7 +48,8 @@ sed -f "$ROOT"/etc/openstack-keystone-setup.sed -i \
        "$ROOT"/usr/share/openstack/openstack-glance-setup \
        "$ROOT"/usr/share/openstack/openstack-nova-setup \
        "$ROOT"/usr/share/openstack/openstack-neutron-setup \
-       "$ROOT"/usr/share/openstack/openstack-cinder-setup
+       "$ROOT"/usr/share/openstack/openstack-cinder-setup  \
+       "$ROOT"/usr/share/openstack/openstack-cinder-configure-backends
 
 ##########################################################################
 

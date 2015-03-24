@@ -1,0 +1,11 @@
+[Unit]
+Description=Configure LVM Backends for Cinder
+After=cinder-volume.service cinder-api.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/openstack/openstack-cinder-configure-backends
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
