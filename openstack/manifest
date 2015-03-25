@@ -159,3 +159,4 @@
 0100644 0 0 /etc/horizon/openstack_dashboard/local_settings.py
 0100644 0 0 /etc/sysctl.conf
 0100644 0 0 /etc/hosts
+0100644 0 0 /etc/tempest/tempest.conf
