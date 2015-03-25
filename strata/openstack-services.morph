@@ -869,3 +869,8 @@ chunks:
   repo: upstream:python-packages/mocker
   ref: f7f87e4ac1c52342162cf2035f5fe3d273f8b07f
   unpetrify-ref: master
+- name: tempest
+  morph: strata/openstack-services/tempest.morph
+  repo: upstream:openstack/tempest.git
+  ref: acba5510785258949679304f3e1a55e53b851962
+  unpetrify-ref: "2"
