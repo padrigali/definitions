@@ -245,6 +245,7 @@ configure-commands:
 - scripts/config -m CONFIGFS_FS
 - scripts/config -e CRYPTO_CRC32C
 - scripts/config -e LIBFC
+- scripts/config -e SCSI_FC_ATTRS
 - yes '' | make oldconfig
 build-commands:
 - make $MAKEFLAGS
