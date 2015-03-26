@@ -1,0 +1,49 @@
+name: open-iscsi
+kind: chunk
+configure-commands:
+# Non preset prefix to /usr
+- sed -i -e 's|prefix = \/usr|prefix = \$\(PREFIX\)|' Makefile
+# Install binaries depending on PREFIX
+- sed -i -e 's|exec_prefix = \/|exec_prefix = \$\(prefix\)|' Makefile
+# Include iscsistart boot tool
+- sed -i -e '/^PROGRAMS = /s/$/ usr\/iscsistart/' Makefile
+build-commands:
+- make
+install-commands:
+- make DESTDIR="$DESTDIR" install
+post-install-commands:
+# Configure iscsi daemon
+# Point the startup to the installed binary
+- |
+  sed -i -e "s|iscsid.startup = \/sbin\/iscsid|iscsid.startup = "$PREFIX"/sbin/iscsid|" \
+            etc/iscsid.conf
+# Start up a session automatically
+- sed -i -e 's|node.startup = manual|node.startup = automatic|' etc/iscsid.conf
+# Install config file
+- install -D -m 644 etc/iscsid.conf "$DESTDIR"/etc/iscsi
+# Install custom systemd unit file
+- |
+  install -D -m 644 /proc/self/fd/0 << 'EOF' "$DESTDIR$PREFIX"/lib/systemd/system/iscsid.service
+  [Unit]
+  Description=Open iSCSI Daemon
+  After=network.target
+
+  [Service]
+  Type=forking
+  ExecStart=/usr/sbin/iscsid
+
+  [Install]
+  WantedBy=multi-user.target
+  EOF
+# Install iscsi socket unit
+- |
+  install -D -m 644 /proc/self/fd/0 << 'EOF' "$DESTDIR$PREFIX"/lib/systemd/system/iscsid.socket
+  [Unit]
+  Description=Open-iSCSI iscsid Socket
+
+  [Socket]
+  ListenStream=@ISCSIADM_ABSTRACT_NAMESPACE
+
+  [Install]
+  WantedBy=sockets.target
+  EOF

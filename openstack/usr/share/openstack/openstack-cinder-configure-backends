@@ -30,6 +30,10 @@ export OS_AUTH_URL=http://localhost:35357/v2.0
 cinder type-create lvms
 cinder type-key lvms set volume_backend_name=LVM_iSCSI
 
+# Create initiatorname.iscsi file
+mkdir -p "$DESTDIR"/etc/iscsi
+echo "InitiatorName=$(iscsi-iname)" > /etc/iscsi/initiatorname.iscsi
+
 # Run the target service required for attaching volumes
 depmod -a
 systemctl enable target.service
