@@ -708,6 +708,11 @@ chunks:
   build-depends:
   - configshell-fb
   - rtslib-fb
+- name: open-iscsi
+  morph: strata/openstack-services/open-iscsi.morph
+  repo: upstream:open-iscsi
+  ref: 8da14e6f9eeeb4fd03938d40fe1126fe0d110b68
+  unpetrify-ref: master
 - name: nova
   morph: strata/openstack-services/nova.morph
   repo: upstream:openstack/nova
