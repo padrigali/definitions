@@ -119,7 +119,6 @@ systemctl start openstack-cinder-api
 systemctl start openstack-cinder-scheduler
 systemctl start openstack-cinder-volume
 systemctl start openstack-cinder-backup
-systemctl start openstack-cinder-configure-backends
 
 # Create the links to run nova services when system start next times.
 ln -sf "/etc/systemd/system/openstack-cinder-api.service" \

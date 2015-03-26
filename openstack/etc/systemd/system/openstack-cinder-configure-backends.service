@@ -1,6 +1,7 @@
 [Unit]
 Description=Configure LVM Backends for Cinder
-After=cinder-volume.service cinder-api.service
+Wants=openstack-cinder-setup.service openstack-cinder-api.service openstack-cinder-volume.service
+After=openstack-keystone-setup.service openstack-cinder-setup.service openstack-cinder-api.service openstack-cinder-volume.service
 
 [Service]
 Type=oneshot
