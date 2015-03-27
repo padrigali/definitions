@@ -239,10 +239,12 @@ configure-commands:
 - scripts/config -m TCM_IBLOCK
 - scripts/config -m TCM_FILEIO
 - scripts/config -m TCM_PSCSI
+- scripts/config -e TCM_FC
 - scripts/config -m LOOPBACK_TARGET
 - scripts/config -m ISCSI_TARGET
 - scripts/config -m CONFIGFS_FS
 - scripts/config -e CRYPTO_CRC32C
+- scripts/config -e LIBFC
 - yes '' | make oldconfig
 build-commands:
 - make $MAKEFLAGS
