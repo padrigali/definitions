@@ -233,11 +233,16 @@ configure-commands:
 - scripts/config -e USB_NET_DM9601
 - scripts/config -e USB_USBNET
 - scripts/config -e E1000E
-- scripts/config -e CRYPTO_CRC32C
-- scripts/config -e CONFIGFS_FS
 - scripts/config -e EXPERT
-- scripts/config -e TARGET_CORE
-- scritps/config -e ISCSI_TARGET
+- scripts/config -e BLK_DEV_INTEGRITY
+- scripts/config -m TARGET_CORE
+- scripts/config -m TCM_IBLOCK
+- scripts/config -m TCM_FILEIO
+- scripts/config -m TCM_PSCSI
+- scripts/config -m LOOPBACK_TARGET
+- scripts/config -m ISCSI_TARGET
+- scripts/config -m CONFIGFS_FS
+- scripts/config -e CRYPTO_CRC32C
 - yes '' | make oldconfig
 build-commands:
 - make $MAKEFLAGS
