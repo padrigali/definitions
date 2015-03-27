@@ -1,13 +1,9 @@
 [Unit]
-Description=Run openstack-neutron-setup (once)
-Wants=openstack-neutron-network-configuration-one-node.service
-After=network-online.target openstack-keystone-setup.service openstack-neutron-network-configuration-one-node.service postgres-server.service
+Description=Run neutron-setup Ansible scripts
+After=network-online.target openstack-keystone-setup.service postgres-server.service
 
 [Service]
-Type=oneshot
-ExecStart=/usr/share/openstack/openstack-neutron-setup
-Restart=no
-RemainAfterExit=yes
+ExecStart=/usr/bin/ansible-playbook -v -M /usr/share/ansible/ansible-openstack-modules -i /usr/share/openstack/hosts /usr/share/openstack/neutron.yml
 
 [Install]
 WantedBy=multi-user.target

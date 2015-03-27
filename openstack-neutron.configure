@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Copyright (C) 2014-2015 Codethink Limited
 #
@@ -20,42 +20,9 @@ set -e
 ROOT="$1"
 
 ##########################################################################
-# Substitutions in configuration files                                   #
-##########################################################################
 
-cat <<EOF > "$ROOT"/etc/openstack-neutron-setup.sed
-s/##NEUTRON_SERVICE_USER##/$NEUTRON_SERVICE_USER/g
-s/##NEUTRON_SERVICE_PASSWORD##/$NEUTRON_SERVICE_PASSWORD/g
-s/##NEUTRON_DB_USER##/$NEUTRON_DB_USER/g
-s/##NEUTRON_DB_PASSWORD##/$NEUTRON_DB_PASSWORD/g
-s/##NEUTRON_PUBLIC_URL##/$NEUTRON_PUBLIC_URL/g
-s/##NEUTRON_INTERNAL_URL##/$NEUTRON_INTERNAL_URL/g
-s/##NEUTRON_ADMIN_URL##/$NEUTRON_ADMIN_URL/g
-s/##METADATA_PROXY_SHARED_SECRET##/$METADATA_PROXY_SHARED_SECRET/g
-EOF
-
-sed -f "$ROOT"/etc/openstack-neutron-setup.sed -i \
-       "$ROOT"/etc/neutron/neutron.conf \
-       "$ROOT"/etc/neutron/metadata_agent.ini \
-       "$ROOT"/etc/nova/nova.conf \
-       "$ROOT"/usr/share/openstack/openstack-neutron-setup
-
-##########################################################################
-# Create the links to enable the neutron systemd services                #
-##########################################################################
-services=("openstack-neutron-network-configuration-one-node.service" \
-          "openstack-neutron-dhcp-agent.service" \
-          "openstack-neutron-l3-agent.service" \
-          "openstack-neutron-metadata-agent.service" \
-          "openstack-neutron-ovs-cleanup.service" \
-          "openstack-neutron-plugin-openvswitch-agent.service" \
-          "openstack-neutron-server.service" \
-	  "openstack-neutron-setup.service")
-
-for service in ${services[@]}; do
-  ln -sf "/usr/lib/systemd/system/$service" \
-    "$ROOT/etc/systemd/system/multi-user.target.wants/$service"
-done
+ln -sf "/usr/lib/systemd/system/openstack-neutron-setup.service" \
+        "$ROOT/etc/systemd/system/multi-user.target.wants/openstack-neutron-setup.service"
 
 #############################################
 # Ensure /var/run is an appropriate symlink #
@@ -65,3 +32,74 @@ if ! link="$(readlink "$ROOT/var/run")" || [ "$link" != ../run ]; then
     rm -rf "$ROOT/var/run"
     ln -s ../run "$ROOT/var/run"
 fi
+
+##########################################################################
+# Check variables
+##########################################################################
+
+
+if [ -z "$NEUTRON_SERVICE_USER" -a \
+     -z "$NEUTRON_SERVICE_PASSWORD" -a \
+     -z "$NEUTRON_DB_USER" -a \
+     -z "$NEUTRON_DB_PASSWORD" -a \
+     -z "$METADATA_PROXY_SHARED_SECRET" -a \
+     -z "$NOVA_SERVICE_USER" -a \
+     -z "$NOVA_SERVICE_PASSWORD" -a \
+     -z "$RABBITMQ_HOST" -a \
+     -z "$RABBITMQ_USER" -a \
+     -z "$RABBITMQ_PASSWORD" -a \
+     -z "$RABBITMQ_PORT" -a \
+     -z "$CONTROLLER_HOST_ADDRESS" -a \
+     -z "$MANAGEMENT_INTERFACE_IP_ADDRESS" -a \
+     -z "$KEYSTONE_TEMPORARY_ADMIN_TOKEN" ]; then
+     # No NOVA options defined, do nothing.
+     exit 0
+fi
+
+if [ -z "$NEUTRON_SERVICE_USER" -o \
+     -z "$NEUTRON_SERVICE_PASSWORD" -o \
+     -z "$NEUTRON_DB_USER" -o \
+     -z "$NEUTRON_DB_PASSWORD" -o \
+     -z "$METADATA_PROXY_SHARED_SECRET" -o \
+     -z "$NOVA_SERVICE_USER" -o \
+     -z "$NOVA_SERVICE_PASSWORD" -o \
+     -z "$RABBITMQ_HOST" -o \
+     -z "$RABBITMQ_USER" -o \
+     -z "$RABBITMQ_PASSWORD" -o \
+     -z "$RABBITMQ_PORT" -o \
+     -z "$CONTROLLER_HOST_ADDRESS" -o \
+     -z "$MANAGEMENT_INTERFACE_IP_ADDRESS" -o \
+     -z "$KEYSTONE_TEMPORARY_ADMIN_TOKEN" ]; then
+    echo Some options required for Nova were defined, but not all.
+    exit 1
+fi
+
+##########################################################################
+# Generate config variable shell snippet
+##########################################################################
+
+OPENSTACK_DATA="$ROOT/etc/openstack"
+mkdir -p "$OPENSTACK_DATA"
+
+python <<'EOF' >"$OPENSTACK_DATA/neutron.conf"
+import os, sys, yaml
+
+nova_configuration={
+    'NEUTRON_SERVICE_USER': os.environ['NEUTRON_SERVICE_USER'],
+    'NEUTRON_SERVICE_PASSWORD': os.environ['NEUTRON_SERVICE_PASSWORD'],
+    'NEUTRON_DB_USER': os.environ['NEUTRON_DB_USER'],
+    'NEUTRON_DB_PASSWORD': os.environ['NEUTRON_DB_PASSWORD'],
+    'METADATA_PROXY_SHARED_SECRET': os.environ['METADATA_PROXY_SHARED_SECRET'],
+    'NOVA_SERVICE_USER': os.environ['NOVA_SERVICE_USER'],
+    'NOVA_SERVICE_PASSWORD': os.environ['NOVA_SERVICE_PASSWORD'],
+    'RABBITMQ_HOST': os.environ['RABBITMQ_HOST'],
+    'RABBITMQ_USER': os.environ['RABBITMQ_USER'],
+    'RABBITMQ_PASSWORD': os.environ['RABBITMQ_PASSWORD'],
+    'RABBITMQ_PORT': os.environ['RABBITMQ_PORT'],
+    'CONTROLLER_HOST_ADDRESS': os.environ['CONTROLLER_HOST_ADDRESS'],
+    'MANAGEMENT_INTERFACE_IP_ADDRESS': os.environ['MANAGEMENT_INTERFACE_IP_ADDRESS'],
+    'KEYSTONE_TEMPORARY_ADMIN_TOKEN': os.environ['KEYSTONE_TEMPORARY_ADMIN_TOKEN'],
+}
+
+yaml.dump(nova_configuration, sys.stdout, default_flow_style=False)
+EOF
