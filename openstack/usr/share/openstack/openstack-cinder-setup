@@ -105,11 +105,18 @@ else
   device=/dev/$(ls /sys/block | grep -v sda | grep [vs]d)
 fi
 
+# Wipe the disk
+wipefs -fa $device
+
+# Partition disk
+echo -e "n\np\n1\n\n\nw\n" | fdisk $device
+partition="$device"1
+
 # Create a physical volume
-pvcreate -ff -y $device
+pvcreate -ff -y $partition
 
 # Create a volume group named "cinder-volumes"
-vgcreate -y cinder-volumes $device
+vgcreate -y cinder-volumes $partition
 
 # Remove the one-shot setup service
 rm /etc/systemd/system/multi-user.target.wants/openstack-cinder-setup.service

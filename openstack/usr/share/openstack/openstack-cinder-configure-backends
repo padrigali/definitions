@@ -19,7 +19,7 @@ set -xe
 
 # Reconfigure LVM to scan only the devices that contain the
 # cinder-volume volume group
-sed -i 's|# filter = \[ \"a\/\.\*\/\" \]|filter = \[ \"a\/sdb\/\", \"r\/\.\*\/\" \]|' \
+sed -i 's|# filter = \[ \"a\/\.\*\/\" \]|filter = \[ \"a\/sdb1\/\", \"r\/\.\*\/\" \]|' \
 	/etc/lvm/lvm.conf
 
 # Create the cinder LVM type and set a volume backend name
