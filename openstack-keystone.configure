@@ -36,6 +36,7 @@ if [ -z "$KEYSTONE_TEMPORARY_ADMIN_TOKEN" -a \
      -z "$RABBITMQ_PORT" -a \
      -z "$RABBITMQ_USER" -a \
      -z "$RABBITMQ_PASSWORD" -a \
+     -z "$MANAGEMENT_INTERFACE_IP_ADDRESS" -a \
      -z "$CONTROLLER_HOST_ADDRESS" ]; then
      # No Keystone options defined, do nothing.
     exit 0
@@ -49,13 +50,28 @@ if [ -z "$KEYSTONE_TEMPORARY_ADMIN_TOKEN" -o \
      -z "$RABBITMQ_PORT" -o \
      -z "$RABBITMQ_USER" -o \
      -z "$RABBITMQ_PASSWORD" -o \
+     -z "$MANAGEMENT_INTERFACE_IP_ADDRESS" -o \
      -z "$CONTROLLER_HOST_ADDRESS" ]; then
     echo Some options required for Keystone were defined, but not all.
     exit 1
 fi
 
+
+python <<'EOF'
+import socket
+import sys
+import os
+
+try:
+    socket.inet_pton(socket.AF_INET, os.environ['MANAGEMENT_INTERFACE_IP_ADDRESS'])
+except:
+    print "Error: MANAGEMENT_INTERFACE_IP_ADDRESS is not a valid IP"
+    sys.exit(1)
+EOF
+
+
 ##########################################################################
-# Generate config variable shell snippet
+# Generate configuration file
 ##########################################################################
 
 OPENSTACK_DATA="$ROOT/etc/openstack"
@@ -69,11 +85,12 @@ keystone_configuration={
     'KEYSTONE_ADMIN_PASSWORD': os.environ['KEYSTONE_ADMIN_PASSWORD'],
     'KEYSTONE_DB_USER': os.environ['KEYSTONE_DB_USER'],
     'KEYSTONE_DB_PASSWORD': os.environ['KEYSTONE_DB_PASSWORD'],
-    'CONTROLLER_HOST_ADDRESS': os.environ['CONTROLLER_HOST_ADDRESS'],
     'RABBITMQ_HOST': os.environ['RABBITMQ_HOST'],
     'RABBITMQ_PORT': os.environ['RABBITMQ_PORT'],
     'RABBITMQ_USER': os.environ['RABBITMQ_USER'],
     'RABBITMQ_PASSWORD': os.environ['RABBITMQ_PASSWORD'],
+    'MANAGEMENT_INTERFACE_IP_ADDRESS': os.environ['MANAGEMENT_INTERFACE_IP_ADDRESS'],
+    'CONTROLLER_HOST_ADDRESS': os.environ['CONTROLLER_HOST_ADDRESS'],
 }
 
 yaml.dump(keystone_configuration, sys.stdout, default_flow_style=False)
