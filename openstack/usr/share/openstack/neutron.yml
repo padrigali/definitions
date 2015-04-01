@@ -5,10 +5,18 @@
   tasks:
 
   - name: Create the neutron user.
-    user: name=neutron comment="Openstack Neutron Daemons" shell=/sbin/nologin home=/var/lib/neutron
+    user:
+        name: neutron
+        comment: Openstack Neutron Daemons
+        shell: /sbin/nologin
+        home: /var/lib/neutron
 
   - name: Create the /var folders for neutron
-    file: path={{ item }} state=directory owner=neutron group=neutron
+    file:
+        path: "{{ item }}"
+        state: directory
+        owner: neutron
+        group: neutron
     with_items:
     - /var/run/neutron
     - /var/lock/neutron
@@ -17,53 +25,68 @@
   - name: Get service tenant id needed in neutron.conf
     shell: |
            keystone \
-               --os-endpoint http://{{ CONTROLLER_HOST_ADDRESS }}:35357/v2.0 \
-               --os-token {{ KEYSTONE_TEMPORARY_ADMIN_TOKEN }} \
+               --os-endpoint http://{{ CONTROLLER_HOST_ADDRESS|quote }}:35357/v2.0 \
+               --os-token {{ KEYSTONE_TEMPORARY_ADMIN_TOKEN|quote }} \
                tenant-get service | grep id | tr -d " " | cut -d"|" -f3
     register: tenant_service_id
 
-  - set_fact: SERVICE_TENANT_ID={{ tenant_service_id.stdout }}
+  - set_fact:
+        SERVICE_TENANT_ID: "{{ tenant_service_id.stdout }}"
 
   - name: Create the directories needed for Neutron configuration files.
-    file: path=/etc/{{ item }} state=directory
+    file:
+        path: /etc/{{ item }}
+        state: directory
     with_lines:
-    - (cd /usr/share/openstack &&  find neutron -type d)
+    - cd /usr/share/openstack &&  find neutron -type d
 
   - name: Add configuration needed for neutron using templates
-    template: src=/usr/share/openstack/{{ item }} dest=/etc/{{ item }}
+    template:
+        src: /usr/share/openstack/{{ item }}
+        dest: /etc/{{ item }}
     with_lines:
-    - (cd /usr/share/openstack && find neutron -type f)
+    - cd /usr/share/openstack && find neutron -type f
 
-  - keystone_user: >
-        user={{ NEUTRON_SERVICE_USER }}
-        password={{ NEUTRON_SERVICE_PASSWORD }}
-        tenant=service
-        token={{ KEYSTONE_TEMPORARY_ADMIN_TOKEN }}
+  - name: Create neutron service user in service tenatnt
+    keystone_user:
+        user: "{{ NEUTRON_SERVICE_USER }}"
+        password: "{{ NEUTRON_SERVICE_PASSWORD }}"
+        tenant: service
+        token: "{{ KEYSTONE_TEMPORARY_ADMIN_TOKEN }}"
 
-  - keystone_user: >
-        role=admin
-        user={{ NEUTRON_SERVICE_USER }}
-        tenant=service
-        token={{ KEYSTONE_TEMPORARY_ADMIN_TOKEN }}
+  - name: Add admin role to neutron service user in service tenant
+    keystone_user:
+        role: admin
+        user: "{{ NEUTRON_SERVICE_USER }}"
+        tenant: service
+        token: "{{ KEYSTONE_TEMPORARY_ADMIN_TOKEN }}"
 
-  - keystone_service: >
-        name=neutron
-        type=network
-        description="Openstack Compute Networking"
-        publicurl=http://{{ CONTROLLER_HOST_ADDRESS }}:9696
-        internalurl=http://{{ CONTROLLER_HOST_ADDRESS }}:9696
-        adminurl=http://{{ CONTROLLER_HOST_ADDRESS }}:9696
-        region='regionOne'
-        token={{ KEYSTONE_TEMPORARY_ADMIN_TOKEN }}
+  - keystone_service:
+        name: neutron
+        type: network
+        description: Openstack Compute Networking
+        publicurl: http://{{ CONTROLLER_HOST_ADDRESS }}:9696
+        internalurl: http://{{ CONTROLLER_HOST_ADDRESS }}:9696
+        adminurl: http://{{ CONTROLLER_HOST_ADDRESS }}:9696
+        region: regionOne
+        token: "{{ KEYSTONE_TEMPORARY_ADMIN_TOKEN }}"
 
-  - postgresql_user: name={{ NEUTRON_DB_USER }} password={{ NEUTRON_DB_PASSWORD }}
+  - name: Create postgresql user for neutron
+    postgresql_user:
+        name: "{{ NEUTRON_DB_USER }}"
+        password: "{{ NEUTRON_DB_PASSWORD }}"
     sudo: yes
     sudo_user: neutron
-  - postgresql_db: name=neutron owner={{ NEUTRON_DB_USER }}
+
+  - name: Create database for neutron services
+    postgresql_db:
+        name: neutron
+        owner: "{{ NEUTRON_DB_USER }}"
     sudo: yes
     sudo_user: neutron
 
-  - shell: |
+  - name: Initiate neutron database
+    shell: |
            neutron-db-manage \
                --config-file /etc/neutron/neutron.conf \
                --config-file /etc/neutron/plugins/ml2/ml2_conf.ini \
@@ -76,21 +99,23 @@
 # https://fosskb.wordpress.com/2014/10/18/openstack-juno-on-ubuntu-14-10/
 # and https://fosskb.wordpress.com/2014/06/10/managing-openstack-internaldataexternal-network-in-one-interface/
 
-  - set_fact: ETH_INTERFACE={{ ansible_default_ipv4.interface }}
+  - set_fact:
+        ETH_INTERFACE: "{{ ansible_default_ipv4.interface }}"
     when: ansible_default_ipv4.interface
-  - set_fact: ETH_INTERFACE="br-eth0"
+  - set_fact:
+        ETH_INTERFACE: br-eth0
     when: not ansible_default_ipv4.interface
 
-  - set_fact: ETH_MAC_ADDRESS={{ ansible_default_ipv4.macaddress }}
-    when: ETH_INTERFACE != "br-eth0"
-  - set_fact: ETH_IP_ADDRESS={{ ansible_default_ipv4.address }}
+  - set_fact:
+        ETH_MAC_ADDRESS: "{{ ansible_default_ipv4.macaddress }}"
+        ETH_IP_ADDRESS: "{{ ansible_default_ipv4.address }}"
     when: ETH_INTERFACE != "br-eth0"
 
 # if is not br-eth0
   - name: Disable dhcp on the bound physical interface
-    template: >
-        src=/usr/share/openstack/extras/00-disable-device.network
-        dest=/etc/systemd/network/00-disable-{{ item }}-config.network
+    template:
+        src: /usr/share/openstack/extras/00-disable-device.network
+        dest: /etc/systemd/network/00-disable-{{ item }}-config.network
     with_items:
     - "{{ ETH_INTERFACE }}"
     when: ETH_INTERFACE != "br-eth0"
@@ -106,9 +131,9 @@
 
 # If is not br-eth0
   - name: Disable dhcp on all the internal interfaces
-    template: >
-        src=/usr/share/openstack/extras/00-disable-device.network
-        dest=/etc/systemd/network/00-disable-{{ item }}-config.network
+    template:
+        src: /usr/share/openstack/extras/00-disable-device.network
+        dest: /etc/systemd/network/00-disable-{{ item }}-config.network
     with_items:
     - br-eth1
     - br-ex
@@ -119,7 +144,9 @@
     register: internal_dhcp_disabled
 
   - name: Restart networkd so it understands to not bring up the interfaces disabled
-    service: name=systemd-networkd.service state=restarted
+    service:
+        name: systemd-networkd.service
+        state: restarted
     when: internal_dhcp_disabled|changed
 
 #ovs-vsctl \
@@ -129,23 +156,30 @@
 #
 
 
-  - openvswitch_bridge: bridge=br-eth0 state=present
+  - openvswitch_bridge:
+        bridge: br-eth0
+        state: present
 # if is not br-eth0
-  - openvswitch_port: bridge=br-eth0 port={{ ETH_INTERFACE }} state=present
+  - openvswitch_port:
+        bridge: br-eth0
+        port: "{{ ETH_INTERFACE }}"
+        state: present
     when: ETH_INTERFACE != "br-eth0"
 # if is not br-eth0
   - shell: ovs-vsctl set bridge br-eth0 other-config:hwaddr={{ ETH_MAC_ADDRESS }}
     when: ETH_INTERFACE != "br-eth0"
 
   - name: Enable dhcp on the Open vSwitch device that replaces our external interface
-    template: >
-        src=/usr/share/openstack/extras/10-device-dhcp.network
-        dest=/etc/systemd/network/10-{{ item }}-dhcp.network
+    template:
+        src: /usr/share/openstack/extras/10-device-dhcp.network
+        dest: /etc/systemd/network/10-{{ item }}-dhcp.network
     with_items:
     - br-eth0
 
   - name: Restart networkd again so it will DHCP in the Open vSwitch interface
-    service: name=systemd-networkd.service state=restarted
+    service:
+        name: systemd-networkd.service
+        state: restarted
 
 #ovs-vsctl \
 #    -- add-br br-eth1 \
@@ -160,21 +194,40 @@
 #    -- set interface proxy-br-ex type=patch options:peer=ex-br-proxy
 
 
-  - openvswitch_bridge: bridge=br-eth1 state=present
-  - openvswitch_port: bridge=br-eth1 port=eth1-br-proxy state=present
+  - openvswitch_bridge:
+        bridge: br-eth1
+        state: present
+  - openvswitch_port:
+        bridge: br-eth1
+        port: eth1-br-proxy
+        state: present
   - shell: ovs-vsctl set interface eth1-br-proxy type=patch options:peer=proxy-br-eth1
-  - openvswitch_port: bridge=br-eth0 port=proxy-br-eth1 state=present
+  - openvswitch_port:
+        bridge: br-eth0
+        port: proxy-br-eth1
+        state: present
   - shell: ovs-vsctl set interface proxy-br-eth1 type=patch options:peer=eth1-br-proxy
-  - openvswitch_bridge: bridge=br-ex state=present
-  - openvswitch_port: bridge=br-ex port=ex-br-proxy state=present
+  - openvswitch_bridge:
+        bridge: br-ex
+        state: present
+  - openvswitch_port:
+        bridge: br-ex
+        port: ex-br-proxy
+        state: present
   - shell: ovs-vsctl set interface ex-br-proxy type=patch options:peer=proxy-br-ex
-  - openvswitch_port: bridge=br-eth0 port=proxy-br-ex state=present
+  - openvswitch_port:
+        bridge: br-eth0
+        port: proxy-br-ex
+        state: present
   - shell: ovs-vsctl set interface proxy-br-ex type=patch options:peer=ex-br-proxy
 
 
 ## SERVICES
   - name: Enable and start openstack-neutron services
-    service: name={{ item }} enabled=yes state=started
+    service:
+        name: "{{ item }}"
+        enabled: yes
+        state: started
     with_items:
     - openstack-neutron-ovs-cleanup.service
     - openstack-neutron-server.service
