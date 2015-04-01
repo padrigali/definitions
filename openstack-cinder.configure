@@ -61,7 +61,7 @@ if [ -z "$RABBITMQ_HOST" -o \
 fi
 
 ##########################################################################
-# Generate config variable shell snippet
+# Generate configuration file
 ##########################################################################
 
 OPENSTACK_DATA="$ROOT/etc/openstack"

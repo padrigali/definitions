@@ -1,5 +1,5 @@
 [Unit]
-Description=Run cinder-setup Ansile scripts
+Description=Run cinder-setup Ansible scripts
 After=local-fs.target openstack-keystone-setup.service postgres-server.service
 
 [Service]
