@@ -708,6 +708,10 @@ chunks:
   build-depends:
   - configshell-fb
   - rtslib-fb
+- name: sysfsutils
+  repo: upstream:sysfsutils
+  ref: 237bf36e664db92f95b75067bf0f246726993254
+  unpetrify-ref: sysfsutils-2_1_0
 - name: open-iscsi
   morph: strata/openstack-services/open-iscsi.morph
   repo: upstream:open-iscsi
