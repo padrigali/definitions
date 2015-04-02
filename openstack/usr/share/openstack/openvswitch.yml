@@ -37,4 +37,3 @@
     service: name={{ item }} enabled=yes state=started
     with_items:
     - openvswitch.service
-    - openstack-neutron-setup.service

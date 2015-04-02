@@ -1,0 +1,113 @@
+---
+- hosts: localhost
+  tasks:
+# Create the bridges to use the External network mapped
+# This configuration is for 1 node and it was taken from:
+# https://fosskb.wordpress.com/2014/10/18/openstack-juno-on-ubuntu-14-10/
+# and https://fosskb.wordpress.com/2014/06/10/managing-openstack-internaldataexternal-network-in-one-interface/
+
+# Count number of network interfaces (interfaces starting with 'e')
+  - shell: ls /sys/class/net | grep ^e.* | wc -l
+    register: number_interfaces
+
+# Abort if there number of interfaces != 1
+  - fail:
+        msg: More than one, or none network interfaces found.
+    when: number_interfaces.stdout != "1"
+
+  - shell: ls /sys/class/net | grep ^e.*
+    register: interface_name
+
+  - set_fact:
+        ETH_INTERFACE: "{{ interface_name.stdout }}"
+        ETH_MAC_ADDRESS: "{{ hostvars['localhost']['ansible_' + interface_name.stdout]['macaddress'] }}"
+
+  - name: Create the /run/systemd/network
+    file:
+        path: /run/systemd/network
+        state: directory
+
+  - name: Disable dhcp on the bound physical interface
+    template:
+        src: /usr/share/openstack/extras/00-disable-device.network
+        dest: /run/systemd/network/00-disable-{{ item }}-config.network
+    with_items:
+    - "{{ ETH_INTERFACE }}"
+
+
+  - name: Disable dhcp on all the internal interfaces
+    template:
+        src: /usr/share/openstack/extras/00-disable-device.network
+        dest: /run/systemd/network/00-disable-{{ item }}-config.network
+    with_items:
+    - br-eth1
+    - br-ex
+    - eth1-br-proxy
+    - proxy-br-eth1
+    - proxy-br-ex
+    - ovs-system
+
+#ovs-vsctl \
+#    -- add-br br-eth0 \
+#    -- add-port br-eth0 $eth_dev \
+#    -- set bridge br-eth0 other-config:hwaddr=$eth_mac
+#
+
+
+  - openvswitch_bridge:
+        bridge: br-eth0
+        state: present
+
+  - openvswitch_port:
+        bridge: br-eth0
+        port: "{{ ETH_INTERFACE }}"
+        state: present
+
+  - shell: ovs-vsctl set bridge br-eth0 other-config:hwaddr={{ ETH_MAC_ADDRESS }}
+
+  - name: Enable dhcp on the Open vSwitch device that replaces our external interface
+    template:
+        src: /usr/share/openstack/extras/10-device-dhcp.network
+        dest: /run/systemd/network/10-{{ item }}-dhcp.network
+    with_items:
+    - br-eth0
+
+#ovs-vsctl \
+#    -- add-br br-eth1 \
+#    -- add-port br-eth1 eth1-br-proxy \
+#    -- set interface eth1-br-proxy type=patch options:peer=proxy-br-eth1 \
+#    -- add-port br-eth0 proxy-br-eth1 \
+#    -- set interface proxy-br-eth1 type=patch options:peer=eth1-br-proxy \
+#    -- add-br br-ex \
+#    -- add-port br-ex ex-br-proxy \
+#    -- set interface ex-br-proxy type=patch options:peer=proxy-br-ex \
+#    -- add-port br-eth0 proxy-br-ex \
+#    -- set interface proxy-br-ex type=patch options:peer=ex-br-proxy
+
+
+  - openvswitch_bridge:
+        bridge: br-eth1
+        state: present
+  - openvswitch_port:
+        bridge: br-eth1
+        port: eth1-br-proxy
+        state: present
+  - shell: ovs-vsctl set interface eth1-br-proxy type=patch options:peer=proxy-br-eth1
+  - openvswitch_port:
+        bridge: br-eth0
+        port: proxy-br-eth1
+        state: present
+  - shell: ovs-vsctl set interface proxy-br-eth1 type=patch options:peer=eth1-br-proxy
+  - openvswitch_bridge:
+        bridge: br-ex
+        state: present
+  - openvswitch_port:
+        bridge: br-ex
+        port: ex-br-proxy
+        state: present
+  - shell: ovs-vsctl set interface ex-br-proxy type=patch options:peer=proxy-br-ex
+  - openvswitch_port:
+        bridge: br-eth0
+        port: proxy-br-ex
+        state: present
+  - shell: ovs-vsctl set interface proxy-br-ex type=patch options:peer=ex-br-proxy
