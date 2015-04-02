@@ -22,7 +22,7 @@ systems:
       KEYSTONE_DB_USER: keystoneDB
       KEYSTONE_DB_PASSWORD: veryinsecure
       CONTROLLER_HOST_ADDRESS: onenode
-      MANAGEMENT_INTERFACE_IP_ADDRESS: 10.24.1.198
+      MANAGEMENT_INTERFACE_IP_ADDRESS: 10.24.1.46
       GLANCE_SERVICE_USER: glance
       GLANCE_SERVICE_PASSWORD: veryinsecure
       GLANCE_DB_USER: glanceDB
@@ -42,3 +42,4 @@ systems:
       NEUTRON_DB_USER: neutronDB
       NEUTRON_DB_PASSWORD: veryinsecure
       METADATA_PROXY_SHARED_SECRET: novaneutronmetasecret
+      HOSTS_ONENODE: 10.24.1.46 onenode
