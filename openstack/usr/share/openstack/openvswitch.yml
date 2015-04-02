@@ -6,12 +6,12 @@
   - name: Create openvswitch directories
     file: path={{ item }} state=directory
     with_items:
-    - /usr/local/etc/openvswitch
-    - /usr/local/var/run/openvswitch
+    - /etc/openvswitch
+    - /var/run/openvswitch
 
   - shell: >
-           ovsdb-tool create /usr/local/etc/openvswitch/conf.db /usr/share/openvswitch/vswitch.ovsschema
-           creates=/usr/local/etc/openvswitch/conf.db
+           ovsdb-tool create /etc/openvswitch/conf.db /usr/share/openvswitch/vswitch.ovsschema
+           creates=/etc/openvswitch/conf.db
 
   # We enable the openvswitch-db-server in a different task to identify
   # the first time we run this script by identifying when we enable the
