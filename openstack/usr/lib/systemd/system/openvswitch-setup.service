@@ -3,6 +3,7 @@ Description=Run openvswitch-setup Ansible scripts
 After=local-fs.target
 
 [Service]
+Type=oneshot
 ExecStart=/usr/bin/ansible-playbook -v -i /usr/share/openstack/hosts /usr/share/openstack/openvswitch.yml
 
 [Install]
