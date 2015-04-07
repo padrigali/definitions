@@ -67,5 +67,5 @@ configuration-extensions:
 - openstack-nova
 - openstack-cinder
 - openstack-neutron
-- openvswitch
+- openstack-network
 - hosts

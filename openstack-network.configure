@@ -21,3 +21,6 @@ ROOT="$1"
 
 ln -sf "/usr/lib/systemd/system/openvswitch-setup.service" \
   "$ROOT/etc/systemd/system/multi-user.target.wants/openvswitch-setup.service"
+
+ln -sf "/usr/lib/systemd/system/openstack-network-setup.service" \
+  "$ROOT/etc/systemd/system/multi-user.target.wants/openstack-network-setup.service"
