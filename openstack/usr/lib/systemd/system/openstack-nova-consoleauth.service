@@ -1,6 +1,6 @@
 [Unit]
 Description=Openstack Console Auth (nova-consoleauth)
-After=syslog.target network.target
+After=syslog.target network-online.target
 
 [Service]
 Type=simple

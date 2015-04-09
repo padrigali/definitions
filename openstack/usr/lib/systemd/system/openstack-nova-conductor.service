@@ -1,6 +1,6 @@
 [Unit]
 Description=Database-access support for Compute nodes (nova-conductor)
-After=syslog.target network.target libvirtd.service
+After=syslog.target network-online.target libvirtd.service
 Requires=libvirtd.service
 
 [Service]
