@@ -1,6 +1,7 @@
 [Unit]
 Description=OpenStack Identity Service (code-named Keystone)
 After=syslog.target network-online.target
+Wants=network-online.target
 
 [Service]
 Type=notify

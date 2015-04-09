@@ -1,6 +1,7 @@
 [Unit]
 Description=OpenStack Nova Cert
 After=syslog.target network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple

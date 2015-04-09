@@ -1,6 +1,7 @@
 [Unit]
 Description=Neutron Layer 3 Agent
 After=network-online.target openstack-neutron-ovs-cleanup.service
+Wants=network-online.target
 
 [Service]
 Type=simple

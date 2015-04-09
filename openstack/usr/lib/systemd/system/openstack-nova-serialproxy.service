@@ -1,6 +1,7 @@
 [Unit]
 Description=OpenStack Nova Serial Proxy
 After=syslog.target network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple

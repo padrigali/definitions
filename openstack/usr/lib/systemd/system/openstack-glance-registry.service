@@ -1,6 +1,7 @@
 [Unit]
 Description=OpenStack Image Service (code-named Glance) Registry server
 After=syslog.target network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple

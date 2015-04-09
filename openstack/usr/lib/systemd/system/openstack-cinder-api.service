@@ -1,6 +1,7 @@
 [Unit]
 Description=OpenStack Volume Service (code-named Cinder) API server
 After=syslog.target network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple

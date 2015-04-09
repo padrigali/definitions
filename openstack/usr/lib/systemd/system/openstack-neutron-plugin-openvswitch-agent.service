@@ -1,6 +1,7 @@
 [Unit]
 Description=Neutron OpenvSwitch Plugin Agent
 After=network-online.target openstack-neutron-setup.service
+Wants=network-online.target
 
 [Service]
 Type=simple
