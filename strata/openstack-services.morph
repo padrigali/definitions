@@ -710,6 +710,10 @@ chunks:
   - suds
   - webob
   - wsgiref
+- name: singledispatch
+  repo: upstream:python-packages/singledispatch.git
+  ref: 92175ba65602a03086d2b1f770f45d88af93fc3e
+  unpetrify-ref: 3.4.0.3
 - name: kazoo
   repo: upstream:python-packages/kazoo.git
   ref: 93a718ea4c20df797766742c3d74de281613c651
