@@ -37,5 +37,9 @@ systems:
       NEUTRON_SERVICE_PASSWORD: veryinsecure
       NEUTRON_DB_USER: neutronDB
       NEUTRON_DB_PASSWORD: veryinsecure
+      CEILOMETER_SERVICE_USER: ceilometer
+      CEILOMETER_SERVICE_PASSWORD: veryinsecure
+      CEILOMETER_DB_USER: ceilometerDB
+      CEILOMETER_DB_PASSWORD: veryinsecure
       METADATA_PROXY_SHARED_SECRET: novaneutronmetasecret
       HOSTS_ONENODE: 10.24.1.79 onenode
