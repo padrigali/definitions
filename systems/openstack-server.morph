@@ -65,6 +65,7 @@ configuration-extensions:
 - openstack-keystone
 - openstack-glance
 - openstack-nova
+- openstack-ceilometer
 - openstack-cinder
 - openstack-neutron
 - openstack-network
