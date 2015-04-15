@@ -5,8 +5,8 @@ systems:
   deploy:
     release:
       type: rawdisk
-      location: /root/baserock-ceilometer-01-openstack-v6-system-x86_64.img
-      DISK_SIZE: 8G
+      location: /root/baserock-ceilometer-05-openstack-v6-system-x86_64.img
+      DISK_SIZE: 6G
       INSTALL_FILES: openstack/manifest
       HOSTNAME: onenode
       RABBITMQ_HOST: onenode
