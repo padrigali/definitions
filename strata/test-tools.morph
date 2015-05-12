@@ -48,8 +48,10 @@ chunks:
   - testtools
 - name: testscenarios
   repo: upstream:python-packages/testscenarios
-  ref: 475857af19a8190c9c0c7f8241b9907b942e19fd
+  ref: 10978cc9ae808202cf7c4b96adb1965056e4a0c6
   unpetrify-ref: trunk
+  build-depends:
+  - testtools
 - name: mox
   repo: upstream:python-packages/mox
   ref: 160491d0384285698d726b1af21277f336107f51

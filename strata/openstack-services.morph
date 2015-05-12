@@ -42,8 +42,8 @@ chunks:
   unpetrify-ref: 0.3.3
 - name: kombu
   repo: upstream:python-packages/kombu
-  ref: 6e68e54b3a846faa6f8b7e14a4a7ca51d1967bc2
-  unpetrify-ref: v3.0.23
+  ref: 0287b11ab0698d9c52ef1b1683ced23123d43ba4
+  unpetrify-ref: v3.0.26
   build-depends:
   - anyjson
   - py-amqp
@@ -54,8 +54,8 @@ chunks:
   unpetrify-ref: rel_0_9_8
 - name: alembic
   repo: upstream:python-packages/alembic
-  ref: 5f952f25caa688d89204d134ee867de7dbad917c
-  unpetrify-ref: rel_0_7_1
+  ref: 6ae4196acc0170ebef29f617b49376b371a8923c
+  unpetrify-ref: rel_0_7_6
   build-depends:
   - sqlalchemy
 - name: lockfile
@@ -186,13 +186,13 @@ chunks:
   build-depends:
   - numpy
 - name: httplib2
-  ref: 058a1f9448d5c27c23772796f83a596caf9188e6
-  unpetrify-ref: v0.9
   repo: upstream:python-packages/httplib2
+  ref: f9f797223d075874b0031aea832152688ec23fef
+  unpetrify-ref: v0.9.1
 - name: suds
   repo: upstream:python-packages/suds
-  ref: badd30a87f676d632d7386b05401e6029a5df83c
-  unpetrify-ref: release-0.3.2
+  ref: e7a317f1a20a4d3c86ac85785bb32d24c3d1078f
+  unpetrify-ref: baserock/release-0.4
 - name: jsonrpclib
   repo: upstream:python-packages/jsonrpclib
   ref: 53c8ffcfe4dd1718086cc551dce8ac459e8abc67
@@ -270,26 +270,66 @@ chunks:
   repo: upstream:python-packages/retrying
   ref: cab083eb5791615fadbc0c98ad77a70d64b77d0d
   unpetrify-ref: v1.3.1
+- name: oslo-context
+  repo: upstream:openstack/oslo-context
+  ref: 1c4757a9fb41e47867bd9b8d390057ad7636b76f
+  unpetrify-ref: 0.2.0
+- name: oslo-middleware
+  repo: upstream:openstack/oslo-middleware
+  ref: bff184a2b5b1a0d3d22508a7544075378aca9e13
+  unpetrify-ref: 1.2.0
+  build-depends:
+  - oslo-context
 - name: oslo-messaging
   repo: upstream:openstack/oslo-messaging
-  ref: 6ea3b12492e86f9e8d109fc3490cc4d3a0edd8b6
-  unpetrify-ref: 1.4.0.0a5
+  ref: 562c41bb78f578ff9c27633c04ac6dd914c55f5a
+  unpetrify-ref: 1.8.2
   build-depends:
   - kombu
+- name: ordereddict
+  repo: upstream:python-packages/ordereddict-tarball
+  ref: 332cd0213829089dd827a32e7c5e64c41ce79cbc
+  unpetrify-ref: ordereddict-1.1
+- name: trollius
+  repo: upstream:python-packages/trollius
+  ref: fe6f8d61b1257bc01cdf4f789aaf4a8ec3d6f8ec
+  unpetrify-ref: trollius-1.0.4
+  build-depends:
+  - ordereddict
+- name: aioeventlet
+  repo: upstream:python-packages/aioeventlet
+  ref: 3cac0d7740592a380a7dadb2ddcdda000cae2bda
+  unpetrify-ref: 0.4
+  build-depends:
+  - trollius
+- name: urllib3
+  repo: upstream:python-packages/urllib3
+  ref: 8434c77d845255c4002b505c6c2d79c3b35def0d
+  unpetrify-ref: 1.10.4
+- name: oslo-concurrency
+  repo: upstream:openstack/oslo-concurrency
+  ref: a2473ed0a59e4553766ffcb1ee8f06cb98b14a48
+  unpetrify-ref: 1.8.0
+  build-depends:
+  - posix-ipc-tarball
+  - retrying
 - name: oslo-vmware
   repo: upstream:openstack/oslo-vmware
-  ref: 047d62c4bbd01a951f77a1a4a75fb2b3d8ce23ee
-  unpetrify-ref: 0.6.0
+  ref: 5de2c31e9d24f40fc7d33ddb1ce407ffdc6f366c
+  unpetrify-ref: 0.11.1
   build-depends:
+  - oslo-concurrency
   - suds
+  - urllib3
+  - httplib2
 - name: taskflow
   repo: upstream:openstack/taskflow
-  ref: 1caaecc5d6b2aa4cde4a50e31d1d993fce7a66c4
-  unpetrify-ref: 0.5.0
+  ref: 28bece7c7c97199b8d941b16865c3670c323589a
+  unpetrify-ref: 0.7.1
 - name: sqlalchemy-migrate
   repo: upstream:python-packages/sqlalchemy-migrate
-  ref: 089663761cc15f8b3cdb874b6a76270ccdd0a412
-  unpetrify-ref: 0.9.1
+  ref: e57ee4c3a4247c634980cbeba74d04a01253967d
+  unpetrify-ref: 0.9.6
   build-depends:
   - sqlalchemy
   - tempita
@@ -315,31 +355,53 @@ chunks:
   unpetrify-ref: 0.3.0
 - name: pycadf
   repo: upstream:python-packages/pycadf
-  ref: 52727bcea3a98e72331e748ce5f9e3a111a64cd1
-  unpetrify-ref: 0.6.0
+  ref: 9501f4f74c5d800ae43edbe52680e285cf98c710
+  unpetrify-ref: 0.9.0
+  build-depends:
+  - oslo-context
   build-depends:
   - oslo-messaging
   - posix-ipc-tarball
 - name: keystonemiddleware
   repo: upstream:openstack/keystonemiddleware
-  ref: a7beb50b38be5c3dd4c44d68ad79d1bb206dab6b
-  unpetrify-ref: 1.2.0
+  ref: 0e63b0e13d0a7919fddd7576c99bc15a45d31a9f
+  unpetrify-ref: 1.5.1
+  build-depends:
+  - pycadf
+  - oslo-context
 - name: oslo-db
   repo: upstream:openstack/oslo-db
-  ref: 0bb1e236daae53a3f5b4b88761d7b19f7961ed6c
-  unpetrify-ref: 1.0.2
+  ref: 3e6a30c396aa42ef0eccb5b3625af728d8d3f437
+  unpetrify-ref: 1.7.1
   build-depends:
   - alembic
   - sqlalchemy
   - sqlalchemy-migrate
 - name: glance_store
   repo: upstream:openstack/glance_store.git
-  ref: 54f673d4133c1244e2555e7ceb3344c104a74154
-  unpetrify-ref: 0.1.8
+  ref: ea88e503b617a7ac9a0ae7e537d6517e9992a104
+  unpetrify-ref: 0.4.0
+  build-depends:
+  - ordereddict
+  - oslo-concurrency
+- name: oslo-log
+  repo: upstream:openstack/oslo-log
+  ref: 54e3d0e705accfaa4c73a01fc2ea1480fcc0024e
+  unpetrify-ref: 1.0.0
+  build-depends:
+  - oslo-context
+- name: oslo-policy
+  repo: upstream:openstack/oslo-policy
+  ref: 4c8f38cd1d088c46be314b47f6774e721813c6d9
+  unpetrify-ref: 0.3.2
+- name: semantic-version
+  repo: upstream:python-packages/semantic-version
+  ref: 2174bdcae6e46f5f68f5b8ea984a695db9f41bcf
+  unpetrify-ref: v2.4.1
 - name: glance
   repo: upstream:openstack/glance
-  ref: 1db07bd8c07bbcde4bd267985c4e3961c22b990e
-  unpetrify-ref: 2014.2.3
+  ref: 93b0d5fce3a41e4a3a549f98f78b6681cbc3ea95
+  unpetrify-ref: 2015.1.0
   build-depends:
   - sqlalchemy
   - anyjson
@@ -350,12 +412,20 @@ chunks:
   - keystonemiddleware
   - wsme
   - oslo-vmware
+  - oslo-concurrency
+  - oslo-context
+  - oslo-log
+  - oslo-policy
   - paste
   - oslo-db
   - oslo-messaging
   - retrying
   - osprofiler
+  - ordereddict
   - glance_store
+  - semantic-version
+  - taskflow
+  - posix-ipc-tarball
 - name: sqlparse
   repo: upstream:python-packages/sqlparse
   ref: 991e7348075accae6d08025212251af21e92e664
