@@ -335,8 +335,8 @@ chunks:
   - tempita
 - name: oauthlib
   repo: upstream:python-packages/oauthlib
-  ref: de773eefcb3c1afe54a0c12d5bf9bd214ceaf404
-  unpetrify-ref: 0.6.3
+  ref: fd239fca84644896b1971cf24bc6213d065adb86
+  unpetrify-ref: 0.7.2
   build-depends:
   - docutils
   - creole
@@ -430,10 +430,14 @@ chunks:
   repo: upstream:python-packages/sqlparse
   ref: 991e7348075accae6d08025212251af21e92e664
   unpetrify-ref: 0.1.13
+- name: pysaml2
+  repo: upstream:python-packages/pysaml2.git
+  ref: 13ff5e8899300c9b359fa1bdfdb3d412be0d7356
+  unpetrify-ref: 2.4.0
 - name: keystone
   repo: upstream:openstack/keystone
-  ref: 91a33875385ca296d24f67d4ef9629a2b33bed99
-  unpetrify-ref: 2014.2.3
+  ref: 5d3b31f9c3d34599ff8a83eeb7530fc6e0b1b67b
+  unpetrify-ref: 2015.1.0
   build-depends:
   - paste
   - routes
@@ -441,13 +445,17 @@ chunks:
   - sqlalchemy-migrate
   - passlib
   - keystonemiddleware
+  - oslo-concurrency
   - oslo-messaging
   - oslo-db
+  - oslo-log
+  - oslo-middleware
+  - oslo-policy
   - oauthlib
   - dogpile-cache
   - pycadf
   - posix-ipc-tarball
-  - sqlparse
+  - pysaml2
 - name: neutron
   morph: strata/openstack-services/neutron.morph
   repo: upstream:openstack/neutron
@@ -601,10 +609,6 @@ chunks:
   repo: upstream:novnc
   ref: fc00821eba469641c6c94706726c3d78e46460a2
   unpetrify-ref: v0.5.1
-- name: oauth
-  repo: upstream:python-packages/oauthlib
-  ref: fd239fca84644896b1971cf24bc6213d065adb86
-  unpetrify-ref: 0.072
 - name: pyserial
   repo: upstream:python-packages/pyserial
   ref: bcfc1ec2fdb9a8c9c867481d7673e85fe512e667
