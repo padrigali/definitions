@@ -532,24 +532,29 @@ chunks:
 - name: cinder
   morph: strata/openstack-services/cinder.morph
   repo: upstream:openstack/cinder
-  ref: 48c792513fd342a5f82122b12e4ed2afd0de2ae7
-  unpetrify-ref: 2014.2.3
+  ref: 5987bb2290f629e59b0bcced2f8fe22cdeb9cc6d
+  unpetrify-ref: 2015.1.0
   build-depends:
   - anyjson
   - keystonemiddleware
   - kombu
+  - oslo-concurrency
+  - oslo-context
   - oslo-db
+  - oslo-log
   - oslo-messaging
+  - oslo-middleware
   - oslo-rootwrap
   - osprofiler
   - paste
+  - retrying
   - routes
   - taskflow
   - rtslib-fb
   - sqlalchemy
   - sqlalchemy-migrate
   - suds
-  - wsgiref
+  - oslo-vmware
 - name: pymemcache
   repo: upstream:python-packages/pymemcache.git
   ref: 3824d3b0bcdea3e8d0c08598bedfce10fd3c79e0

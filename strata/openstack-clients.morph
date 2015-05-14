@@ -84,9 +84,9 @@ chunks:
   - cliff
   - python-keystoneclient
 - name: python-barbicanclient
-  repo: upstream:openstack/python-barbicanclient.git
-  ref: ac30643631b6bc1c40116061f8eb280a7881e422
-  unpetrify-ref: 2.2.1
+  repo: upstream:openstack/python-barbicanclient
+  ref: 2919366867af335d59913764a55ca8e95569947d
+  unpetrify-ref: 3.0.3
   build-depends:
   - python-keystoneclient
   - cliff
