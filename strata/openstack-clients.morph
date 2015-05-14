@@ -21,8 +21,8 @@ chunks:
   - warlock
 - name: python-novaclient
   repo: upstream:openstack/python-novaclient
-  ref: 5ecfdac6b34769e200ff5c4c7429c20518c5b24f
-  unpetrify-ref: 2.20.0
+  ref: e0f5072907a00d48a183dd8fc91a6cf6038ca279
+  unpetrify-ref: 2.23.0
   build-depends:
   - python-keystoneclient
 - name: python-swiftclient

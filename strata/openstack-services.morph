@@ -451,20 +451,24 @@ chunks:
 - name: neutron
   morph: strata/openstack-services/neutron.morph
   repo: upstream:openstack/neutron
-  ref: 96b5962646510ee67b322aa82242e02e3edfaa83
-  unpetrify-ref: 2014.2.3
+  ref: 7260e0e3fc2ea479e80e0962624aca7fd38a1f60
+  unpetrify-ref: 2015.1.0
   build-depends:
   - paste
   - routes
-  - anyjson
   - httplib2
   - jsonrpclib
   - keystonemiddleware
   - sqlalchemy
   - alembic
+  - retrying
   - oslo-db
   - oslo-messaging
   - oslo-rootwrap
+  - oslo-concurrency
+  - oslo-context
+  - oslo-log
+  - oslo-middleware
 - name: wsgiref
   repo: upstream:python-packages/wsgiref.git
   ref: e8360785eef259394e13b2062407edc3c2cbc1e0
