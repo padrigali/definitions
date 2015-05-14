@@ -556,46 +556,61 @@ chunks:
   - suds
   - oslo-vmware
 - name: pymemcache
-  repo: upstream:python-packages/pymemcache.git
-  ref: 3824d3b0bcdea3e8d0c08598bedfce10fd3c79e0
-  unpetrify-ref: master
+  repo: upstream:python-packages/pymemcache
+  ref: 0646937c2bfebdb557ec2c01f0e42a9af79ad49d
+  unpetrify-ref: v1.2.9
 - name: sysv_ipc-tarball
   repo: upstream:python-packages/sysv-ipc-tarball.git
   ref: a77e3a63f004e6ee789fa05e4a5bbc333b1529f1
   unpetrify-ref: sysv_ipc-0.6.8
+- name: redis-py
+  repo: upstream:python-packages/redis-py
+  ref: 4d0b0afe9c9a431ed50c3e9fb95a0aa88b1f1038
+  unpetrify-ref: 2.10.3
 - name: tooz
-  repo: upstream:python-packages/tooz.git
-  ref: a90940a506b7c1bf52ef7d2f2ff52204fdcc6221
-  unpetrify-ref: 0.7
+  repo: upstream:python-packages/tooz
+  ref: 8086661f404e61c22f0dd1d07b57a864862a0869
+  unpetrify-ref: 0.13.2
   build-depends:
   - pymemcache
-  - sysv_ipc-tarball
   - msgpack-python
   - retrying
+  - redis-py
+- name: kafka-python
+  repo: upstream:python-packages/kafka-python
+  ref: 8675c3e3e620df5ba9fd7e570c554b773429bd78
+  unpetrify-ref: v0.9.3
+- name: werkzeug
+  repo: upstream:python-packages/werkzeug
+  ref: 96e49709d627a7766077cff4c98ebf3cad868ceb
+  unpetrify-ref: v0.10.4
 - name: ceilometer
   repo: upstream:openstack/ceilometer
   morph: strata/openstack-services/ceilometer.morph
-  ref: 720c2b4915caf5decd3da91ea2d6e6291316b940 
-  unpetrify-ref: 2014.2.3
+  ref: b0447ed8e7bee371bf7095c86e47d717abe89edc
+  unpetrify-ref: 2014.1.0
   build-depends:
+  - retrying
   - alembic
-  - anyjson
   - croniter
-  - happybase
   - jsonpath-rw
+  - kafka-python
   - keystonemiddleware
-  - lockfile
   - msgpack-python
+  - oslo-context
   - oslo-db
+  - oslo-concurrency
+  - oslo-policy
   - oslo-rootwrap
-  - oslo-vmware
   - pecan
   - posix-ipc-tarball
   - oslo-messaging
+  - oslo-middleware
   - pysnmp
   - sqlalchemy
   - sqlalchemy-migrate
   - tooz
+  - werkzeug
   - wsme
 - name: django-openstack-auth
   repo: upstream:openstack/django_openstack_auth

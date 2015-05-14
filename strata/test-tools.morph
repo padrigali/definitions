@@ -81,9 +81,9 @@ chunks:
   ref: f7f87e4ac1c52342162cf2035f5fe3d273f8b07f
   unpetrify-ref: master
 - name: zake
-  repo: upstream:python-packages/zake.git
-  ref: 13b92d9db4ad37d9550ef5c5abd323a2530a1e72
-  unpetrify-ref: master
+  repo: upstream:python-packages/zake
+  ref: 436bab3306aeec420f1281f34bd5d26d7f81038c
+  unpetrify-ref: 0.2.1
   build-depends:
   - testtools
 - name: nose

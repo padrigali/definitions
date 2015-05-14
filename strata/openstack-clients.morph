@@ -66,8 +66,8 @@ chunks:
   - python-keystoneclient
 - name: python-ceilometerclient
   repo: upstream:openstack/python-ceilometerclient
-  ref: 7316dd16b8850270db27c1298dcf5a2223f2f1e1
-  unpetrify-ref: 1.0.12
+  ref: 127aadfd2b2daf9884ad7003e23440048e2efbd8
+  unpetrify-ref: 1.0.14
   build-depends:
   - python-keystoneclient
 - name: python-heatclient
