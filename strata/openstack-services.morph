@@ -614,16 +614,22 @@ chunks:
   - wsme
 - name: django-openstack-auth
   repo: upstream:openstack/django_openstack_auth
-  ref: e676c88a329af57d6c4f13df54f6e1e06c1f8360
-  unpetrify-ref: 1.1.8
+  ref: 0e1f7b78277850634992a594132921efb83256e0
+  unpetrify-ref: 1.2.0
+- name: pint
+  repo: upstream:python-packages/pint
+  ref: e7e7de5ca2e1c19963be8a918369fb19186f9a73
+  unpetrify-ref: 0.6
 - name: horizon
   morph: strata/openstack-services/horizon.morph
   repo: upstream:openstack/horizon
-  ref: b37c1f3565e89a7fe3fef5ce76e9c26b22e3e7c4
-  unpetrify-ref: 2014.2.3
+  ref: b99cf48ff346494198fb9740495eacc14fa406bf
+  unpetrify-ref: 2015.1.0
   build-depends:
+  - pint
   - django-openstack-auth
-  - lockfile
+  - kombu
+  - oslo-concurrency
 - name: novnc
   morph: strata/openstack-services/novnc.morph
   repo: upstream:novnc

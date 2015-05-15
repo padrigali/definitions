@@ -72,8 +72,8 @@ chunks:
   - python-keystoneclient
 - name: python-heatclient
   repo: upstream:openstack/python-heatclient
-  ref: 6089d31e302d80910cc15132f99a1bf358bbb64f
-  unpetrify-ref: 0.2.12
+  ref: 6d528f005742263837d05250662bf6214a703da8
+  unpetrify-ref: 0.4.0
   build-depends:
   - python-keystoneclient
 - name: python-designateclient
@@ -92,8 +92,8 @@ chunks:
   - cliff
 - name: python-saharaclient
   repo: upstream:openstack/python-saharaclient
-  ref: eadb40ccb62566f02cb93ec03aa232e48835dec3
-  unpetrify-ref: 0.7.6
+  ref: 319ceb6acf55382218dcd971367613aecb3e4afc
+  unpetrify-ref: 0.8.0
   build-depends:
   - python-keystoneclient
 - name: python-ironicclient
