@@ -648,7 +648,7 @@ chunks:
   repo: upstream:python-packages/singledispatch
   ref: 92175ba65602a03086d2b1f770f45d88af93fc3e
   unpetrify-ref: 3.4.0.3
-- name: pysinglefile
+- name: pysendfile
   morph: strata/openstack-services/pysendfile.morph
   repo: upstream:python-packages/pysendfile
   ref: 6775b2938ef74255239c8e08458369921297b311
@@ -656,5 +656,22 @@ chunks:
 - name: ironic
   morph: strata/openstack-services/ironic.morph
   repo: upstream:openstack/ironic
-  ref: 0f4d454bf2093d3d62460f88aa9288bee3286b38
-  unpetrify-ref: stable/juno
+  ref: dee609cb7976e9b3cc07c3d342a271c4a347f69f
+  unpetrify-ref: 2015.1.0
+  build-depends:
+  - sqlalchemy
+  - alembic
+  - sqlalchemy-migrate
+  - pysendfile
+  - websockify
+  - oslo-concurrency
+  - oslo-context
+  - oslo-db
+  - oslo-rootwrap
+  - oslo-policy
+  - pecan
+  - wsme
+  - keystonemiddleware
+  - oslo-messaging
+  - retrying
+  - posix-ipc-tarball
