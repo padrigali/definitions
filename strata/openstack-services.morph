@@ -639,11 +639,17 @@ chunks:
   repo: upstream:python-packages/pyserial
   ref: bcfc1ec2fdb9a8c9c867481d7673e85fe512e667
   unpetrify-ref: release2_7
+- name: tempest-lib
+  repo: upstream:openstack/tempest-lib
+  ref: c307ffc525d896e2071319c8067aec805804f92b
+  unpetrify-ref: 0.5.0
 - name: tempest
   morph: strata/openstack-services/tempest.morph
-  repo: upstream:openstack/tempest.git
-  ref: acba5510785258949679304f3e1a55e53b851962
-  unpetrify-ref: "2"
+  repo: upstream:openstack/tempest
+  ref: 26149b612d01ad605e4d0f41a2d67280c8088cda
+  unpetrify-ref: "4"
+  build-depends:
+  - tempest-lib
 - name: tftp-hpa
   morph: strata/openstack-services/tftp-hpa.morph
   repo: upstream:tftp-hpa

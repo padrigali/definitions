@@ -48,7 +48,7 @@ chunks:
   - testtools
 - name: testscenarios
   repo: upstream:python-packages/testscenarios
-  ref: 10978cc9ae808202cf7c4b96adb1965056e4a0c6
+  ref: bccfaa71a2def5590161b6d1a247cf23c45a8b4d
   unpetrify-ref: trunk
   build-depends:
   - testtools
