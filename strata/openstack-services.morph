@@ -435,6 +435,7 @@ chunks:
   ref: 13ff5e8899300c9b359fa1bdfdb3d412be0d7356
   unpetrify-ref: 2.4.0
 - name: keystone
+  morph: strata/openstack-services/keystone.morph
   repo: upstream:openstack/keystone
   ref: 5d3b31f9c3d34599ff8a83eeb7530fc6e0b1b67b
   unpetrify-ref: 2015.1.0
