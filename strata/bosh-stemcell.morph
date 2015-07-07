@@ -1,0 +1,5 @@
+name: bosh-stemcell
+kind: stratum
+build-depends:
+chunks:
+  build-depends:
