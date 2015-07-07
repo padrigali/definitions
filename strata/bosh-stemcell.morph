@@ -15,7 +15,7 @@ chunks:
 #  morph: strata/bosh-stemcell/runit.morph
 #  repo: /src/runit
 #  ref: runit-2.1.2
-#- name: monit
-#  morph: strata/bosh-stemcell/monit.morph
-#  repo: https://bitbucket.org/tildeslash/monit.git
-#  ref: release-5-14-0
+- name: monit
+  morph: strata/bosh-stemcell/monit.morph
+  repo: https://bitbucket.org/tildeslash/monit.git
+  ref: release-5-14-0

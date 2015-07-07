@@ -1,0 +1,21 @@
+name: monit
+kind: chunk
+build-system: autotools
+configure-commands:
+- autoreconf -ivf
+- ./configure --prefix=/var/vcap/bosh
+post-install-commands:
+- |
+  cat <<EOF >> monitrc
+  set daemon 10
+  set logfile /var/vcap/monit/monit.log
+
+  set httpd port 2822 and use address 127.0.0.1
+    allow cleartext /var/vcap/monit/monit.user
+
+  include /var/vcap/monit/*.monitrc
+  include /var/vcap/monit/job/*.monitrc
+  EOF
+- install -D -m700 monitrc "$DESTDIR/var/vcap/bosh/etc/monitrc"
+- mkdir -p "$DESTDIR/var/vcap/monit"
+- touch "$DESTDIR/var/vcap/monit/empty.monitrc"
