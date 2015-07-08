@@ -1,0 +1,67 @@
+#!/bin/sh
+# Copyright (C) 2014  Codethink Limited
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.5
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+set -e
+
+ROOT="$1"
+#################
+# bosh_sysctl   #
+#################
+# We need some configuration in sysctl
+cp extensions/bosh-stemcell/sysctl.d/60-bosh-sysctl-neigh-fix.conf "$ROOT"/etc/sysctl.d/
+
+
+#################
+# bosh_users    #
+#################
+
+# Add vcap user for BOSH, with password 'cloudc0w'
+echo 'vcap:x:1023:1023:BOSH System User:/home/vcap:/bin/bash' >> "$ROOT/etc/passwd"
+echo 'vcap:$6$GEHdJeCp$owULUlrJ0nY3Y8VpDx5KRfnHV07NT9SJj676lqvXNCVwgQPrx9SeOrIGU1C4q3lWBCqCtGTNL/LQFYCb6Hdhw0:16624:0:99999:7:::' >> "$ROOT/etc/shadow"
+echo 'vcap:x:1023:' >> "$ROOT/etc/group"
+mkdir -p "$ROOT/home/vcap"
+chown -R 1023:1023 "$ROOT/home/vcap"
+
+
+# Set up groups for vcap
+vcap_user_groups='admin adm audio cdrom dialout floppy video dip'
+for group in "$vcap_user_groups"; do
+    sed -i '/^'"$group"':/ s/$/,vcap/' "$ROOT/etc/group"
+done
+sed -i 's/:,/:/' "$ROOT/etc/group"
+
+
+# Setup SUDO
+cp extensions/bosh-stemcell/sudoers "$ROOT"/etc/sudoers
+
+# Add $bosh_dir/bin to $PATH
+echo "export PATH=$/var/vcap/bin:\$PATH" >> $ROOT/root/.bashrc
+echo "export PATH=$/var/vcap/bin:\$PATH" >> $ROOT/home/vcap/.bashrc
+
+cat > $ROOT/root/.profile <<EOS
+if [ "\$BASH" ]; then
+  if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+  fi
+fi
+EOS
+
+#################
+# bosh_sudoers  #
+#################
+
+echo '#includedir /etc/sudoers.d' >> $ROOT/etc/sudoers
+
