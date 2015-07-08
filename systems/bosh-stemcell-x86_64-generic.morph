@@ -26,6 +26,8 @@ strata:
   morph: strata/connectivity.morph
 - name: bosh-stemcell
   morph: strata/bosh-stemcell.morph
+- name: ntpd
+  morph: strata/ntpd.morph
 configuration-extensions:
 - extensions/set-hostname
 - extensions/add-config-files
