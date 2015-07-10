@@ -1,0 +1,9 @@
+name: DiskQuota
+kind: chunk
+build-system: autotools
+configure-commands:
+- cd quota-tools && ./configure --prefix="$PREFIX"
+build-commands:
+- cd quota-tools && make
+install-commands:
+- cd quota-tools && make ROOTDIR="$DESTDIR" install

@@ -21,8 +21,8 @@ strata:
   morph: strata/nfs.morph
 - name: connectivity
   morph: strata/connectivity.morph
-#- name: bosh-stemcell
-#  morph: strata/bosh-stemcell.morph
+- name: bosh-stemcell
+  morph: strata/bosh-stemcell.morph
 configuration-extensions:
 - extensions/set-hostname
 - extensions/add-config-files

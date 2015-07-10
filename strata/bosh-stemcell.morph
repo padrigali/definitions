@@ -1,5 +1,13 @@
 name: bosh-stemcell
 kind: stratum
 build-depends:
+- morph: strata/core.morph
+- morph: strata/audio-bluetooth.morph
 chunks:
-  build-depends:
+- name: sysstat
+  repo: https://github.com/sysstat/sysstat.git
+  ref: v11.1.4
+- name: DiskQuota
+  morph: strata/bosh-stemcell/DiskQuota.morph
+  repo: /src/DiskQuota
+  ref: quota-4.02
