@@ -3,6 +3,9 @@ kind: system
 description: |
     The set of strata required to have a 64-bit x86 bosh stemcell operating
     system image.
+    It doesnt necessarily contain the exact software it seems sto require as
+    many things are 'covered' by busybox or similar softwares to that required.
+    Err, So it may not work.
 arch: x86_64
 strata:
 - name: build-essential
