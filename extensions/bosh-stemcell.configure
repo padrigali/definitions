@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (C) 2014  Codethink Limited
+# Copyright (C) 2015  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,6 +17,34 @@
 set -e
 
 ROOT="$1"
+
+############
+# base_ssh #
+############
+# Configure sshd appropriately
+# adapted from `bosh/stemcell_builder/stages/base_ssh/apply.sh`
+sed "/^ *Banner/d" -i "$ROOT"/etc/ssh/sshd_config
+echo 'Banner /etc/issue.net' >> "$ROOT"/etc/ssh/sshd_config
+
+sed "/^ *UseDNS/d" -i "$ROOT"/etc/ssh/sshd_config
+echo 'UseDNS no' >> "$ROOT"/etc/ssh/sshd_config
+
+sed "/^ *PermitRootLogin/d" -i "$ROOT"/etc/ssh/sshd_config
+echo 'PermitRootLogin no' >> "$ROOT"/etc/ssh/sshd_config
+
+sed "/^ *X11Forwarding/d" -i "$ROOT"/etc/ssh/sshd_config
+sed "/^ *X11DisplayOffset/d" -i "$ROOT"/etc/ssh/sshd_config
+echo 'X11Forwarding no' >> "$ROOT"/etc/ssh/sshd_config
+
+sed "/^ *MaxAuthTries/d" -i "$ROOT"/etc/ssh/sshd_config
+echo 'MaxAuthTries 3' >> "$ROOT"/etc/ssh/sshd_config
+
+# protect against as-shipped sshd_config that has no newline at end
+echo "" >> "$ROOT"/etc/ssh/sshd_config
+
+# There should be some configuration for the CBC
+
+
 #################
 # bosh_sysctl   #
 #################

@@ -34,3 +34,4 @@ configuration-extensions:
 - extensions/nfsboot
 - extensions/install-files
 - extensions/install-essential-files
+- extensions/bosh-stemcell
